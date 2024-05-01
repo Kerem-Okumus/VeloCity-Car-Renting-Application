@@ -1,4 +1,145 @@
 package View;
 
-public class SignUpView {
+import javax.swing.*;
+import java.awt.*;
+
+public class SignUpView extends View{
+
+    JTextField userNameTextField;
+    JTextField birthdayTextField;
+    JTextField phoneNumberTextField;
+    JTextField mailTextField;
+    JPasswordField passwordTextField;
+    JPasswordField passwordCheckTextField;
+    JRadioButton maleButton;
+    JRadioButton femaleButton;
+    JButton signUpButton;
+    JLabel userNameLabel;
+    JLabel birthdayLabel;
+    JLabel phoneNumberLabel;
+    JLabel mailLabel;
+    JLabel genderLabel;
+    JLabel passwordLabel;
+    JLabel passwordCheckLabel;
+    JLabel pageNameLabel;
+    ImageIcon logo;
+
+
+
+    public SignUpView() {
+
+        this.setTitle("VeloCity");
+        this.setResizable(false);
+        this.setLayout(null);
+        this.setSize(1920, 1080);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.getContentPane().setBackground(new Color(248,239,217));
+
+        logo = new ImageIcon("Velocity.png");
+        this.setIconImage(logo.getImage());
+
+        pageNameLabel = new JLabel("Create Account");
+        pageNameLabel.setBounds(300,150,400,60);
+        pageNameLabel.setForeground(new Color(255,81,0));
+        pageNameLabel.setFont(new Font("Franklin Gothic Heavy",Font.BOLD, 50));
+
+        userNameTextField = new JTextField();
+        userNameTextField.setBounds(300,350,300,50);
+        userNameTextField.setFont(new Font("Metropolis", Font.PLAIN,20));
+
+        passwordTextField = new JPasswordField();
+        passwordTextField.setBounds(700,350,300,50);
+        passwordTextField.setFont(new Font("Metropolis", Font.PLAIN, 20));
+
+        passwordCheckTextField = new JPasswordField();
+        passwordCheckTextField.setBounds(1100,350,300,50);
+        passwordCheckTextField.setFont(new Font("Metropolis",Font.PLAIN,20));
+
+        mailTextField = new JTextField();
+        mailTextField.setBounds(300,550,300,50);
+        mailTextField.setFont(new Font("Metropolis", Font.PLAIN,20));
+
+        birthdayTextField = new JTextField();
+        birthdayTextField.setBounds(700,550,300,50);
+        birthdayTextField.setFont(new Font("Metropolis", Font.PLAIN, 20));
+
+        phoneNumberTextField = new JTextField();
+        phoneNumberTextField.setBounds(1100,550,300,50);
+        phoneNumberTextField.setFont(new Font("Metropolis", Font.PLAIN,20));
+
+        ButtonGroup genderButton = new ButtonGroup();
+        maleButton = new JRadioButton("Male");
+        maleButton.setBounds(800,670,100,20);
+        maleButton.setForeground(new Color(255,81,0));
+        maleButton.setBackground(new Color(248,239,217));
+
+        femaleButton = new JRadioButton("Female");
+        femaleButton.setBounds(900,670,100,20);
+        femaleButton.setForeground(new Color(255,81,0));
+        femaleButton.setBackground(new Color(248,239,217));
+
+        genderButton.add(maleButton);
+        genderButton.add(femaleButton);
+
+        userNameLabel = new JLabel("User Name:");
+        userNameLabel.setBounds(300,280, 300,50);
+        userNameLabel.setFont(new Font("Metropolis", Font.PLAIN,20));
+        userNameLabel.setForeground(new Color(255,81,0));
+
+        passwordLabel = new JLabel("Password:");
+        passwordLabel.setBounds(700,280,300,50);
+        passwordLabel.setFont(new Font("Metropolis", Font.PLAIN,20));
+        passwordLabel.setForeground(new Color(255,81,0));
+
+        passwordCheckLabel = new JLabel("Password Check:");
+        passwordCheckLabel.setBounds(1100,280,300,50);
+        passwordCheckLabel.setFont(new Font("Metropolis", Font.PLAIN,20));
+        passwordCheckLabel.setForeground(new Color(255,81,0));
+
+        mailLabel = new JLabel("Email:");
+        mailLabel.setBounds(300,480, 300,50);
+        mailLabel.setFont(new Font("Metropolis", Font.PLAIN,20));
+        mailLabel.setForeground(new Color(255,81,0));
+
+        birthdayLabel = new JLabel("Birthday:");
+        birthdayLabel.setBounds(700,480, 300,50);
+        birthdayLabel.setFont(new Font("Metropolis", Font.PLAIN,20));
+        birthdayLabel.setForeground(new Color(255,81,0));
+
+        phoneNumberLabel = new JLabel("Phone Number");
+        phoneNumberLabel.setBounds(1100,480, 300,50);
+        phoneNumberLabel.setFont(new Font("Metropolis", Font.PLAIN,20));
+        phoneNumberLabel.setForeground(new Color(255,81,0));
+
+        genderLabel = new JLabel("Gender:");
+        genderLabel.setBounds(700,650, 300,50);
+        genderLabel.setFont(new Font("Metropolis", Font.PLAIN,20));
+        genderLabel.setForeground(new Color(255,81,0));
+
+        signUpButton = new JButton("Sign Up");
+        signUpButton.setBounds(700,750,300,50);
+        signUpButton.setBorderPainted(false);
+        signUpButton.setFocusPainted(false);
+        signUpButton.setBackground(new Color(255,81,0));
+        signUpButton.setForeground(new Color(248,239,217));
+
+        this.add(pageNameLabel);
+        this.add(userNameTextField);
+        this.add(passwordTextField);
+        this.add(passwordCheckTextField);
+        this.add(mailTextField);
+        this.add(birthdayTextField);
+        this.add(phoneNumberTextField);
+        this.add(maleButton);
+        this.add(femaleButton);
+        this.add(userNameLabel);
+        this.add(passwordLabel);
+        this.add(passwordCheckLabel);
+        this.add(mailLabel);
+        this.add(birthdayLabel);
+        this.add(phoneNumberLabel);
+        this.add(genderLabel);
+        this.add(signUpButton);
+        this.setVisible(true);
+    }
 }

@@ -53,7 +53,7 @@ public class LoginView extends View{
 
         passwordTextField = new JPasswordField();
         passwordTextField.setBounds(235, 250,300,50);
-        userNameTextField.setFont(new Font("Metropolis",Font.PLAIN,20));
+        passwordTextField.setFont(new Font("Metropolis",Font.PLAIN,20));
 
         this.add(applicationNameLabel);
         this.add(signUpButton);
