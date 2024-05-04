@@ -2,8 +2,10 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
-public class LoginView extends View{
+
+public class LoginView extends JFrame{
 
     //buraya label button textfieldları  vs tanımlama
 
@@ -15,6 +17,7 @@ public class LoginView extends View{
     JLabel userNameLabel;
     JLabel passwordLabel;
     ImageIcon logo;
+    ActionListener actionListener;
 
     public LoginView(){
 
@@ -61,8 +64,7 @@ public class LoginView extends View{
         this.add(userNameTextField);
         this.add(passwordTextField);
         this.setVisible(true);
-        buttons.add(signUpButton);
-        buttons.add(logInButton);
+        signUpButton.addActionListener(actionListener);
 
 
     }

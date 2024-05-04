@@ -3,7 +3,7 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 
-public class SignUpView extends View{
+public class SignUpView extends JFrame{
 
     JTextField userNameTextField;
     JTextField birthdayTextField;
@@ -24,7 +24,6 @@ public class SignUpView extends View{
     JLabel pageNameLabel;
     ImageIcon logo;
     ButtonGroup genderButton = new ButtonGroup();
-
 
 
     public SignUpView() {
@@ -142,9 +141,6 @@ public class SignUpView extends View{
         this.add(genderLabel);
         this.add(signUpButton);
         this.setVisible(true);
-        buttons.add(signUpButton);
-
-
     }
 
     public JTextField getUserNameTextField() {

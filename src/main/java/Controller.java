@@ -11,10 +11,14 @@ public class Controller implements ActionListener {
     public Controller(Model model, View view) {
         this.model = model;
         this.view = view;
-
+        addActionListenerToButtons();
     }
 
-
+    public void addActionListenerToButtons(){
+        for(int i = 0; i<view.getButtons().size(); i++){
+            view.getButtons().get(i).addActionListener(this);
+        }
+    }
 
     /**
      * burda kullanıcı ne yapmış nelere basmış kontrol edip ona göre modelin fonksiyonlarını kullanıcaz

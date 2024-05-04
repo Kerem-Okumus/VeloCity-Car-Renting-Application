@@ -13,7 +13,7 @@ public class Model {
 
     private ArrayList<Customer> customerArray=new ArrayList<>();// aşağıdaki örnek method customer olduğu için böyle koydum bunu driver, car vs için yapabiliriz
 
-    public Model() throws IOException {} //buraya da kod gelebilir textten çekerken burda direkt dosyayı okuyup userları arrayliste atıyodu bunun sql veriyonu gibi.
+    public Model() {} //buraya da kod gelebilir textten çekerken burda direkt dosyayı okuyup userları arrayliste atıyodu bunun sql veriyonu gibi.
 
     // bu kod admin varmış gibi düşünüldü o yüzden sadece sql ile birlikte nasıl çalıştığının örneği olsun diye koydum
     public int addUser(String username, String password, String name_surname, String email, int age, String phoneNumber, String gender, String cardNumber)  {
