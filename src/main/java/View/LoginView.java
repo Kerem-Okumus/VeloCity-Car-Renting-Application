@@ -61,6 +61,10 @@ public class LoginView extends View{
         this.add(userNameTextField);
         this.add(passwordTextField);
         this.setVisible(true);
+        buttons.add(signUpButton);
+        buttons.add(logInButton);
+
+
     }
 /*
     public LoginView(ActionListener actionListener){

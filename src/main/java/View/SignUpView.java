@@ -23,6 +23,7 @@ public class SignUpView extends View{
     JLabel passwordCheckLabel;
     JLabel pageNameLabel;
     ImageIcon logo;
+    ButtonGroup genderButton = new ButtonGroup();
 
 
 
@@ -67,7 +68,7 @@ public class SignUpView extends View{
         phoneNumberTextField.setBounds(1100,550,300,50);
         phoneNumberTextField.setFont(new Font("Metropolis", Font.PLAIN,20));
 
-        ButtonGroup genderButton = new ButtonGroup();
+
         maleButton = new JRadioButton("Male");
         maleButton.setBounds(800,670,100,20);
         maleButton.setForeground(new Color(255,81,0));
@@ -141,5 +142,67 @@ public class SignUpView extends View{
         this.add(genderLabel);
         this.add(signUpButton);
         this.setVisible(true);
+        buttons.add(signUpButton);
+
+
+    }
+
+    public JTextField getUserNameTextField() {
+        return userNameTextField;
+    }
+
+    public void setUserNameTextField(JTextField userNameTextField) {
+        this.userNameTextField = userNameTextField;
+    }
+
+    public JTextField getBirthdayTextField() {
+        return birthdayTextField;
+    }
+
+    public void setBirthdayTextField(JTextField birthdayTextField) {
+        this.birthdayTextField = birthdayTextField;
+    }
+
+    public JTextField getPhoneNumberTextField() {
+        return phoneNumberTextField;
+    }
+
+    public void setPhoneNumberTextField(JTextField phoneNumberTextField) {
+        this.phoneNumberTextField = phoneNumberTextField;
+    }
+
+    public JTextField getMailTextField() {
+        return mailTextField;
+    }
+
+    public void setMailTextField(JTextField mailTextField) {
+        this.mailTextField = mailTextField;
+    }
+
+    public JPasswordField getPasswordTextField() {
+        return passwordTextField;
+    }
+
+    public void setPasswordTextField(JPasswordField passwordTextField) {
+        this.passwordTextField = passwordTextField;
+    }
+
+    public JPasswordField getPasswordCheckTextField() {
+        return passwordCheckTextField;
+    }
+
+    public void setPasswordCheckTextField(JPasswordField passwordCheckTextField) {
+        this.passwordCheckTextField = passwordCheckTextField;
+    }
+
+    public JButton getSignUpButton() {
+        return signUpButton;
+    }
+
+    public void setSignUpButton(JButton signUpButton) {
+        this.signUpButton = signUpButton;
+    }
+    public ButtonGroup getGenderButton(){
+        return genderButton;
     }
 }

@@ -5,7 +5,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class View extends JFrame {
-
+    LoginView lView=new LoginView();
+    SignUpView sView=new SignUpView();
     ArrayList<JButton> buttons=new ArrayList<JButton>();
 
     public View() {
@@ -19,4 +20,15 @@ public class View extends JFrame {
         }
     }
 
+    public LoginView getlView() {
+        return lView;
+    }
+
+    public SignUpView getsView() {
+        return sView;
+    }
+
+    public ArrayList<JButton> getButtons() {
+        return buttons;
+    }
 }

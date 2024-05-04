@@ -16,33 +16,33 @@ public class Model {
     public Model() throws IOException {} //buraya da kod gelebilir textten çekerken burda direkt dosyayı okuyup userları arrayliste atıyodu bunun sql veriyonu gibi.
 
     // bu kod admin varmış gibi düşünüldü o yüzden sadece sql ile birlikte nasıl çalıştığının örneği olsun diye koydum
-    public int addCustomer(String name)  {
+    public int addUser(String username, String password, String name_surname, String email, int age, String phoneNumber, String gender, String cardNumber)  {
         int lastId = 0;
-        int customerId = 0;
+        int userId = 0;
 
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs1 = statement.executeQuery("SELECT MAX(customerId) FROM Customer");
+            ResultSet rs1 = statement.executeQuery("SELECT MAX(userId) FROM User");
 
             while (rs1.next()) {
                 lastId = rs1.getInt(1);
             }
 
             if (lastId == 0) {
-                customerId = 1001;
+                userId = 1;
             } else {
-                customerId = lastId + 1;
+                userId = lastId + 1;
             }
 
 
-            statement.executeUpdate("INSERT INTO Customer (customerId, username) VALUES ( '" + customerId + "' , '" + name + "')");
-            System.out.println("NOTIFICATION >>> Customer " + name + " with id " + customerId + " added to Customers <<<");
+            statement.executeUpdate("INSERT INTO User (userId, age, userName, password, name_surname,cardNumber, gender,phoneNumber) VALUES ( '" + userId + "' , '" + age + "', '" + username + "' , '" + password + "' , '" + name_surname + "' , '" + cardNumber + "' , '" + gender + "' , '" + phoneNumber + "')");
+            System.out.println("NOTIFICATION >>> Customer " + name_surname + " with id " + userId + " added to Customers <<<");
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 //customerArray.add(new Customer(id,username vs))
-        return customerId;
+        return userId;
     } //sample method for adding a customer with a unique id ama username için de unique yaptıralım
 
     //buraları fonksiyonlarla doldurucaz userın yapacağı sonra controllerdaki actionperformed classında kullanıcaz
