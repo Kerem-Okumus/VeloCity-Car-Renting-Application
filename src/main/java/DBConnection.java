@@ -4,9 +4,9 @@ import java.sql.DriverManager;
 public class DBConnection {
 
     //pulladığınızda sadece nameofthedatabase ve password kısmını kendinizinki yapın.pushlarken de eski halinde bırakın
-    final static String url="jdbc:mysql://localhost:3306/name_of_the_database";
+    final static String url="jdbc:mysql://localhost:3306/velocity";
     final static String user = "root";
-    final static String password= "your_password";
+    final static String password= "edarak123";
 
 
     public static Connection getConnection(){
