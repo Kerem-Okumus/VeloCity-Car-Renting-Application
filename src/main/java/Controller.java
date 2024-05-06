@@ -3,6 +3,7 @@ import View.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class Controller implements ActionListener {
 
@@ -35,6 +36,19 @@ public class Controller implements ActionListener {
                     signUpView.getPhoneNumberTextField().getText(),"male","12341231411"
             );
             model.addUser(newUser);
+
+        }
+        LoginView lv=view.getlView();
+        if(e.getSource()==lv.getLogInButton()){
+            String username=lv.getUserNameTextField().getText();
+            String password=lv.getPasswordTextField().getText();
+
+            try {
+                model.logIn(username,password);
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+
         }
     }
 }

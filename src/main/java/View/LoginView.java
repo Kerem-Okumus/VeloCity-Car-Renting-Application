@@ -68,7 +68,39 @@ public class LoginView extends JFrame{
 
 
     }
-/*
+
+    public JButton getLogInButton() {
+        return logInButton;
+    }
+
+    public void setLogInButton(JButton logInButton) {
+        this.logInButton = logInButton;
+    }
+
+    public JButton getSignUpButton() {
+        return signUpButton;
+    }
+
+    public void setSignUpButton(JButton signUpButton) {
+        this.signUpButton = signUpButton;
+    }
+
+    public JTextField getUserNameTextField() {
+        return userNameTextField;
+    }
+
+    public void setUserNameTextField(JTextField userNameTextField) {
+        this.userNameTextField = userNameTextField;
+    }
+
+    public JPasswordField getPasswordTextField() {
+        return passwordTextField;
+    }
+
+    public void setPasswordTextField(JPasswordField passwordTextField) {
+        this.passwordTextField = passwordTextField;
+    }
+    /*
     public LoginView(ActionListener actionListener){
 
         // yukarıdakileri add(label1) tarzı eklemece

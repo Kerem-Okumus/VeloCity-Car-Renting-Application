@@ -106,6 +106,23 @@ public class Model {
             driverArrayList.add(existingDriver);
         }
     }
+    public String logIn(String username, String password) throws SQLException {
+        Statement statement = connection.createStatement();
+        ResultSet rs1 = statement.executeQuery("SELECT username " +
+                "FROM user " +
+                        "WHERE username='" + username + "' and password= '" + password +"';");
+
+
+        if (rs1.next()) {
+            System.out.println("NOTIFICATION >>> Welcome " + rs1.getString("username"));
+            return username;
+        } else {
+            System.out.println("NOTIFICATION >>> Wrong username or password");
+        }
+
+
+        return "Wrong username";
+    }
 
     //buraları fonksiyonlarla doldurucaz userın yapacağı sonra controllerdaki actionperformed classında kullanıcaz
 

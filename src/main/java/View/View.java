@@ -16,6 +16,7 @@ public class View extends JFrame {
 
     public void addButtonsToArrayList(){
         buttons.add(sView.getSignUpButton());
+        buttons.add(lView.getLogInButton());
     }
     public LoginView getlView() {
         return lView;
