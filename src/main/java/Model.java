@@ -2,10 +2,7 @@ import Objects.Driver;
 import Objects.User;
 import Objects.Vehicle;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class Model {
@@ -122,6 +119,35 @@ public class Model {
 
 
         return "Wrong username";
+    }
+    public void addReservation(Date pickupDate, Date returnDate, String pickupLocation, String returnLocation, int resStatus, double price, int userId, int vehicleId){
+        int lastId = 0;
+        int reservationId = 0;
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs1 = statement.executeQuery("SELECT MAX(reservationId) FROM Reservation");
+
+            while (rs1.next()) {
+                lastId = rs1.getInt(1);
+            }
+
+            if (lastId == 0) {
+                reservationId = 1;
+            } else {
+                reservationId = lastId + 1;
+            }
+
+
+            statement.executeUpdate("INSERT INTO Reservation (reservationId, pickupDate, returnDate, pickupLocation, returnLocation ,resStatus , price , userId , vehicleId) VALUES ( '" + reservationId
+                    + "' , '" + pickupDate + "', '" + returnDate + "' , '" + pickupLocation+ "' , '" + returnLocation + "' , '" + resStatus
+                    + "' , '" + price + "' , '" + userId + "','" +vehicleId + "')");
+            System.out.println("NOTIFICATION >>> Reservation   with id " + reservationId + " added to Reservations! <<<");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     //buraları fonksiyonlarla doldurucaz userın yapacağı sonra controllerdaki actionperformed classında kullanıcaz

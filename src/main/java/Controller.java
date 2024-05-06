@@ -3,6 +3,7 @@ import View.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.sql.SQLException;
 
 public class Controller implements ActionListener {
@@ -14,6 +15,7 @@ public class Controller implements ActionListener {
         this.model = model;
         this.view = view;
         addActionListenerToButtons();
+        model.addReservation(new Date(2032-1900,3,20),new Date(2032-1900,3,22),"Ankara","İstanbul",1,150.60,3,2);
     }
 
     public void addActionListenerToButtons(){
