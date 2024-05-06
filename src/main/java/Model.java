@@ -1,6 +1,5 @@
-import Objects.Customer;
+import Objects.User;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,12 +10,14 @@ public class Model {
 
     static Connection connection = DBConnection.getConnection();
 
-    private ArrayList<Customer> customerArray=new ArrayList<>();// aşağıdaki örnek method customer olduğu için böyle koydum bunu driver, car vs için yapabiliriz
+    private ArrayList<User> userArrayList =new ArrayList<>();// aşağıdaki örnek method customer olduğu için böyle koydum bunu driver, car vs için yapabiliriz
 
     public Model() {} //buraya da kod gelebilir textten çekerken burda direkt dosyayı okuyup userları arrayliste atıyodu bunun sql veriyonu gibi.
 
     // bu kod admin varmış gibi düşünüldü o yüzden sadece sql ile birlikte nasıl çalıştığının örneği olsun diye koydum
-    public int addUser(String username, String password, String name_surname, String email, int age, String phoneNumber, String gender, String cardNumber)  {
+    public int addUser(User user)  {
+        userArrayList.add(user);
+
         int lastId = 0;
         int userId = 0;
 
@@ -35,16 +36,20 @@ public class Model {
             }
 
 
-            statement.executeUpdate("INSERT INTO User (userId, age, userName, password, name_surname,cardNumber, gender,phoneNumber) VALUES ( '" + userId + "' , '" + age + "', '" + username + "' , '" + password + "' , '" + name_surname + "' , '" + cardNumber + "' , '" + gender + "' , '" + phoneNumber + "')");
-            System.out.println("NOTIFICATION >>> Customer " + name_surname + " with id " + userId + " added to Customers <<<");
+            statement.executeUpdate("INSERT INTO User (userId, age, userName, password, name_surname,cardNumber, gender,phoneNumber) VALUES ( '" + userId
+                    + "' , '" + user.getAge() + "', '" + user.getUsername() + "' , '" + user.getPassword() + "' , '" + user.getName_surname() + "' , '" + user.getCardNumber()
+                    + "' , '" + user.getGender() + "' , '" + user.getPhoneNumber() + "')");
+            System.out.println("NOTIFICATION >>> Customer " + user.getName_surname() + " with id " + userId + " added to Users <<<");
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-//customerArray.add(new Customer(id,username vs))
         return userId;
     } //sample method for adding a customer with a unique id ama username için de unique yaptıralım
 
     //buraları fonksiyonlarla doldurucaz userın yapacağı sonra controllerdaki actionperformed classında kullanıcaz
 
+    public ArrayList<User> getUserArrayList() {
+        return userArrayList;
+    }
 }

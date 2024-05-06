@@ -1,3 +1,4 @@
+import Objects.User;
 import View.*;
 
 import java.awt.event.ActionEvent;
@@ -25,9 +26,15 @@ public class Controller implements ActionListener {
      * @param e the event to be processed
      */
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==view.getsView().getSignUpButton()){
-            SignUpView s= view.getsView();
-            model.addUser(s.getUserNameTextField().getText(),s.getPasswordTextField().getText(),s.getUserNameTextField().getText(),s.getMailTextField().getText(),22,s.getPhoneNumberTextField().getText(),"male","12341231411");
+        SignUpView signUpView = view.getsView();
+
+        if(e.getSource()==signUpView.getSignUpButton()){
+            User newUser = new User(
+                    signUpView.getUserNameTextField().getText(),signUpView.getPasswordTextField().getText(),
+                    signUpView.getUserNameTextField().getText(),signUpView.getMailTextField().getText(),22,
+                    signUpView.getPhoneNumberTextField().getText(),"male","12341231411"
+            );
+            model.addUser(newUser);
         }
     }
 }
