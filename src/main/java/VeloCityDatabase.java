@@ -1,5 +1,3 @@
-import Objects.Car;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,10 +6,6 @@ import java.sql.Statement;
 public class VeloCityDatabase {
 
     static Connection connection = DBConnection.getConnection();
-
-    public void addCar(Car car) {
-
-    }
 
     public static void main(String[] args) throws SQLException {
         Statement statement = connection.createStatement();
@@ -31,7 +25,7 @@ public class VeloCityDatabase {
             System.out.println("Vehicle ID: " + vehicleId);
             System.out.println("Gear Type: " + gearType);
             System.out.println("Color: " + color);
-            System.out.println("Car Type: " + carType);
+            System.out.println("Vehicle Type: " + carType);
             System.out.println("Model: " + model);
             System.out.println("Brand: " + brand);
             System.out.println("isAvailable: " + isAvailable);

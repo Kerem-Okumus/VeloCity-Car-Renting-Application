@@ -1,7 +1,7 @@
 package Objects;
 
 public class User {
-
+    private int userId;
     private String username;
     private String password;
     private String name_surname;
@@ -52,5 +52,13 @@ public class User {
 
     public String getCardNumber() {
         return cardNumber;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }
