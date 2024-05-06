@@ -1,6 +1,5 @@
+import Objects.*;
 import Objects.Driver;
-import Objects.User;
-import Objects.Vehicle;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,14 +11,19 @@ public class Model {
     private ArrayList<User> userArrayList =new ArrayList<>();
     private ArrayList<Vehicle> vehicleArrayList =new ArrayList<>();
     private ArrayList<Driver> driverArrayList =new ArrayList<>();
+    private ArrayList<Extras> extrasArrayList =new ArrayList<>();
+    private ArrayList<Reservation> reservationArrayList =new ArrayList<>();
+    private ArrayList<ReservationExtras> reservationExtrasArrayList =new ArrayList<>();
 
     public Model() throws SQLException {
         getUsersInDB();
         getVehiclesInDB();
         getDriversInDB();
-    } //buraya da kod gelebilir textten çekerken burda direkt dosyayı okuyup userları arrayliste atıyodu bunun sql veriyonu gibi.
+        getExtrasInDB();
+        getReservationsInDB();
+        getReservationExtrasInDB();
+    }
 
-    // bu kod admin varmış gibi düşünüldü o yüzden sadece sql ile birlikte nasıl çalıştığının örneği olsun diye koydum
     public int addUser(User user)  {
         int lastId = 0;
         int userId = 0;
@@ -48,7 +52,7 @@ public class Model {
             e.printStackTrace();
         }
         return userId;
-    } //sample method for adding a customer with a unique id ama username için de unique yaptıralım
+    }
 
     public void getUsersInDB() throws SQLException {
         Statement statement = connection.createStatement();
@@ -103,6 +107,53 @@ public class Model {
             driverArrayList.add(existingDriver);
         }
     }
+
+    public void getExtrasInDB() throws SQLException {
+        Statement statement = connection.createStatement();
+        String query = "SELECT extraId, extraName, price FROM extras ";
+        ResultSet resultSet = statement.executeQuery(query);
+        while (resultSet.next()) {
+            int extraId = resultSet.getInt("extraId");
+            String extraName = resultSet.getString("extraName");
+            int price = resultSet.getInt("price");
+            Extras existingExtras = new Extras(extraId, extraName, price);
+            extrasArrayList.add(existingExtras);
+        }
+    }
+
+    public void getReservationsInDB() throws SQLException {
+        Statement statement = connection.createStatement();
+        String query = "SELECT reservationId, pickupDate, returnDate, pickupLocation, returnLocation, resStatus, price, userId, vehicleId, driverId, extraId FROM driver ";
+        ResultSet resultSet = statement.executeQuery(query);
+        while (resultSet.next()) {
+            int reservationId = resultSet.getInt("reservationId");
+            Date pickupDate = resultSet.getDate("pickupDate");
+            Date returnDate = resultSet.getDate("returnDate");
+            String pickupLocation = resultSet.getString("pickupLocation");
+            String returnLocation = resultSet.getString("returnLocation");
+            int resStatus = resultSet.getInt("resStatus");
+            int price = resultSet.getInt("price");
+            int userId = resultSet.getInt("userId");
+            int vehicleId = resultSet.getInt("vehicleId");
+            int driverId = resultSet.getInt("driverId");
+            int extraId = resultSet.getInt("extraId");
+            Reservation existingReservation = new Reservation(reservationId, pickupDate, returnDate, pickupLocation, returnLocation, resStatus, price, userId, vehicleId);
+            reservationArrayList.add(existingReservation);
+        }
+    }
+
+    public void getReservationExtrasInDB() throws SQLException {
+        Statement statement = connection.createStatement();
+        String query = "SELECT reservationId, extraId FROM extras ";
+        ResultSet resultSet = statement.executeQuery(query);
+        while (resultSet.next()) {
+            int reservationId = resultSet.getInt("reservationId");
+            int extraId = resultSet.getInt("extraId");
+            ReservationExtras existingReservationExtras = new ReservationExtras(reservationId, extraId);
+            reservationExtrasArrayList.add(existingReservationExtras);
+        }
+    }
+
     public String logIn(String username, String password) throws SQLException {
         Statement statement = connection.createStatement();
         ResultSet rs1 = statement.executeQuery("SELECT username " +
@@ -150,8 +201,6 @@ public class Model {
 
     }
 
-    //buraları fonksiyonlarla doldurucaz userın yapacağı sonra controllerdaki actionperformed classında kullanıcaz
-
     public ArrayList<User> getUserArrayList() {
         return userArrayList;
     }
@@ -162,5 +211,17 @@ public class Model {
 
     public ArrayList<Driver> getDriverArrayList() {
         return driverArrayList;
+    }
+
+    public ArrayList<Extras> getExtrasArrayList() {
+        return extrasArrayList;
+    }
+
+    public ArrayList<Reservation> getReservationArrayList() {
+        return reservationArrayList;
+    }
+
+    public ArrayList<ReservationExtras> getReservationExtrasArrayList() {
+        return reservationExtrasArrayList;
     }
 }
