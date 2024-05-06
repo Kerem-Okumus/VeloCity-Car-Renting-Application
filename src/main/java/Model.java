@@ -200,6 +200,15 @@ public class Model {
         }
 
     }
+    public void addExtrastoReservation(int reservationId,ArrayList extraId) throws SQLException {
+        Statement statement = connection.createStatement();
+        for(int i=0;i<extraId.size();i++){
+            statement.executeUpdate("INSERT INTO reservationExtras (reservationId, extraId,) VALUES ( '" + reservationId
+                    + "' , '"  +extraId + "')");
+            System.out.println("NOTIFICATION >>> ReservationExtra   with  reservationId " + reservationId + " and with extrasId "+extraId.get(i)+"has been added to DB <<<");
+        }
+
+    }
 
     public ArrayList<User> getUserArrayList() {
         return userArrayList;
