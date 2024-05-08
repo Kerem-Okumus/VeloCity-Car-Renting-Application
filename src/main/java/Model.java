@@ -123,7 +123,7 @@ public class Model {
 
     public void getReservationsInDB() throws SQLException {
         Statement statement = connection.createStatement();
-        String query = "SELECT* FROM Reservation ";
+        String query = "SELECT * FROM Reservation ";
         ResultSet resultSet = statement.executeQuery(query);
         while (resultSet.next()) {
             int reservationId = resultSet.getInt("reservationId");
@@ -137,13 +137,14 @@ public class Model {
             int vehicleId = resultSet.getInt("vehicleId");
             int driverId = resultSet.getInt("driverId");
             Reservation existingReservation = new Reservation(reservationId, pickupDate, returnDate, pickupLocation, returnLocation, resStatus, price, userId, vehicleId);
+            existingReservation.setDriverId(driverId);
             reservationArrayList.add(existingReservation);
         }
     }
 
     public void getReservationExtrasInDB() throws SQLException {
         Statement statement = connection.createStatement();
-        String query = "SELECT * FROM extras ";
+        String query = "SELECT * FROM reservationExtras ";
         ResultSet resultSet = statement.executeQuery(query);
         while (resultSet.next()) {
             int reservationId = resultSet.getInt("reservationId");
@@ -229,6 +230,13 @@ public class Model {
         // Close ResultSet and Statement
         rs1.close();
         statement.close();
+    }
+
+    public void addPaymentInformation(String cardNumber, String cvv, String lastDateYear, String lastDateMonth, String lastDateDay, User user) throws SQLException {
+        Statement statement = connection.createStatement();
+        statement.executeUpdate("UPDATE user SET cardNumber=" + cardNumber + ",cvv=" + cvv + ",lastDateYear=" + lastDateYear + ",lastDateMonth=" + lastDateMonth + ",lastDateDay=" + lastDateDay + " WHERE userId= " + user.getUserId());
+
+
     }
 
 
