@@ -11,11 +11,13 @@ public class Controller implements ActionListener {
     private Model model;
     private View view;
 
-    public Controller(Model model, View view) {
+    public Controller(Model model, View view) throws SQLException {
         this.model = model;
         this.view = view;
         addActionListenerToButtons();
-        model.addReservation(new Date(2032-1900,3,20),new Date(2032-1900,3,22),"Ankara","İstanbul",1,150.60,3,2);
+        Integer a=null;
+        int x=model.addReservation(new Date(2032-1900,3,20),new Date(2032-1900,3,22),"Ankara","İstanbul",1,150.60,3,2);
+        model.assignDriver(false,x);
     }
 
     public void addActionListenerToButtons(){

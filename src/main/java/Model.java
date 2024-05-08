@@ -123,7 +123,7 @@ public class Model {
 
     public void getReservationsInDB() throws SQLException {
         Statement statement = connection.createStatement();
-        String query = "SELECT reservationId, pickupDate, returnDate, pickupLocation, returnLocation, resStatus, price, userId, vehicleId, driverId, extraId FROM driver ";
+        String query = "SELECT* FROM Reservation ";
         ResultSet resultSet = statement.executeQuery(query);
         while (resultSet.next()) {
             int reservationId = resultSet.getInt("reservationId");
@@ -136,7 +136,6 @@ public class Model {
             int userId = resultSet.getInt("userId");
             int vehicleId = resultSet.getInt("vehicleId");
             int driverId = resultSet.getInt("driverId");
-            int extraId = resultSet.getInt("extraId");
             Reservation existingReservation = new Reservation(reservationId, pickupDate, returnDate, pickupLocation, returnLocation, resStatus, price, userId, vehicleId);
             reservationArrayList.add(existingReservation);
         }
@@ -144,7 +143,7 @@ public class Model {
 
     public void getReservationExtrasInDB() throws SQLException {
         Statement statement = connection.createStatement();
-        String query = "SELECT reservationId, extraId FROM extras ";
+        String query = "SELECT * FROM extras ";
         ResultSet resultSet = statement.executeQuery(query);
         while (resultSet.next()) {
             int reservationId = resultSet.getInt("reservationId");
@@ -171,7 +170,7 @@ public class Model {
 
         return "Wrong username";
     }
-    public void addReservation(Date pickupDate, Date returnDate, String pickupLocation, String returnLocation, int resStatus, double price, int userId, int vehicleId){
+    public int addReservation(Date pickupDate, Date returnDate, String pickupLocation, String returnLocation, int resStatus, double price, int userId, int vehicleId){
         int lastId = 0;
         int reservationId = 0;
 
@@ -190,14 +189,15 @@ public class Model {
             }
 
 
-            statement.executeUpdate("INSERT INTO Reservation (reservationId, pickupDate, returnDate, pickupLocation, returnLocation ,resStatus , price , userId , vehicleId) VALUES ( '" + reservationId
+            statement.executeUpdate("INSERT INTO Reservation (reservationId, pickupDate, returnDate, pickupLocation, returnLocation ,resStatus , price , userId , vehicleId , driverId) VALUES ( '" + reservationId
                     + "' , '" + pickupDate + "', '" + returnDate + "' , '" + pickupLocation+ "' , '" + returnLocation + "' , '" + resStatus
-                    + "' , '" + price + "' , '" + userId + "','" +vehicleId + "')");
+                    + "' , '" + price + "' , '" + userId + "','" +vehicleId + "',null)");
             System.out.println("NOTIFICATION >>> Reservation   with id " + reservationId + " added to Reservations! <<<");
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return reservationId;
 
     }
     public void addExtrastoReservation(int reservationId,ArrayList extraId) throws SQLException {
@@ -209,6 +209,28 @@ public class Model {
         }
 
     }
+    public void assignDriver(boolean isExperienced, int reservationId) throws SQLException {
+        Statement statement = connection.createStatement();
+        ResultSet rs1;
+        if(isExperienced){
+            rs1 = statement.executeQuery("SELECT driverId FROM Driver WHERE isExperienced=true and isAvailable=true");
+        }
+        else{
+            rs1 = statement.executeQuery("SELECT driverId FROM Driver WHERE isExperienced=false and isAvailable=true");
+        }
+        if (rs1.next()) {
+            int driverId = rs1.getInt("driverId");
+            statement.executeUpdate("UPDATE Reservation SET driverId =" + driverId + " WHERE reservationId =" + reservationId);
+            statement.executeUpdate("UPDATE Driver SET isAvailable = 0 WHERE driverId =" + driverId);
+        } else {
+            // Handle the case where no available driver is found
+            System.out.println("No available driver found.");
+        }
+        // Close ResultSet and Statement
+        rs1.close();
+        statement.close();
+    }
+
 
     public ArrayList<User> getUserArrayList() {
         return userArrayList;
