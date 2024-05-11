@@ -32,9 +32,6 @@ public class LoginView extends JFrame{
         this.setIconImage(logo.getImage());
 
 
-
-
-
         applicationNameLabel = new JLabel("VELOCITY");
         applicationNameLabel.setForeground(new Color(255,81,0));
         applicationNameLabel.setFont(new Font("Franklin Gothic Heavy",Font.ITALIC, 50));
@@ -44,11 +41,15 @@ public class LoginView extends JFrame{
         logInButton.setBounds(275,350,100,40);
         logInButton.setBorderPainted(false);
         logInButton.setFocusPainted(false);
+        logInButton.setBackground(new Color(255,81,0));
+        logInButton.setForeground(new Color(248,239,217));
 
         signUpButton = new JButton("Sign Up");
         signUpButton.setBounds(400,350,100,40);
         signUpButton.setBorderPainted(false);
         signUpButton.setFocusPainted(false);
+        signUpButton.setBackground(new Color(255,81,0));
+        signUpButton.setForeground(new Color(248,239,217));
 
         userNameTextField = new JTextField();
         userNameTextField.setBounds(235, 150,300,50);

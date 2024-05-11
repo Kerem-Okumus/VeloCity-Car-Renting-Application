@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="86f84471-38d9-4b68-84a1-15122fe1a2ab" name="Changes" comment="GUI part of log-in page was created.">
+    <list default="true" id="86f84471-38d9-4b68-84a1-15122fe1a2ab" name="Changes" comment="GUI part of payment page was created.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/LoginView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/PaymentInformationView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/PaymentInformationView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/SignUpView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/SignUpView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/UserMainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/UserMainView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/View.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +31,6 @@
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;rsamil&quot;
   }
 }</component>
   <component name="GithubPullRequestsUISettings">
@@ -64,6 +66,9 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -89,7 +94,17 @@
       <updated>1714391356610</updated>
       <workItem from="1714465348562" duration="10403000" />
       <workItem from="1714507844660" duration="1267000" />
-      <workItem from="1714570020230" duration="5665000" />
+      <workItem from="1714570020230" duration="6199000" />
+      <workItem from="1714597981443" duration="1118000" />
+      <workItem from="1714852892694" duration="226000" />
+      <workItem from="1715155232778" duration="64000" />
+      <workItem from="1715155334758" duration="9000" />
+      <workItem from="1715155352185" duration="20000" />
+      <workItem from="1715175636291" duration="218000" />
+      <workItem from="1715203605476" duration="2507000" />
+      <workItem from="1715431759055" duration="6403000" />
+      <workItem from="1715440314268" duration="1763000" />
+      <workItem from="1715450062150" duration="10213000" />
     </task>
     <task id="LOCAL-00001" summary="GUI part of log-in page was created.">
       <option name="closed" value="true" />
@@ -99,7 +114,23 @@
       <option name="project" value="LOCAL" />
       <updated>1714508435519</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="GUI part of sign-up page was created.">
+      <option name="closed" value="true" />
+      <created>1714577412831</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1714577412831</updated>
+    </task>
+    <task id="LOCAL-00003" summary="GUI part of payment page was created.">
+      <option name="closed" value="true" />
+      <created>1715432876253</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1715432876253</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -107,6 +138,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="GUI part of log-in page was created." />
-    <option name="LAST_COMMIT_MESSAGE" value="GUI part of log-in page was created." />
+    <MESSAGE value="GUI part of sign-up page was created." />
+    <MESSAGE value="GUI part of payment page was created." />
+    <option name="LAST_COMMIT_MESSAGE" value="GUI part of payment page was created." />
   </component>
 </project>

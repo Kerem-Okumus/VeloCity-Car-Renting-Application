@@ -3,7 +3,7 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 
-public class PaymentInformationView extends View{
+public class PaymentInformationView extends JFrame{
     JTextField nameOnCardTextField;
     JTextField promotionCodeTextField;
     JTextField cvvTextField;
@@ -20,7 +20,6 @@ public class PaymentInformationView extends View{
     JLabel cardNumberLabel;
     JLabel pageNameLabel;
     ImageIcon logo;
-
 
     public PaymentInformationView() {
 
@@ -113,6 +112,62 @@ public class PaymentInformationView extends View{
         this.add(promotionCodeLabel);
         this.add(confirmButton);
         this.setVisible(true);
+    }
+
+    public JTextField getNameOnCardTextField() {
+        return nameOnCardTextField;
+    }
+
+    public void setNameOnCardTextField(JTextField nameOnCardTextField) {
+        this.nameOnCardTextField = nameOnCardTextField;
+    }
+
+    public JTextField getPromotionCodeTextField() {
+        return promotionCodeTextField;
+    }
+
+    public void setPromotionCodeTextField(JTextField promotionCodeTextField) {
+        this.promotionCodeTextField = promotionCodeTextField;
+    }
+
+    public JTextField getCvvTextField() {
+        return cvvTextField;
+    }
+
+    public void setCvvTextField(JTextField cvvTextField) {
+        this.cvvTextField = cvvTextField;
+    }
+
+    public JTextField getCardNumberTextField() {
+        return cardNumberTextField;
+    }
+
+    public void setCardNumberTextField(JTextField cardNumberTextField) {
+        this.cardNumberTextField = cardNumberTextField;
+    }
+
+    public JComboBox getMonthComboBox() {
+        return monthComboBox;
+    }
+
+    public void setMonthComboBox(JComboBox monthComboBox) {
+        this.monthComboBox = monthComboBox;
+    }
+
+    public JComboBox getYearComboBox() {
+        return yearComboBox;
+    }
+
+    public void setYearComboBox(JComboBox yearComboBox) {
+        this.yearComboBox = yearComboBox;
+    }
+
+    public JButton getConfirmButton() {
+        return confirmButton;
+    }
+
+    public void setConfirmButton(JButton confirmButton) {
+        this.confirmButton = confirmButton;
     }
 }
 

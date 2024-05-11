@@ -141,6 +141,7 @@ public class SignUpView extends JFrame{
         this.add(genderLabel);
         this.add(signUpButton);
         this.setVisible(true);
+
     }
 
     public JTextField getUserNameTextField() {

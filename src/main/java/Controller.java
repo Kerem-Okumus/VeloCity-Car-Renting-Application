@@ -1,6 +1,7 @@
 import Objects.User;
 import View.*;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
@@ -32,27 +33,29 @@ public class Controller implements ActionListener {
      */
     public void actionPerformed(ActionEvent e) {
         SignUpView signUpView = view.getsView();
-
+        LoginView logInView= view.getlView();
         if(e.getSource()==signUpView.getSignUpButton()){
             User newUser = new User(
                     signUpView.getUserNameTextField().getText(),signUpView.getPasswordTextField().getText(),
                     signUpView.getUserNameTextField().getText(),signUpView.getMailTextField().getText(),22,
                     signUpView.getPhoneNumberTextField().getText(),"male","12341231411"
             );
+            signUpView.dispose();
+            SignUpView signUpView1 = new SignUpView();
             model.addUser(newUser);
 
         }
-        LoginView lv=view.getlView();
-        if(e.getSource()==lv.getLogInButton()){
-            String username=lv.getUserNameTextField().getText();
-            String password=lv.getPasswordTextField().getText();
 
+        if(e.getSource()==logInView.getLogInButton()){
+            String username=logInView.getUserNameTextField().getText();
+            String password=logInView.getPasswordTextField().getText();
+            logInView.dispose();
             try {
                 model.logIn(username,password);
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
-
         }
+
     }
 }
