@@ -33,29 +33,42 @@ public class Controller implements ActionListener {
      */
     public void actionPerformed(ActionEvent e) {
         SignUpView signUpView = view.getsView();
-        LoginView logInView= view.getlView();
+        LoginView lv = view.getlView();
         if(e.getSource()==signUpView.getSignUpButton()){
             User newUser = new User(
                     signUpView.getUserNameTextField().getText(),signUpView.getPasswordTextField().getText(),
                     signUpView.getUserNameTextField().getText(),signUpView.getMailTextField().getText(),22,
                     signUpView.getPhoneNumberTextField().getText(),"male","12341231411"
             );
-            signUpView.dispose();
-            SignUpView signUpView1 = new SignUpView();
             model.addUser(newUser);
-
+            signUpView.setVisible(false);
+            lv.getPasswordTextField().setText("");
+            lv.getUserNameTextField().setText("");
+            lv.setVisible(true);
         }
 
-        if(e.getSource()==logInView.getLogInButton()){
-            String username=logInView.getUserNameTextField().getText();
-            String password=logInView.getPasswordTextField().getText();
-            logInView.dispose();
+        if(e.getSource()==lv.getLogInButton()){
+            String username=lv.getUserNameTextField().getText();
+            String password=lv.getPasswordTextField().getText();
+
             try {
                 model.logIn(username,password);
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
+            lv.getPasswordTextField().setText("");
+            lv.getUserNameTextField().setText("");
         }
-
+        if(e.getSource()==lv.getSignUpButton()){
+            lv.setVisible(false);
+            signUpView.getUserNameTextField().setText("");
+            signUpView.getPasswordTextField().setText("");
+            signUpView.getPasswordCheckTextField().setText("");
+            signUpView.getPhoneNumberTextField().setText("");
+            signUpView.getMailTextField().setText("");
+            signUpView.getBirthdayTextField().setText("");
+            signUpView.getGenderButton().clearSelection();
+            signUpView.setVisible(true);
+        }
     }
 }

@@ -17,7 +17,6 @@ public class LoginView extends JFrame{
     JLabel userNameLabel;
     JLabel passwordLabel;
     ImageIcon logo;
-    ActionListener actionListener;
 
     public LoginView(){
 
@@ -65,7 +64,6 @@ public class LoginView extends JFrame{
         this.add(userNameTextField);
         this.add(passwordTextField);
         this.setVisible(true);
-        signUpButton.addActionListener(actionListener);
 
 
     }

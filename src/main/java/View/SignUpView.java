@@ -140,7 +140,7 @@ public class SignUpView extends JFrame{
         this.add(phoneNumberLabel);
         this.add(genderLabel);
         this.add(signUpButton);
-        this.setVisible(true);
+        this.setVisible(false);
 
     }
 

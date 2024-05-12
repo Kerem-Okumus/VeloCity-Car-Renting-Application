@@ -111,7 +111,7 @@ public class PaymentInformationView extends JFrame{
         this.add(expirationDateLabel);
         this.add(promotionCodeLabel);
         this.add(confirmButton);
-        this.setVisible(true);
+        this.setVisible(false);
     }
 
     public JTextField getNameOnCardTextField() {

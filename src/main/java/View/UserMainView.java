@@ -166,7 +166,7 @@ public class UserMainView extends JFrame{
         optionBar.add("New Rent",newRentPanel);
 
         this.add(optionBar);
-        this.setVisible(true);
+        this.setVisible(false);
 
 
     }
