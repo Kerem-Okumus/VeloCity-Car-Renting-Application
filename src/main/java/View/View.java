@@ -30,6 +30,10 @@ public class View extends JFrame {
         return sView;
     }
 
+    public UserMainView getuView() {
+        return uView;
+    }
+
     public PaymentInformationView getpView() {
         return pView;
     }

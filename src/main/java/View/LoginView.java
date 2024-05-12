@@ -58,11 +58,23 @@ public class LoginView extends JFrame{
         passwordTextField.setBounds(235, 250,300,50);
         passwordTextField.setFont(new Font("Metropolis",Font.PLAIN,20));
 
+        userNameLabel = new JLabel("Username:");
+        userNameLabel.setBounds(100,150,100,50);
+        userNameLabel.setForeground(new Color(255,81,0));
+        userNameLabel.setFont(new Font("Metropolis",Font.PLAIN, 20));
+
+        passwordLabel = new JLabel("Password:");
+        passwordLabel.setBounds(100,250,100,50);
+        passwordLabel.setForeground(new Color(255,81,0));
+        passwordLabel.setFont(new Font("Metropolis",Font.PLAIN, 20));
+
         this.add(applicationNameLabel);
         this.add(signUpButton);
         this.add(logInButton);
         this.add(userNameTextField);
         this.add(passwordTextField);
+        this.add(userNameLabel);
+        this.add(passwordLabel);
         this.setVisible(true);
 
 

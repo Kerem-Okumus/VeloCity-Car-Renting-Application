@@ -34,6 +34,7 @@ public class Controller implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         SignUpView signUpView = view.getsView();
         LoginView lv = view.getlView();
+        UserMainView userMainView = view.getuView();
         if(e.getSource()==signUpView.getSignUpButton()){
             User newUser = new User(
                     signUpView.getUserNameTextField().getText(),signUpView.getPasswordTextField().getText(),
@@ -50,7 +51,8 @@ public class Controller implements ActionListener {
         if(e.getSource()==lv.getLogInButton()){
             String username=lv.getUserNameTextField().getText();
             String password=lv.getPasswordTextField().getText();
-
+            lv.setVisible(false);
+            userMainView.setVisible(true);
             try {
                 model.logIn(username,password);
             } catch (SQLException ex) {
