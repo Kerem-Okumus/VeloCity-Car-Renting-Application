@@ -18,13 +18,11 @@ public class UserMainView extends JFrame{
     };
     JTable rentListTable;
     String place[] = {"İstanbul", "Ankara", "Trabzon", "Çankırı", "Rize","Erzurum","Gaziantep"};
-    String day[] = {"01","02","03","04","05","06","07","08","09",
-                    "10","11","12","13","14","15","16","17","18",
-                    "19","21","22","23","24","25","26","27","28",
-                    "29","30","31"};
-    String month[] = {"01","02","03","04","05","06","07","08","09",
-                      "10","11","12"};
-    String year[] = {"2024","2025","2026"};
+    String[] day = {"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
+    String[] month = {"01","02","03","04","05","06","07","08","09","10","11","12"};
+    String[] year = {"2024", "2025", "2026"};
+
+
     JComboBox pickUpPlace;
     JComboBox deliveryPlace;
     JComboBox pickUpDateDay;
@@ -34,15 +32,15 @@ public class UserMainView extends JFrame{
     JComboBox deliveryDateMonth;
     JComboBox deliveryDateYear;
     JComboBox gearTypeComboBox;
-    String gear[] = {"Automatic", "Manual"};
+    String gear[] = {"ALL","Automatic", "Manual"};
     JComboBox colorComboBox;
-    String color[] = {"Black","Yellow", "White","Red", "Blue"};
+    String color[] = {"ALL","Black","Grey", "White","Red", "Blue"};
     JComboBox brandComboBox;
-    String brand[] = {"Toyota", "Volkswagen","MG","Volvo"};
+    String brand[] = {"ALL","Toyota", "Volkswagen","MG","Volvo","Fiat","Renault","Lamborghini","Mazda","BMW","Tesla","Mercedes","Hyundai"};
     JComboBox carTypeComboBox;
-    String carType[] = {"Sedan", "SUV", "Hatchback"};
+    String carType[] = {"ALL","Sedan", "SUV", "Hatchback","Roadster","Panel-Van"};
     JComboBox passengerAmountComboBox;
-    String passengerAmount[] = {"2", "5", "7"};
+    String passengerAmount[] = {"ALL","2", "5", "7"};
     JButton searchButton;
     JButton confirmButton;
     JRadioButton driverOptionYes;
@@ -63,6 +61,8 @@ public class UserMainView extends JFrame{
     JScrollPane carSelectionPane;
     ImageIcon logo;
     ButtonGroup driverOption = new ButtonGroup();
+
+
     public UserMainView(){
 
         this.setTitle("VeloCity");
@@ -281,5 +281,277 @@ public class UserMainView extends JFrame{
         this.setVisible(false);
 
 
+    }
+
+    public JPanel getCurrentRentPanel() {
+        return currentRentPanel;
+    }
+
+    public void setCurrentRentPanel(JPanel currentRentPanel) {
+        this.currentRentPanel = currentRentPanel;
+    }
+
+    public JPanel getNewRentPanel() {
+        return newRentPanel;
+    }
+
+    public void setNewRentPanel(JPanel newRentPanel) {
+        this.newRentPanel = newRentPanel;
+    }
+
+    public JPanel getCarSelectionPanel() {
+        return carSelectionPanel;
+    }
+
+    public void setCarSelectionPanel(JPanel carSelectionPanel) {
+        this.carSelectionPanel = carSelectionPanel;
+    }
+
+    public JPanel getDriverPanel() {
+        return driverPanel;
+    }
+
+    public void setDriverPanel(JPanel driverPanel) {
+        this.driverPanel = driverPanel;
+    }
+
+    public JTabbedPane getOptionBar() {
+        return optionBar;
+    }
+
+    public void setOptionBar(JTabbedPane optionBar) {
+        this.optionBar = optionBar;
+    }
+
+    public String[] getColumnNames() {
+        return columnNames;
+    }
+
+    public void setColumnNames(String[] columnNames) {
+        this.columnNames = columnNames;
+    }
+
+    public String[][] getData() {
+        return data;
+    }
+
+    public void setData(String[][] data) {
+        this.data = data;
+    }
+
+    public JTable getRentListTable() {
+        return rentListTable;
+    }
+
+    public void setRentListTable(JTable rentListTable) {
+        this.rentListTable = rentListTable;
+    }
+
+    public String[] getPlace() {
+        return place;
+    }
+
+    public void setPlace(String[] place) {
+        this.place = place;
+    }
+
+    public String[] getDay() {
+        return day;
+    }
+
+    public void setDay(String[] day) {
+        this.day = day;
+    }
+
+    public String[] getMonth() {
+        return month;
+    }
+
+    public void setMonth(String[] month) {
+        this.month = month;
+    }
+
+    public String[] getYear() {
+        return year;
+    }
+
+    public void setYear(String[] year) {
+        this.year = year;
+    }
+
+    public JComboBox getPickUpPlace() {
+        return pickUpPlace;
+    }
+
+    public void setPickUpPlace(JComboBox pickUpPlace) {
+        this.pickUpPlace = pickUpPlace;
+    }
+
+    public JComboBox getDeliveryPlace() {
+        return deliveryPlace;
+    }
+
+    public void setDeliveryPlace(JComboBox deliveryPlace) {
+        this.deliveryPlace = deliveryPlace;
+    }
+
+    public JComboBox getPickUpDateDay() {
+        return pickUpDateDay;
+    }
+
+    public void setPickUpDateDay(JComboBox pickUpDateDay) {
+        this.pickUpDateDay = pickUpDateDay;
+    }
+
+    public JComboBox getPickUpDateMonth() {
+        return pickUpDateMonth;
+    }
+
+    public void setPickUpDateMonth(JComboBox pickUpDateMonth) {
+        this.pickUpDateMonth = pickUpDateMonth;
+    }
+
+    public JComboBox getPickUpDateYear() {
+        return pickUpDateYear;
+    }
+
+    public void setPickUpDateYear(JComboBox pickUpDateYear) {
+        this.pickUpDateYear = pickUpDateYear;
+    }
+
+    public JComboBox getDeliveryDateDay() {
+        return deliveryDateDay;
+    }
+
+    public void setDeliveryDateDay(JComboBox deliveryDateDay) {
+        this.deliveryDateDay = deliveryDateDay;
+    }
+
+    public JComboBox getDeliveryDateMonth() {
+        return deliveryDateMonth;
+    }
+
+    public void setDeliveryDateMonth(JComboBox deliveryDateMonth) {
+        this.deliveryDateMonth = deliveryDateMonth;
+    }
+
+    public JComboBox getDeliveryDateYear() {
+        return deliveryDateYear;
+    }
+
+    public void setDeliveryDateYear(JComboBox deliveryDateYear) {
+        this.deliveryDateYear = deliveryDateYear;
+    }
+
+    public JComboBox getGearTypeComboBox() {
+        return gearTypeComboBox;
+    }
+
+    public void setGearTypeComboBox(JComboBox gearTypeComboBox) {
+        this.gearTypeComboBox = gearTypeComboBox;
+    }
+
+    public String[] getGear() {
+        return gear;
+    }
+
+    public void setGear(String[] gear) {
+        this.gear = gear;
+    }
+
+    public JComboBox getColorComboBox() {
+        return colorComboBox;
+    }
+
+    public void setColorComboBox(JComboBox colorComboBox) {
+        this.colorComboBox = colorComboBox;
+    }
+
+    public String[] getColor() {
+        return color;
+    }
+
+    public void setColor(String[] color) {
+        this.color = color;
+    }
+
+    public JComboBox getBrandComboBox() {
+        return brandComboBox;
+    }
+
+    public void setBrandComboBox(JComboBox brandComboBox) {
+        this.brandComboBox = brandComboBox;
+    }
+
+    public String[] getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String[] brand) {
+        this.brand = brand;
+    }
+
+    public JComboBox getCarTypeComboBox() {
+        return carTypeComboBox;
+    }
+
+    public void setCarTypeComboBox(JComboBox carTypeComboBox) {
+        this.carTypeComboBox = carTypeComboBox;
+    }
+
+    public String[] getCarType() {
+        return carType;
+    }
+
+    public void setCarType(String[] carType) {
+        this.carType = carType;
+    }
+
+    public JComboBox getPassengerAmountComboBox() {
+        return passengerAmountComboBox;
+    }
+
+    public void setPassengerAmountComboBox(JComboBox passengerAmountComboBox) {
+        this.passengerAmountComboBox = passengerAmountComboBox;
+    }
+
+    public String[] getPassengerAmount() {
+        return passengerAmount;
+    }
+
+    public void setPassengerAmount(String[] passengerAmount) {
+        this.passengerAmount = passengerAmount;
+    }
+
+    public JButton getSearchButton() {
+        return searchButton;
+    }
+
+    public void setSearchButton(JButton searchButton) {
+        this.searchButton = searchButton;
+    }
+
+    public JButton getConfirmButton() {
+        return confirmButton;
+    }
+
+    public void setConfirmButton(JButton confirmButton) {
+        this.confirmButton = confirmButton;
+    }
+
+    public JRadioButton getDriverOptionYes() {
+        return driverOptionYes;
+    }
+
+    public void setDriverOptionYes(JRadioButton driverOptionYes) {
+        this.driverOptionYes = driverOptionYes;
+    }
+
+    public JRadioButton getDriverOptionNo() {
+        return driverOptionNo;
+    }
+
+    public void setDriverOptionNo(JRadioButton driverOptionNo) {
+        this.driverOptionNo = driverOptionNo;
     }
 }

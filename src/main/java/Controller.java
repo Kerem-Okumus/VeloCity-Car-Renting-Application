@@ -1,5 +1,6 @@
 import Objects.User;
 import View.*;
+import java.time.LocalDate;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -16,8 +17,6 @@ public class Controller implements ActionListener {
         this.model = model;
         this.view = view;
         addActionListenerToButtons();
-        int x=model.addReservation(new Date(2032-1900,3,20),new Date(2032-1900,3,22),"Ankara","İstanbul",1,150.60,3,2);
-        model.assignDriver(false,x);
         model.addPaymentInformation("1234","123","1928","06","2",model.getUserArrayList().get(0));
     }
 
@@ -72,6 +71,42 @@ public class Controller implements ActionListener {
             signUpView.getBirthdayTextField().setText("");
             signUpView.getGenderButton().clearSelection();
             signUpView.setVisible(true);
+        }
+        if(e.getSource()==userMainView.getSearchButton()){
+            int pDay = Integer.parseInt(userMainView.getPickUpDateDay().getSelectedItem().toString());
+            int pMonth = Integer.parseInt(userMainView.getPickUpDateMonth().getSelectedItem().toString());
+            int pYear = Integer.parseInt(userMainView.getPickUpDateYear().getSelectedItem().toString());
+            int dDay= Integer.parseInt(userMainView.getDeliveryDateDay().getSelectedItem().toString());
+            int dMonth= Integer.parseInt(userMainView.getDeliveryDateMonth().getSelectedItem().toString());
+            int dYear= Integer.parseInt(userMainView.getDeliveryDateYear().getSelectedItem().toString());
+            int passenger;
+            if(userMainView.getPassengerAmountComboBox().getSelectedItem().toString().equals("ALL")){
+                passenger=-1;
+            }
+            else{
+                 passenger= Integer.parseInt(userMainView.getPassengerAmountComboBox().getSelectedItem().toString());
+            }
+
+
+            String brand=userMainView.getBrandComboBox().getSelectedItem().toString();
+
+            String color=userMainView.getColorComboBox().getSelectedItem().toString();
+            String category=userMainView.getCarTypeComboBox().getSelectedItem().toString();
+            String gearType=userMainView.getGearTypeComboBox().getSelectedItem().toString();
+            LocalDate startDate = LocalDate.of(pYear, pMonth, pDay); // Example start date
+            LocalDate returnDate = LocalDate.of(dYear, dMonth, dDay); // Example return date
+            if(startDate.isBefore(returnDate)){
+                try {
+                    System.out.println("--------------------------------");
+                    model.showFilteredCars(model.filterCars(brand,category,color,gearType,passenger,pDay,pMonth,pYear,dDay,dMonth,dYear));
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+            else{
+                System.out.println("Dates are not valid.");
+            }
+
         }
     }
 }

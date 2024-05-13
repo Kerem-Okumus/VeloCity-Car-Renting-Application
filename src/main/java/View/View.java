@@ -21,6 +21,7 @@ public class View extends JFrame {
         buttons.add(lView.getLogInButton());
         buttons.add(pView.getConfirmButton());
         buttons.add(lView.getSignUpButton());
+        buttons.add(uView.getSearchButton());
     }
     public LoginView getlView() {
         return lView;

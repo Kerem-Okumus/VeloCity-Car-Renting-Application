@@ -254,6 +254,36 @@ public class Model {
     }
 
 
+    public ResultSet filterCars(String brand, String category, String color, String gearType, int passenger, int pDay, int pMonth, int pYear, int dDay, int dMonth, int dYear) throws SQLException {
+        Date pickupDate = new Date(pYear - 1900, pMonth-1, pDay);
+        Date deliverDate = new Date(dYear - 1900, dMonth-1, dDay);
+        Statement statement = connection.createStatement();
+        StringBuilder queryBuilder = new StringBuilder("SELECT V.vehicleId FROM Vehicle V WHERE V.vehicleId NOT IN(SELECT R.vehicleId FROM Reservation R WHERE R.pickupDate <= '" + deliverDate + "' AND R.returnDate >= '" + pickupDate + "')" );
+        if (!"ALL".equals(brand)) {
+            queryBuilder.append(" AND V.brand = '").append(brand).append("'");
+        }
+        if (!"ALL".equals(gearType)) {
+            queryBuilder.append(" AND V.gearType = '").append(gearType).append("'");
+        }
+        if (!"ALL".equals(category)) {
+            queryBuilder.append(" AND V.carType = '").append(category).append("'");
+        }
+        if (!"ALL".equals(color)) {
+            queryBuilder.append(" AND V.color = '").append(color).append("'");
+        }
+        if (passenger != -1) { // assuming -1 represents "ALL" for passenger count
+            queryBuilder.append(" AND V.passengerAmount = ").append(passenger);
+        }
+        ResultSet rs1 = statement.executeQuery(queryBuilder.toString());
+        return rs1;
+    }
+    public void showFilteredCars(ResultSet rs1) throws SQLException {
+        while(rs1.next()){
+            System.out.println(rs1.getInt("vehicleId"));
+        }
+    }
+
+
     public ArrayList<User> getUserArrayList() {
         return userArrayList;
     }
