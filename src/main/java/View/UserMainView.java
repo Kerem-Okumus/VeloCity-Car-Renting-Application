@@ -12,10 +12,7 @@ public class UserMainView extends JFrame{
     JPanel driverPanel;
     JTabbedPane optionBar;
     String[] columnNames = {"Vehicle Model", "Rental Place", "Delivery Place", "Rental Date", "Delivery Date"};
-    String[][] data = {
-            {"Yaris","İstanbul","Trabzon","12/05/2024","15/05/2024"},
-            {"Yaris","İstanbul","Trabzon","12/05/2024","15/05/2024"}
-    };
+    String[][] data;
     JTable rentListTable;
     String place[] = {"İstanbul", "Ankara", "Trabzon", "Çankırı", "Rize","Erzurum","Gaziantep"};
     String[] day = {"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
@@ -78,9 +75,6 @@ public class UserMainView extends JFrame{
 
         currentRentPanel = new JPanel();
         currentRentPanel.setBackground(new Color(248,239,217));
-        rentListTable = new JTable(data,columnNames);
-        scrollPane = new JScrollPane(rentListTable);
-        currentRentPanel.add(scrollPane);
 
         pickUpPlace = new JComboBox(place);
         pickUpPlace.setBounds(300,300, 300,50);
@@ -267,8 +261,6 @@ public class UserMainView extends JFrame{
         driverPanel.add(driverOptionYes);
         driverPanel.add(driverOptionNo);
 
-        rentListTable.getTableHeader().setReorderingAllowed(false);
-        rentListTable.getTableHeader().setResizingAllowed(false);
 
         optionBar = new JTabbedPane();
         optionBar.setBounds(0,0,1920,1080);
@@ -281,6 +273,14 @@ public class UserMainView extends JFrame{
         this.setVisible(false);
 
 
+    }
+
+    public void createTable(){
+        rentListTable = new JTable(data,columnNames);
+        rentListTable.getTableHeader().setReorderingAllowed(false);
+        rentListTable.getTableHeader().setResizingAllowed(false);
+        scrollPane = new JScrollPane(rentListTable);
+        currentRentPanel.add(scrollPane);
     }
 
     public JPanel getCurrentRentPanel() {

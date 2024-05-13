@@ -15,6 +15,7 @@ public class Model {
     private ArrayList<Extras> extrasArrayList =new ArrayList<>();
     private ArrayList<Reservation> reservationArrayList =new ArrayList<>();
     private ArrayList<ReservationExtras> reservationExtrasArrayList =new ArrayList<>();
+    private int loggedUserId;
 
     public Model() throws SQLException {
         getUsersInDB();
@@ -163,12 +164,13 @@ public class Model {
             JOptionPane.showMessageDialog(new JFrame(),"PLEASE FILL BOTH FIELDS !!!");
             return false;
         }
-        ResultSet rs1 = statement.executeQuery("SELECT username " +
+        ResultSet rs1 = statement.executeQuery("SELECT username, userId " +
                 "FROM user " +
                         "WHERE username='" + username + "' and password= '" + password +"';");
 
         if (rs1.next()) {
             System.out.println("NOTIFICATION >>> Welcome " + rs1.getString("username"));
+            loggedUserId = rs1.getInt("userId");
             return true;
         } else {
             System.out.println("NOTIFICATION >>> Wrong username or password");
@@ -306,5 +308,9 @@ public class Model {
 
     public ArrayList<ReservationExtras> getReservationExtrasArrayList() {
         return reservationExtrasArrayList;
+    }
+
+    public int getLoggedUserId() {
+        return loggedUserId;
     }
 }

@@ -1,12 +1,10 @@
-import Objects.User;
+import Objects.*;
 import View.*;
 import java.time.LocalDate;
-
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Controller implements ActionListener {
 
@@ -53,6 +51,10 @@ public class Controller implements ActionListener {
             try {
                 if(model.logIn(username,password)==true){
                     lv.setVisible(false);
+                    ArrayList<String> tempList = getUsersReservations(username);
+                    String[][] tempArray = getData(tempList);
+                    userMainView.setData(tempArray);
+                    userMainView.createTable();
                     userMainView.setVisible(true);
                 }
             } catch (SQLException ex) {
@@ -108,5 +110,39 @@ public class Controller implements ActionListener {
             }
 
         }
+    }
+
+    public ArrayList<String> getUsersReservations(String username){
+        ArrayList<String> data = new ArrayList<>();
+        for(int i = 0; i<model.getReservationArrayList().size(); i++){
+            Reservation r = model.getReservationArrayList().get(i);
+            if(model.getLoggedUserId() == r.getUserId()){
+                for(int j = 0; j<model.getVehicleArrayList().size(); j++){
+                    Vehicle v = model.getVehicleArrayList().get(j);
+                    if(r.getVehicleId() == v.getVehicleId()){
+                        data.add(v.getModel());
+                        data.add(r.getPickupLocation());
+                        data.add(r.getReturnLocation());
+                        data.add(r.getPickupDate().toString());
+                        data.add(r.getReturnDate().toString());
+                    }
+                }
+            }
+        }
+        return data;
+    }
+
+    public String[][] getData(ArrayList<String> data){
+        String[][] dataArray = new String[data.size()/5][5];
+        int counter = 0, columnCounter = 0;
+        for(int i = 0; i<data.size(); i++){
+            dataArray[columnCounter][counter] = data.get(i);
+            counter++;
+            if(counter % 5 == 0){
+                columnCounter++;
+                counter = 0;
+            }
+        }
+        return dataArray;
     }
 }
