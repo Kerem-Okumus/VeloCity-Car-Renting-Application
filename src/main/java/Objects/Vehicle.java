@@ -10,9 +10,10 @@ public class Vehicle {
     private boolean isAvailable;
     private final String fuelType;
     private final String passengerAmount;
+    private final String dailyPrice;
 
     public Vehicle(int vehicleId, String gearType, String color, String carType, String model, String brand,
-                   boolean isAvailable, String fuelType, String passengerAmount) {
+                   boolean isAvailable, String fuelType, String passengerAmount, String dailyPrice) {
         this.vehicleId = vehicleId;
         this.gearType = gearType;
         this.color = color;
@@ -22,6 +23,7 @@ public class Vehicle {
         this.isAvailable = isAvailable;
         this.fuelType = fuelType;
         this.passengerAmount = passengerAmount;
+        this.dailyPrice = dailyPrice;
     }
 
     public int getVehicleId() {

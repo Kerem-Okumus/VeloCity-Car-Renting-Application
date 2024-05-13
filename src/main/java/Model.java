@@ -26,6 +26,7 @@ public class Model {
     }
 
     public int addUser(User user)  {
+        userArrayList.add(user);
         int lastId = 0;
         int userId = 0;
 
@@ -77,7 +78,7 @@ public class Model {
 
     public void getVehiclesInDB() throws SQLException {
         Statement statement = connection.createStatement();
-        String query = "SELECT vehicleId, gearType, color, carType, model, brand, isAvailable, fuelType, passengerAmount FROM vehicle ";
+        String query = "SELECT * FROM vehicle ";
         ResultSet resultSet = statement.executeQuery(query);
         while (resultSet.next()) {
             int vehicleId = resultSet.getInt("vehicleId");
@@ -89,7 +90,8 @@ public class Model {
             boolean isAvailable = resultSet.getBoolean("isAvailable");
             String fuelType = resultSet.getString("fuelType");
             String passengerAmount = resultSet.getString("passengerAmount");
-            Vehicle existingVehicle = new Vehicle(vehicleId, gearType, color, carType, model, brand, isAvailable, fuelType, passengerAmount);
+            String dailyPrice = resultSet.getString("dailyPrice");
+            Vehicle existingVehicle = new Vehicle(vehicleId, gearType, color, carType, model, brand, isAvailable, fuelType, passengerAmount, dailyPrice);
             vehicleArrayList.add(existingVehicle);
         }
     }
@@ -241,7 +243,14 @@ public class Model {
         Statement statement = connection.createStatement();
         statement.executeUpdate("UPDATE user SET cardNumber=" + cardNumber + ",cvv=" + cvv + ",lastDateYear=" + lastDateYear + ",lastDateMonth=" + lastDateMonth + ",lastDateDay=" + lastDateDay + " WHERE userId= " + user.getUserId());
 
-
+        for(int i = 0; i<userArrayList.size(); i++){
+            if(userArrayList.get(i).getUserId() == user.getUserId()){
+                userArrayList.get(i).setCvv(cvv);
+                userArrayList.get(i).setLastDateYear(lastDateYear);
+                userArrayList.get(i).setLastDateMonth(lastDateMonth);
+                userArrayList.get(i).setLastDateDay(lastDateDay);
+            }
+        }
     }
 
 

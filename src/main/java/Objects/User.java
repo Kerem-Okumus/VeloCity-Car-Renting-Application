@@ -10,6 +10,10 @@ public class User {
     private String phoneNumber;
     private String gender;
     private String cardNumber;
+    private String cvv;
+    private String lastDateYear;
+    private String lastDateMonth;
+    private String lastDateDay;
 
     public User(String username, String password, String name_surname, String email, int age, String phoneNumber, String gender, String cardNumber) {
         this.username = username;
@@ -60,5 +64,20 @@ public class User {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+    public void setLastDateYear(String lastDateYear) {
+        this.lastDateYear = lastDateYear;
+    }
+
+    public void setLastDateMonth(String lastDateMonth) {
+        this.lastDateMonth = lastDateMonth;
+    }
+
+    public void setLastDateDay(String lastDateDay) {
+        this.lastDateDay = lastDateDay;
+    }
+
+    public void setCvv(String cvv) {
+        this.cvv = cvv;
     }
 }
