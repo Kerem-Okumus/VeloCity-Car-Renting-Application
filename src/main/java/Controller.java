@@ -51,10 +51,11 @@ public class Controller implements ActionListener {
         if(e.getSource()==lv.getLogInButton()){
             String username=lv.getUserNameTextField().getText();
             String password=lv.getPasswordTextField().getText();
-            lv.setVisible(false);
-            userMainView.setVisible(true);
             try {
-                model.logIn(username,password);
+                if(model.logIn(username,password)==true){
+                    lv.setVisible(false);
+                    userMainView.setVisible(true);
+                }
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }

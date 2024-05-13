@@ -87,6 +87,7 @@ public class UserMainView extends JFrame{
         pickUpPlace.setFont(new Font("Metropolis", Font.PLAIN,20));
         pickUpPlace.setForeground(new Color(255,81,0));
 
+
         deliveryPlace = new JComboBox(place);
         deliveryPlace.setBounds(900,300, 300,50);
         deliveryPlace.setFont(new Font("Metropolis", Font.PLAIN,20));
@@ -164,6 +165,7 @@ public class UserMainView extends JFrame{
         driverOptionYes.setBounds(800,670,100,20);
         driverOptionYes.setForeground(new Color(255,81,0));
         driverOptionYes.setBackground(new Color(248,239,217));
+
 
         driverOptionNo = new JRadioButton("No");
         driverOptionNo.setBounds(900,670,100,20);
@@ -265,6 +267,8 @@ public class UserMainView extends JFrame{
         driverPanel.add(driverOptionYes);
         driverPanel.add(driverOptionNo);
 
+        rentListTable.getTableHeader().setReorderingAllowed(false);
+        rentListTable.getTableHeader().setResizingAllowed(false);
 
         optionBar = new JTabbedPane();
         optionBar.setBounds(0,0,1920,1080);

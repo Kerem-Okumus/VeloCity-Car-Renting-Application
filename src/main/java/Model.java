@@ -1,6 +1,7 @@
 import Objects.*;
 import Objects.Driver;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -154,23 +155,27 @@ public class Model {
         }
     }
 
-    public String logIn(String username, String password) throws SQLException {
+    public boolean logIn(String username, String password) throws SQLException {
         Statement statement = connection.createStatement();
+        if(username.equals("") || password.equals("")){
+            JOptionPane.showMessageDialog(new JFrame(),"PLEASE FILL BOTH FIELDS !!!");
+            return false;
+        }
         ResultSet rs1 = statement.executeQuery("SELECT username " +
                 "FROM user " +
                         "WHERE username='" + username + "' and password= '" + password +"';");
 
-
         if (rs1.next()) {
             System.out.println("NOTIFICATION >>> Welcome " + rs1.getString("username"));
-            return username;
+            return true;
         } else {
             System.out.println("NOTIFICATION >>> Wrong username or password");
+            JOptionPane.showMessageDialog(new JFrame(),"WRONG USERNAME OR PASSWORD !!!");
         }
-
-
-        return "Wrong username";
+        return false;
     }
+
+
     public int addReservation(Date pickupDate, Date returnDate, String pickupLocation, String returnLocation, int resStatus, double price, int userId, int vehicleId){
         int lastId = 0;
         int reservationId = 0;
