@@ -343,7 +343,7 @@ public class Model {
         Date pickupDate = new Date(pYear - 1900, pMonth-1, pDay);
         Date deliverDate = new Date(dYear - 1900, dMonth-1, dDay);
         Statement statement = connection.createStatement();
-        StringBuilder queryBuilder = new StringBuilder("SELECT V.vehicleId FROM Vehicle V WHERE V.vehicleId NOT IN(SELECT R.vehicleId FROM Reservation R WHERE R.pickupDate <= '" + deliverDate + "' AND R.returnDate >= '" + pickupDate + "')" );
+        StringBuilder queryBuilder = new StringBuilder("SELECT V.vehicleId, V.gearType, V.color, V.carType, V.model, V.brand, V.isAvailable, V.fuelType, V.passengerAmount, V.dailyPrice FROM Vehicle V WHERE V.vehicleId NOT IN(SELECT R.vehicleId FROM Reservation R WHERE R.pickupDate <= '" + deliverDate + "' AND R.returnDate >= '" + pickupDate + "')" );
         if (!"ALL".equals(brand)) {
             queryBuilder.append(" AND V.brand = '").append(brand).append("'");
         }
@@ -362,10 +362,22 @@ public class Model {
         ResultSet rs1 = statement.executeQuery(queryBuilder.toString());
         return rs1;
     }
-    public void showFilteredCars(ResultSet rs1) throws SQLException {
+    public ArrayList<Vehicle> showFilteredCars(ResultSet rs1) throws SQLException {
+        ArrayList<Vehicle> cars = new ArrayList<>();
         while(rs1.next()){
-            System.out.println(rs1.getInt("vehicleId"));
+            int vehicleId = rs1.getInt("vehicleId");
+            String gearType = rs1.getString("gearType");
+            String color = rs1.getString("color");
+            String carType = rs1.getString("carType");
+            String model = rs1.getString("model");
+            String brand = rs1.getString("brand");
+            boolean isAvailable = rs1.getBoolean("isAvailable");
+            String fuelType = rs1.getString("fuelType");
+            String passengerAmount = rs1.getString("passengerAmount");
+            String dailyPrice = rs1.getString("dailyPrice");
+            cars.add(new Vehicle(vehicleId, gearType, color, carType, model, brand, isAvailable, fuelType, passengerAmount, dailyPrice));
         }
+        return cars;
     }
 
 

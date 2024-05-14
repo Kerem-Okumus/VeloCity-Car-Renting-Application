@@ -69,6 +69,7 @@ public class Controller implements ActionListener {
             try {
                 if(model.logIn(username,password)==true){
                     lv.setVisible(false);
+                    //Reservation list
                     ArrayList<String> tempList = getUsersReservations(username);
                     String[][] tempArray = getData(tempList);
                     userMainView.setData(tempArray);
@@ -118,7 +119,11 @@ public class Controller implements ActionListener {
             if(startDate.isBefore(returnDate)){
                 try {
                     System.out.println("--------------------------------");
-                    model.showFilteredCars(model.filterCars(brand,category,color,gearType,passenger,pDay,pMonth,pYear,dDay,dMonth,dYear));
+                    ArrayList<Vehicle> tempCars = model.showFilteredCars(model.filterCars(brand,category,color,gearType,passenger,pDay,pMonth,pYear,dDay,dMonth,dYear));
+                    String[][] tempCarsData = carsToTable(tempCars);
+                    userMainView.setCarData(tempCarsData);
+                    userMainView.clearCarTable();
+                    userMainView.createCarTable();
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -127,6 +132,9 @@ public class Controller implements ActionListener {
                 System.out.println("Dates are not valid.");
             }
 
+        }
+        if(e.getSource() == userMainView.getConfirmButton()){
+            System.out.println(userMainView.getCarListTable().getValueAt(userMainView.getCarListTable().getSelectedRow(), 0));
         }
     }
 
@@ -162,5 +170,20 @@ public class Controller implements ActionListener {
             }
         }
         return dataArray;
+    }
+
+    public String[][] carsToTable(ArrayList<Vehicle> vehicles){
+        String[][] carArray = new String[vehicles.size()][8];
+        for(int i = 0; i<vehicles.size(); i++){
+            carArray[i][0] = vehicles.get(i).getModel();
+            carArray[i][1] = vehicles.get(i).getBrand();
+            carArray[i][2] = vehicles.get(i).getColor();
+            carArray[i][3] = vehicles.get(i).getGearType();
+            carArray[i][4] = vehicles.get(i).getCarType();
+            carArray[i][5] = vehicles.get(i).getFuelType();
+            carArray[i][6] = vehicles.get(i).getPassengerAmount();
+            carArray[i][7] = vehicles.get(i).getDailyPrice();
+        }
+        return carArray;
     }
 }

@@ -65,4 +65,8 @@ public class Vehicle {
     public void setAvailable(boolean available) {
         isAvailable = available;
     }
+
+    public String getDailyPrice() {
+        return dailyPrice;
+    }
 }

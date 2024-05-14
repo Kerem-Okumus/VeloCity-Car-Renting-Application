@@ -2,7 +2,6 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Objects;
 
 public class UserMainView extends JFrame{
 
@@ -12,8 +11,11 @@ public class UserMainView extends JFrame{
     JPanel driverPanel;
     JTabbedPane optionBar;
     String[] columnNames = {"Vehicle Model", "Rental Place", "Delivery Place", "Rental Date", "Delivery Date"};
+    String[] carColumnNames = {"Model", "Brand", "Color", "Gear Type", "Car Type", "Fuel Type", "Passenger Amount", "Daily Price"};
     String[][] data;
+    String[][] carData;
     JTable rentListTable;
+    JTable carListTable;
     String place[] = {"İstanbul", "Ankara", "Trabzon", "Çankırı", "Rize","Erzurum","Gaziantep"};
     String[] day = {"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
     String[] month = {"01","02","03","04","05","06","07","08","09","10","11","12"};
@@ -219,7 +221,7 @@ public class UserMainView extends JFrame{
         confirmButton.setForeground(new Color(248,239,217));
 
         searchButton = new JButton("Search");
-        searchButton.setBounds(900,850,200,50);
+        searchButton.setBounds(675,950,200,50);
         searchButton.setBorderPainted(false);
         searchButton.setFocusPainted(false);
         searchButton.setBackground(new Color(255,81,0));
@@ -279,8 +281,27 @@ public class UserMainView extends JFrame{
         rentListTable = new JTable(data,columnNames);
         rentListTable.getTableHeader().setReorderingAllowed(false);
         rentListTable.getTableHeader().setResizingAllowed(false);
+        rentListTable.setDefaultEditor(Object.class, null);
         scrollPane = new JScrollPane(rentListTable);
         currentRentPanel.add(scrollPane);
+    }
+
+    public void createCarTable(){
+        carListTable = new JTable(carData,carColumnNames);
+        carListTable.getTableHeader().setReorderingAllowed(false);
+        carListTable.getTableHeader().setResizingAllowed(false);
+        carListTable.setDefaultEditor(Object.class, null);
+        carSelectionPane = new JScrollPane(carListTable);
+        carSelectionPane.setPreferredSize(new Dimension(790,220));
+        carSelectionPanel.add(carSelectionPane);
+        carSelectionPanel.setVisible(false);
+        carSelectionPanel.setVisible(true);
+    }
+
+    public void clearCarTable(){
+        if(carListTable != null){
+            carSelectionPanel.remove(carSelectionPane);
+        }
     }
 
     public JPanel getCurrentRentPanel() {
@@ -553,5 +574,17 @@ public class UserMainView extends JFrame{
 
     public void setDriverOptionNo(JRadioButton driverOptionNo) {
         this.driverOptionNo = driverOptionNo;
+    }
+
+    public String[][] getCarData() {
+        return carData;
+    }
+
+    public void setCarData(String[][] carData) {
+        this.carData = carData;
+    }
+
+    public JTable getCarListTable() {
+        return carListTable;
     }
 }
