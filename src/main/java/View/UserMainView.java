@@ -40,6 +40,8 @@ public class UserMainView extends JFrame{
     String carType[] = {"ALL","Sedan", "SUV", "Hatchback","Roadster","Panel-Van"};
     JComboBox passengerAmountComboBox;
     String passengerAmount[] = {"ALL","2", "5", "7"};
+    JComboBox fuelTypeComboBox;
+    String fuelType[] = {"ALL","Gasoline","Diesel","Electric","Hybrid"};
     JButton searchButton;
     JButton confirmButton;
     JRadioButton driverOptionYes;
@@ -56,6 +58,7 @@ public class UserMainView extends JFrame{
     JLabel categoryLabel;
     JLabel gearTypeLabel;
     JLabel passengerAmountLabel;
+    JLabel fuelTypeLabel;
     JScrollPane scrollPane;
     JScrollPane carSelectionPane;
     ImageIcon logo;
@@ -145,7 +148,7 @@ public class UserMainView extends JFrame{
         deliveryDateLabel.setFont(new Font("Metropolis",Font.PLAIN, 20));
 
         carSelectionPanel = new JPanel();
-        carSelectionPanel.setLayout(new FlowLayout(FlowLayout.LEFT,60,60));
+        carSelectionPanel.setLayout(new FlowLayout(FlowLayout.LEFT,40,60));
         carSelectionPanel.setBackground(new Color(225, 211, 189));
         carSelectionPanel.setBounds(300,550,900,400);
 
@@ -154,8 +157,7 @@ public class UserMainView extends JFrame{
         driverPanel.setBackground(new Color(225, 211, 189));
         driverPanel.setBounds(1300,300,300,650);
 
-        driverOption.add(driverOptionYes);
-        driverOption.add(driverOptionNo);
+
 
         driverOptionYes = new JRadioButton("Yes");
         driverOptionYes.setBounds(800,670,100,20);
@@ -167,6 +169,9 @@ public class UserMainView extends JFrame{
         driverOptionNo.setBounds(900,670,100,20);
         driverOptionNo.setForeground(new Color(255,81,0));
         driverOptionNo.setBackground(new Color(248,239,217));
+
+        driverOption.add(driverOptionYes);
+        driverOption.add(driverOptionNo);
 
         brandComboBox = new JComboBox(brand);
         brandComboBox.setFont(new Font("Metropolis", Font.PLAIN,20));
@@ -188,30 +193,39 @@ public class UserMainView extends JFrame{
         passengerAmountComboBox.setFont(new Font("Metropolis", Font.PLAIN,20));
         passengerAmountComboBox.setForeground(new Color(255,81,0));
 
+        fuelTypeComboBox = new JComboBox(fuelType);
+        fuelTypeComboBox.setFont(new Font("Metropolis", Font.PLAIN,20));
+        fuelTypeComboBox.setForeground(new Color(255,81,0));
+
         brandLabel = new JLabel("Brand:");
-        brandLabel.setBounds(360,550,300,50);
+        brandLabel.setBounds(340,550,300,50);
         brandLabel.setForeground(new Color(255,81,0));
         brandLabel.setFont(new Font("Metropolis",Font.PLAIN, 20));
 
         categoryLabel = new JLabel("Category:");
-        categoryLabel.setBounds(550,550,300,50);
+        categoryLabel.setBounds(520,550,300,50);
         categoryLabel.setForeground(new Color(255,81,0));
         categoryLabel.setFont(new Font("Metropolis",Font.PLAIN, 20));
 
         colorLabel = new JLabel("Color:");
-        colorLabel.setBounds(730,550,300,50);
+        colorLabel.setBounds(680,550,300,50);
         colorLabel.setForeground(new Color(255,81,0));
         colorLabel.setFont(new Font("Metropolis",Font.PLAIN, 20));
 
         gearTypeLabel = new JLabel("Gear Type:");
-        gearTypeLabel.setBounds(880,550,300,50);
+        gearTypeLabel.setBounds(800,550,300,50);
         gearTypeLabel.setForeground(new Color(255,81,0));
         gearTypeLabel.setFont(new Font("Metropolis",Font.PLAIN, 20));
 
         passengerAmountLabel = new JLabel("Passenger:");
-        passengerAmountLabel.setBounds(1050,550,300,50);
+        passengerAmountLabel.setBounds(950,550,300,50);
         passengerAmountLabel.setForeground(new Color(255,81,0));
         passengerAmountLabel.setFont(new Font("Metropolis",Font.PLAIN, 20));
+
+        fuelTypeLabel = new JLabel("Fuel T:");
+        fuelTypeLabel.setBounds(1060,550,300,50);
+        fuelTypeLabel.setForeground(new Color(255,81,0));
+        fuelTypeLabel.setFont(new Font("Metropolis",Font.PLAIN, 20));
 
         confirmButton = new JButton("Confirm");
         confirmButton.setBounds(1350,850,200,50);
@@ -232,6 +246,7 @@ public class UserMainView extends JFrame{
         carSelectionPanel.add(colorComboBox);
         carSelectionPanel.add(gearTypeComboBox);
         carSelectionPanel.add(passengerAmountComboBox);
+        carSelectionPanel.add(fuelTypeComboBox);
 
         newRentPanel = new JPanel();
         newRentPanel.setBackground(new Color(248,239,217));
@@ -254,6 +269,7 @@ public class UserMainView extends JFrame{
         newRentPanel.add(colorLabel);
         newRentPanel.add(gearTypeLabel);
         newRentPanel.add(passengerAmountLabel);
+        newRentPanel.add(fuelTypeLabel);
         newRentPanel.add(searchButton);
         newRentPanel.add(carSelectionPanel);
         newRentPanel.add(confirmButton);
@@ -272,7 +288,7 @@ public class UserMainView extends JFrame{
         optionBar.add("New Rent",newRentPanel);
 
         this.add(optionBar);
-        this.setVisible(false);
+        this.setVisible(true);
 
 
     }
