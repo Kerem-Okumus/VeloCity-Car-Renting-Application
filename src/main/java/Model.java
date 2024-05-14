@@ -4,6 +4,8 @@ import Objects.Driver;
 import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Model {
 
@@ -55,6 +57,87 @@ public class Model {
             e.printStackTrace();
         }
         return userId;
+    }
+
+    public boolean signUp(String userName, String password, String passwordCheck, String eMail, String birthday, String phone, String gender) throws SQLException {
+        Statement statement = connection.createStatement();
+        ResultSet rs1 = statement.executeQuery("SELECT userName FROM User");
+
+        //checkValidInfoForSignUp(userName, password, passwordCheck, eMail, birthday, phone, gender);
+        if(checkValidInfoForSignUp(userName, password, passwordCheck, eMail, birthday, phone, gender)==false){
+            return false;
+        }
+
+        while (rs1.next()) {
+            String activeUserName = rs1.getString("userName");
+            if(userName.equals(activeUserName)){
+                JOptionPane.showMessageDialog(new JFrame(),"--- This username has taken ---");
+                return false;
+            }
+        }
+
+        User newUser=new User(userName, password, userName, eMail, Integer.parseInt(birthday), phone, gender,null);
+        addUser(newUser);
+
+        return true;
+    }
+
+    public boolean checkValidInfoForSignUp(String userName, String password, String passwordCheck, String eMail, String age, String phone, String gender){
+
+        String errorMessage="";
+        int flag =0;
+        int ageFlag=0;
+
+        if(age.equals("") || age.contains(" ")){
+            ageFlag=1;
+        }
+
+        if(userName.equals("") || password.equals("") || passwordCheck.equals("") || eMail.equals("") || age.equals("") || phone.equals("") || gender.equals("")){
+            errorMessage+="!! PLEASE FILL ALL THE FIELDS !!\n";
+            flag=1;
+        }
+        if(!password.equals(passwordCheck)){
+            errorMessage+="!! PLEASE ENTER THE SAME PASSWORD !!\n";
+            flag=1;
+        }
+
+        String regex ="^(.+)@(.+)$";
+        Pattern pattern=Pattern.compile(regex);
+        Matcher matcher= pattern.matcher(eMail);
+        if(!matcher.matches()){
+            errorMessage+="!! PLEASE ENTER A VALID E-MAIL !!\n";
+            flag=1;
+        }
+
+        if(!isNumeric(age)){
+            errorMessage+="!! PLEASE ENTER A VALID AGE !!\n";
+            flag=1;
+        }else if(Integer.parseInt(age)>100 || Integer.parseInt(age)<18){
+            errorMessage+="!! YOU ARE NOT ELIGIBLE (age) !!\n";
+            flag=1;
+        }
+        if(!isNumeric(phone) || !phone.startsWith("05") || phone.length() != 11){
+            errorMessage+="!! PLEASE ENTER A VALID PHONE NUMBER !!\n";
+            flag=1;
+        }
+        if(gender==null){
+            errorMessage+="!! PLEASE SELECT GENDER !!";
+            flag=1;
+        }
+        if(flag==1) {
+            JOptionPane.showMessageDialog(new JFrame(), errorMessage);
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isNumeric(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch(NumberFormatException e){
+            return false;
+        }
     }
 
     public void getUsersInDB() throws SQLException {

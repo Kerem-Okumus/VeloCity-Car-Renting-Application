@@ -32,17 +32,35 @@ public class Controller implements ActionListener {
         SignUpView signUpView = view.getsView();
         LoginView lv = view.getlView();
         UserMainView userMainView = view.getuView();
+
         if(e.getSource()==signUpView.getSignUpButton()){
-            User newUser = new User(
-                    signUpView.getUserNameTextField().getText(),signUpView.getPasswordTextField().getText(),
-                    signUpView.getUserNameTextField().getText(),signUpView.getMailTextField().getText(),22,
-                    signUpView.getPhoneNumberTextField().getText(),"male","12341231411"
-            );
-            model.addUser(newUser);
-            signUpView.setVisible(false);
-            lv.getPasswordTextField().setText("");
-            lv.getUserNameTextField().setText("");
-            lv.setVisible(true);
+
+            String username = signUpView.getUserNameTextField().getText();
+            String password = signUpView.getPasswordTextField().getText();
+            String passwordCheck = signUpView.getPasswordCheckTextField().getText();
+            String nameSurname = signUpView.getUserNameTextField().getText();
+            String eMail = signUpView.getMailTextField().getText();
+            String phoneNumber = signUpView.getPhoneNumberTextField().getText();
+            String age = signUpView.getBirthdayTextField().getText();
+            String gender=null;
+            if(signUpView.getFemaleButton().isSelected()){
+                gender="female";
+            }else if(signUpView.getMaleButton().isSelected()){
+                gender="male";
+            }
+
+            try {
+                if(model.signUp(username, password, passwordCheck, eMail, age, phoneNumber, gender)==true){
+                    signUpView.setVisible(false);
+                    lv.getPasswordTextField().setText("");
+                    lv.getUserNameTextField().setText("");
+                    lv.setVisible(true);
+                }
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+
+
         }
 
         if(e.getSource()==lv.getLogInButton()){

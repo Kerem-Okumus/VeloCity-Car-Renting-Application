@@ -43,30 +43,32 @@ public class SignUpView extends JFrame{
         pageNameLabel.setForeground(new Color(255,81,0));
         pageNameLabel.setFont(new Font("Franklin Gothic Heavy",Font.BOLD, 50));
 
-        userNameTextField = new JTextField();
+        userNameTextField = new JTextField("enter username");
         userNameTextField.setBounds(300,350,300,50);
         userNameTextField.setFont(new Font("Metropolis", Font.PLAIN,20));
 
-        passwordTextField = new JPasswordField();
+        passwordTextField = new JPasswordField("enter password");
         passwordTextField.setBounds(700,350,300,50);
         passwordTextField.setFont(new Font("Metropolis", Font.PLAIN, 20));
 
-        passwordCheckTextField = new JPasswordField();
+        passwordCheckTextField = new JPasswordField("confirm password");
         passwordCheckTextField.setBounds(1100,350,300,50);
         passwordCheckTextField.setFont(new Font("Metropolis",Font.PLAIN,20));
+        passwordCheckTextField.setToolTipText("confirm password");
 
         mailTextField = new JTextField();
         mailTextField.setBounds(300,550,300,50);
         mailTextField.setFont(new Font("Metropolis", Font.PLAIN,20));
+        mailTextField.setToolTipText("example@abc.com");
 
-        birthdayTextField = new JTextField();
+        birthdayTextField = new JTextField("enter your age");
         birthdayTextField.setBounds(700,550,300,50);
         birthdayTextField.setFont(new Font("Metropolis", Font.PLAIN, 20));
 
         phoneNumberTextField = new JTextField();
         phoneNumberTextField.setBounds(1100,550,300,50);
         phoneNumberTextField.setFont(new Font("Metropolis", Font.PLAIN,20));
-
+        phoneNumberTextField.setToolTipText("05_________");
 
         maleButton = new JRadioButton("Male");
         maleButton.setBounds(800,670,100,20);
@@ -101,7 +103,7 @@ public class SignUpView extends JFrame{
         mailLabel.setFont(new Font("Metropolis", Font.PLAIN,20));
         mailLabel.setForeground(new Color(255,81,0));
 
-        birthdayLabel = new JLabel("Birthday:");
+        birthdayLabel = new JLabel("Age:");
         birthdayLabel.setBounds(700,480, 300,50);
         birthdayLabel.setFont(new Font("Metropolis", Font.PLAIN,20));
         birthdayLabel.setForeground(new Color(255,81,0));
@@ -201,5 +203,13 @@ public class SignUpView extends JFrame{
     }
     public ButtonGroup getGenderButton(){
         return genderButton;
+    }
+
+    public JRadioButton getMaleButton() {
+        return maleButton;
+    }
+
+    public JRadioButton getFemaleButton() {
+        return femaleButton;
     }
 }
