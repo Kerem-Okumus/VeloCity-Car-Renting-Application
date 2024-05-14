@@ -46,6 +46,18 @@ public class UserMainView extends JFrame{
     JButton confirmButton;
     JRadioButton driverOptionYes;
     JRadioButton driverOptionNo;
+    JRadioButton normalDriver;
+    JRadioButton professionalDriver;
+    JRadioButton tireChainYes;
+    JRadioButton tireChainNo;
+    JRadioButton childSeat;
+    JRadioButton babySeat;
+    JRadioButton roofBoxYes;
+    JRadioButton roofBoxNo;
+    JRadioButton bigProtection;
+    JRadioButton mediumProtection;
+    JRadioButton additionalProtection;
+    JRadioButton noProtection;
     JLabel pageNameLabel;
     JLabel pickUpPlaceLabel;
     JLabel deliveryPlaceLabel;
@@ -63,7 +75,11 @@ public class UserMainView extends JFrame{
     JScrollPane carSelectionPane;
     ImageIcon logo;
     ButtonGroup driverOption = new ButtonGroup();
-
+    ButtonGroup driverQuality = new ButtonGroup();
+    ButtonGroup seatOption = new ButtonGroup();
+    ButtonGroup tireChain = new ButtonGroup();
+    ButtonGroup roofBox = new ButtonGroup();
+    ButtonGroup protectionPackages = new ButtonGroup();
 
     public UserMainView(){
 
@@ -153,25 +169,101 @@ public class UserMainView extends JFrame{
         carSelectionPanel.setBounds(300,550,900,400);
 
         driverPanel = new JPanel();
-        driverPanel.setLayout(new FlowLayout(FlowLayout.LEFT,70,100));
+        driverPanel.setLayout(new FlowLayout(FlowLayout.LEFT,60,52));
         driverPanel.setBackground(new Color(225, 211, 189));
         driverPanel.setBounds(1300,300,300,650);
 
 
 
         driverOptionYes = new JRadioButton("Yes");
-        driverOptionYes.setBounds(800,670,100,20);
+        //driverOptionYes.setBounds(800,670,100,20);
         driverOptionYes.setForeground(new Color(255,81,0));
         driverOptionYes.setBackground(new Color(248,239,217));
 
-
         driverOptionNo = new JRadioButton("No");
-        driverOptionNo.setBounds(900,670,100,20);
+        //driverOptionNo.setBounds(900,670,100,20);
         driverOptionNo.setForeground(new Color(255,81,0));
         driverOptionNo.setBackground(new Color(248,239,217));
 
+        normalDriver = new JRadioButton("Normal");
+        //driverOptionYes.setBounds(800,670,100,20);
+        normalDriver.setForeground(new Color(255,81,0));
+        normalDriver.setBackground(new Color(248,239,217));
+
+        professionalDriver = new JRadioButton("Experienced");
+        //driverOptionNo.setBounds(900,670,100,20);
+        professionalDriver.setForeground(new Color(255,81,0));
+        professionalDriver.setBackground(new Color(248,239,217));
+
+        childSeat = new JRadioButton("Child Seat");
+        //driverOptionYes.setBounds(800,670,100,20);
+        childSeat.setForeground(new Color(255,81,0));
+        childSeat.setBackground(new Color(248,239,217));
+
+        babySeat = new JRadioButton("Baby Seat");
+        //driverOptionNo.setBounds(900,670,100,20);
+        babySeat.setForeground(new Color(255,81,0));
+        babySeat.setBackground(new Color(248,239,217));
+
+        tireChainYes = new JRadioButton("Yes");
+        //driverOptionYes.setBounds(800,670,100,20);
+        tireChainYes.setForeground(new Color(255,81,0));
+        tireChainYes.setBackground(new Color(248,239,217));
+
+        tireChainNo = new JRadioButton("No");
+        //driverOptionNo.setBounds(900,670,100,20);
+        tireChainNo.setForeground(new Color(255,81,0));
+        tireChainNo.setBackground(new Color(248,239,217));
+
+        roofBoxYes = new JRadioButton("Yes");
+        //driverOptionYes.setBounds(800,670,100,20);
+        roofBoxYes.setForeground(new Color(255,81,0));
+        roofBoxYes.setBackground(new Color(248,239,217));
+
+        roofBoxNo = new JRadioButton("No");
+        //driverOptionNo.setBounds(900,670,100,20);
+        roofBoxNo.setForeground(new Color(255,81,0));
+        roofBoxNo.setBackground(new Color(248,239,217));
+
+        bigProtection = new JRadioButton("High");
+        //driverOptionYes.setBounds(800,670,100,20);
+        bigProtection.setForeground(new Color(255,81,0));
+        bigProtection.setBackground(new Color(248,239,217));
+
+        mediumProtection = new JRadioButton("Medium");
+        //driverOptionNo.setBounds(900,670,100,20);
+        mediumProtection.setForeground(new Color(255,81,0));
+        mediumProtection.setBackground(new Color(248,239,217));
+
+        additionalProtection = new JRadioButton("Additional");
+        //driverOptionYes.setBounds(800,670,100,20);
+        additionalProtection.setForeground(new Color(255,81,0));
+        additionalProtection.setBackground(new Color(248,239,217));
+
+        noProtection = new JRadioButton("No");
+        //driverOptionNo.setBounds(900,670,100,20);
+        noProtection.setForeground(new Color(255,81,0));
+        noProtection.setBackground(new Color(248,239,217));
+
         driverOption.add(driverOptionYes);
         driverOption.add(driverOptionNo);
+
+        driverQuality.add(normalDriver);
+        driverQuality.add(professionalDriver);
+
+        seatOption.add(childSeat);
+        seatOption.add(babySeat);
+
+        tireChain.add(tireChainYes);
+        tireChain.add(tireChainNo);
+
+        roofBox.add(roofBoxYes);
+        roofBox.add(roofBoxNo);
+
+        protectionPackages.add(bigProtection);
+        protectionPackages.add(mediumProtection);
+        protectionPackages.add(additionalProtection);
+        protectionPackages.add(noProtection);
 
         brandComboBox = new JComboBox(brand);
         brandComboBox.setFont(new Font("Metropolis", Font.PLAIN,20));
@@ -222,7 +314,7 @@ public class UserMainView extends JFrame{
         passengerAmountLabel.setForeground(new Color(255,81,0));
         passengerAmountLabel.setFont(new Font("Metropolis",Font.PLAIN, 20));
 
-        fuelTypeLabel = new JLabel("Fuel T:");
+        fuelTypeLabel = new JLabel("Fuel Type:");
         fuelTypeLabel.setBounds(1060,550,300,50);
         fuelTypeLabel.setForeground(new Color(255,81,0));
         fuelTypeLabel.setFont(new Font("Metropolis",Font.PLAIN, 20));
@@ -278,7 +370,18 @@ public class UserMainView extends JFrame{
 
         driverPanel.add(driverOptionYes);
         driverPanel.add(driverOptionNo);
-
+        driverPanel.add(normalDriver);
+        driverPanel.add(professionalDriver);
+        driverPanel.add(childSeat);
+        driverPanel.add(babySeat);
+        driverPanel.add(tireChainYes);
+        driverPanel.add(tireChainNo);
+        driverPanel.add(roofBoxYes);
+        driverPanel.add(roofBoxNo);
+        driverPanel.add(bigProtection);
+        driverPanel.add(mediumProtection);
+        driverPanel.add(additionalProtection);
+        driverPanel.add(noProtection);
 
         optionBar = new JTabbedPane();
         optionBar.setBounds(0,0,1920,1080);
