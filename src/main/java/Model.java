@@ -18,6 +18,7 @@ public class Model {
     private ArrayList<Reservation> reservationArrayList =new ArrayList<>();
     private ArrayList<ReservationExtras> reservationExtrasArrayList =new ArrayList<>();
     private int loggedUserId;
+    private ArrayList<String> promotionCodes = new ArrayList<>();
 
     public Model() throws SQLException {
         getUsersInDB();
@@ -26,6 +27,13 @@ public class Model {
         getExtrasInDB();
         getReservationsInDB();
         getReservationExtrasInDB();
+        determinePromotionCodes();
+    }
+
+    public void determinePromotionCodes(){
+        promotionCodes.add("mcqueen10");
+        promotionCodes.add("blackfriday15");
+        promotionCodes.add("alonso20");
     }
 
     public int addUser(User user)  {
@@ -380,6 +388,59 @@ public class Model {
         return cars;
     }
 
+    public boolean paymentValidation(String nameOnTheCard, String cardNumber, String cvv, String promotionCode){
+
+        String cardName = nameOnTheCard;
+        cardName = cardName.replaceAll("\\s+","") ;
+        promotionCode = promotionCode.toLowerCase();
+
+        String errorMessage="";
+        int flag=0;
+
+        if(nameOnTheCard.equals("") || cardNumber.equals("") || cvv.equals("")){
+            errorMessage += "!! PLEASE FILL ALL REQUIRED FIELDS !!\n";
+            flag=1;
+        }else {
+            if (checkStringIfItIsFullOfLetters(cardName) == false) {
+                errorMessage += "!! PLEASE ENTER ONLY LETTERS IN NAME FIELD !!\n";
+                flag = 1;
+            }
+            if (!isNumeric(cardNumber)) {
+                errorMessage += "!! PLEASE ENTER ONLY INTEGERS IN CARD NUMBER FIELD !!\n";
+                flag = 1;
+            } else if (cardNumber.length() != 16) {
+                errorMessage += "!! INVALID CARD NUMBER (NEED 16 DIGITS) !!\n";
+                flag = 1;
+            }
+            if (!isNumeric(cvv)) {
+                errorMessage += "!! PLEASE ENTER ONLY INTEGERS IN CCV !!\n";
+                flag = 1;
+            } else if (cardNumber.length() != 16) {
+                errorMessage += "!! INVALID CCV (NEED 3 DIGITS) !!\n";
+                flag = 1;
+            }
+            if (!promotionCodes.contains(promotionCode) && !promotionCode.equals("")) {
+                errorMessage += "!! INVALID PROMOTION CODE !!\n";
+                flag = 1;
+            }
+        }
+
+        if(flag==1){
+            JOptionPane.showMessageDialog(new JFrame(), errorMessage);
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean checkStringIfItIsFullOfLetters(String string){
+        for(char c : string.toCharArray()){
+            if(!Character.isLetter(c)){
+                return false;
+            }
+        }
+        return true;
+    }
 
     public ArrayList<User> getUserArrayList() {
         return userArrayList;

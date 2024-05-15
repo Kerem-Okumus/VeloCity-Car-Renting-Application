@@ -20,6 +20,7 @@ public class View extends JFrame {
         buttons.add(sView.getSignUpButton());
         buttons.add(lView.getLogInButton());
         buttons.add(pView.getConfirmButton());
+        buttons.add(pView.getBackButton());
         buttons.add(lView.getSignUpButton());
         buttons.add(uView.getSearchButton());
         buttons.add(uView.getConfirmButton());

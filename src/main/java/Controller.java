@@ -34,6 +34,7 @@ public class Controller implements ActionListener {
         SignUpView signUpView = view.getsView();
         LoginView lv = view.getlView();
         UserMainView userMainView = view.getuView();
+        PaymentInformationView paymentView = view.getpView();
 
         if(e.getSource()==signUpView.getSignUpButton()){
 
@@ -141,7 +142,28 @@ public class Controller implements ActionListener {
                 JOptionPane.showMessageDialog(new JFrame(),"!! PLEASE SELECT A CAR !!");
             }else{
                 System.out.println(userMainView.getCarListTable().getValueAt(userMainView.getCarListTable().getSelectedRow(), 0));
+                userMainView.setVisible(false);
+                paymentView.setVisible(true);
             }
+        }
+        if(e.getSource()==paymentView.getConfirmButton()){
+            String nameOnTheCard = paymentView.getNameOnCardTextField().getText();
+            String cardNumber = paymentView.getCardNumberTextField().getText();
+            String cvv = paymentView.getCvvTextField().getText();
+            String promotionCode = paymentView.getPromotionCodeTextField().getText();
+
+            if(model.paymentValidation(nameOnTheCard,cardNumber,cvv,promotionCode)==true){
+                System.out.println("successful rent");
+            }
+
+        }
+        if(e.getSource()==paymentView.getBackButton()){
+            paymentView.getCardNumberTextField().setText("");
+            paymentView.getCvvTextField().setText("");
+            paymentView.getNameOnCardTextField().setText("");
+            paymentView.getPromotionCodeTextField().setText("");
+            paymentView.setVisible(false);
+            userMainView.setVisible(true);
         }
     }
 

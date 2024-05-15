@@ -13,6 +13,7 @@ public class PaymentInformationView extends JFrame{
     JComboBox yearComboBox;
     String year[] = {"2025","2026","2027","2028","2029","2030"};
     JButton confirmButton;
+    JButton backButton;
     JLabel expirationDateLabel;
     JLabel nameOnCardLabel;
     JLabel promotionCodeLabel;
@@ -89,6 +90,13 @@ public class PaymentInformationView extends JFrame{
         confirmButton.setBackground(new Color(255,81,0));
         confirmButton.setForeground(new Color(248,239,217));
 
+        backButton = new JButton("Back");
+        backButton.setBounds(1100,750,200,50);
+        backButton.setBorderPainted(false);
+        backButton.setFocusPainted(false);
+        backButton.setBackground(new Color(255,81,0));
+        backButton.setForeground(new Color(248,239,217));
+
         monthComboBox = new JComboBox(month);
         monthComboBox.setBounds(300,750, 100,50);
         monthComboBox.setFont(new Font("Metropolis", Font.PLAIN,20));
@@ -112,6 +120,7 @@ public class PaymentInformationView extends JFrame{
         this.add(expirationDateLabel);
         this.add(promotionCodeLabel);
         this.add(confirmButton);
+        this.add(backButton);
         this.setVisible(false);
     }
 
@@ -169,6 +178,10 @@ public class PaymentInformationView extends JFrame{
 
     public void setConfirmButton(JButton confirmButton) {
         this.confirmButton = confirmButton;
+    }
+
+    public JButton getBackButton() {
+        return backButton;
     }
 }
 
