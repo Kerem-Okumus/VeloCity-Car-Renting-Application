@@ -1,5 +1,7 @@
 import Objects.*;
 import View.*;
+
+import javax.swing.*;
 import java.time.LocalDate;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -130,11 +132,16 @@ public class Controller implements ActionListener {
             }
             else{
                 System.out.println("Dates are not valid.");
+                JOptionPane.showMessageDialog(new JFrame(),"!! PLEASE ENTER A VALID DATE !!");
             }
 
         }
         if(e.getSource() == userMainView.getConfirmButton()){
-            System.out.println(userMainView.getCarListTable().getValueAt(userMainView.getCarListTable().getSelectedRow(), 0));
+            if(userMainView.getCarListTable().getSelectedRowCount() < 1){
+                JOptionPane.showMessageDialog(new JFrame(),"!! PLEASE SELECT A CAR !!");
+            }else{
+                System.out.println(userMainView.getCarListTable().getValueAt(userMainView.getCarListTable().getSelectedRow(), 0));
+            }
         }
     }
 

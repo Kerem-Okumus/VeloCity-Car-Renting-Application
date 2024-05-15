@@ -84,7 +84,7 @@ public class UserMainView extends JFrame{
     public UserMainView(){
 
         this.setTitle("VeloCity");
-        this.setResizable(false);
+        this.setResizable(true);
         this.setLayout(null);
         this.setSize(1920,1080);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -415,6 +415,8 @@ public class UserMainView extends JFrame{
         carSelectionPanel.add(carSelectionPane);
         carSelectionPanel.setVisible(false);
         carSelectionPanel.setVisible(true);
+        carListTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
     }
 
     public void clearCarTable(){
