@@ -30,6 +30,7 @@ public class SignUpView extends JFrame{
 
         this.setTitle("VeloCity");
         this.setResizable(false);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setLayout(null);
         this.setSize(1920, 1080);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

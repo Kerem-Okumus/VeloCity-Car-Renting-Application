@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="86f84471-38d9-4b68-84a1-15122fe1a2ab" name="Changes" comment="GUI part of user page was created.">
+    <list default="true" id="86f84471-38d9-4b68-84a1-15122fe1a2ab" name="Changes" comment="Extras' buttons was added.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/PaymentInformationView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/PaymentInformationView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/SignUpView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/SignUpView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/UserMainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/UserMainView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -104,7 +106,8 @@
       <workItem from="1715541908717" duration="4573000" />
       <workItem from="1715590804765" duration="154000" />
       <workItem from="1715680591722" duration="2246000" />
-      <workItem from="1715702963024" duration="2435000" />
+      <workItem from="1715702963024" duration="7510000" />
+      <workItem from="1715774445980" duration="2131000" />
     </task>
     <task id="LOCAL-00001" summary="GUI part of log-in page was created.">
       <option name="closed" value="true" />
@@ -154,7 +157,23 @@
       <option name="project" value="LOCAL" />
       <updated>1715546468415</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Fuel type combobox was added car selection panel.">
+      <option name="closed" value="true" />
+      <created>1715706019272</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1715706019272</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Extras' buttons was added.">
+      <option name="closed" value="true" />
+      <created>1715710418725</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1715710418725</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -165,6 +184,8 @@
     <MESSAGE value="GUI part of sign-up page was created." />
     <MESSAGE value="GUI part of payment page was created." />
     <MESSAGE value="GUI part of user page was created." />
-    <option name="LAST_COMMIT_MESSAGE" value="GUI part of user page was created." />
+    <MESSAGE value="Fuel type combobox was added car selection panel." />
+    <MESSAGE value="Extras' buttons was added." />
+    <option name="LAST_COMMIT_MESSAGE" value="Extras' buttons was added." />
   </component>
 </project>
