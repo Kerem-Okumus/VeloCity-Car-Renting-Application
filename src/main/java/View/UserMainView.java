@@ -2,6 +2,7 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class UserMainView extends JFrame{
 
@@ -92,7 +93,7 @@ public class UserMainView extends JFrame{
     public UserMainView(){
 
         this.setTitle("VeloCity");
-        this.setResizable(false);
+        this.setResizable(true);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setLayout(null);
         this.setSize(1920,1080);
@@ -414,6 +415,7 @@ public class UserMainView extends JFrame{
         extrasPanel.add(additionalProtection);
         extrasPanel.add(noProtection);
 
+
         optionBar = new JTabbedPane();
         optionBar.setBounds(0,0,1920,1080);
         optionBar.setForeground(new Color(255,81,0));
@@ -455,6 +457,27 @@ public class UserMainView extends JFrame{
         if(carListTable != null){
             carSelectionPanel.remove(carSelectionPane);
         }
+    }
+    public void setExtrasPanelVisibilityFalse(){
+        extrasPanel.setVisible(false);
+        confirmButton.setVisible(false);
+        driverLevelLabel.setVisible(false);
+        driverOptionLabel.setVisible(false);
+        seatOptionLabel.setVisible(false);
+        tireChainLabel.setVisible(false);
+        roofBoxLabel.setVisible(false);
+        protectionLabel.setVisible(false);
+    }
+    public void setExtrasPanelVisibilityTrue(){
+        extrasPanel.setVisible(true);
+        confirmButton.setVisible(true);
+        driverLevelLabel.setVisible(true);
+        driverOptionLabel.setVisible(true);
+        seatOptionLabel.setVisible(true);
+        tireChainLabel.setVisible(true);
+        roofBoxLabel.setVisible(true);
+        protectionLabel.setVisible(true);
+
     }
 
     public JPanel getCurrentRentPanel() {
@@ -739,5 +762,126 @@ public class UserMainView extends JFrame{
 
     public JTable getCarListTable() {
         return carListTable;
+    }
+
+    public JComboBox getFuelTypeComboBox() {
+        return fuelTypeComboBox;
+    }
+
+    public void setFuelTypeComboBox(JComboBox fuelTypeComboBox) {
+        this.fuelTypeComboBox = fuelTypeComboBox;
+    }
+
+    public String[] getFuelType() {
+        return fuelType;
+    }
+
+    public void setFuelType(String[] fuelType) {
+        this.fuelType = fuelType;
+    }
+
+    public JRadioButton getNormalDriver() {
+        return normalDriver;
+    }
+
+    public void setNormalDriver(JRadioButton normalDriver) {
+        this.normalDriver = normalDriver;
+    }
+
+    public JRadioButton getProfessionalDriver() {
+        return professionalDriver;
+    }
+
+    public void setProfessionalDriver(JRadioButton professionalDriver) {
+        this.professionalDriver = professionalDriver;
+    }
+
+    public JRadioButton getTireChainYes() {
+        return tireChainYes;
+    }
+
+    public void setTireChainYes(JRadioButton tireChainYes) {
+        this.tireChainYes = tireChainYes;
+    }
+
+    public JRadioButton getTireChainNo() {
+        return tireChainNo;
+    }
+
+    public void setTireChainNo(JRadioButton tireChainNo) {
+        this.tireChainNo = tireChainNo;
+    }
+
+    public JRadioButton getChildSeat() {
+        return childSeat;
+    }
+
+    public void setChildSeat(JRadioButton childSeat) {
+        this.childSeat = childSeat;
+    }
+
+    public JRadioButton getBabySeat() {
+        return babySeat;
+    }
+
+    public void setBabySeat(JRadioButton babySeat) {
+        this.babySeat = babySeat;
+    }
+
+    public JRadioButton getRoofBoxYes() {
+        return roofBoxYes;
+    }
+
+    public void setRoofBoxYes(JRadioButton roofBoxYes) {
+        this.roofBoxYes = roofBoxYes;
+    }
+
+    public JRadioButton getRoofBoxNo() {
+        return roofBoxNo;
+    }
+
+    public void setRoofBoxNo(JRadioButton roofBoxNo) {
+        this.roofBoxNo = roofBoxNo;
+    }
+
+    public JRadioButton getBigProtection() {
+        return bigProtection;
+    }
+
+    public void setBigProtection(JRadioButton bigProtection) {
+        this.bigProtection = bigProtection;
+    }
+
+    public JRadioButton getMediumProtection() {
+        return mediumProtection;
+    }
+
+    public void setMediumProtection(JRadioButton mediumProtection) {
+        this.mediumProtection = mediumProtection;
+    }
+
+    public JRadioButton getAdditionalProtection() {
+        return additionalProtection;
+    }
+
+    public void setAdditionalProtection(JRadioButton additionalProtection) {
+        this.additionalProtection = additionalProtection;
+    }
+
+    public JRadioButton getNoProtection() {
+        return noProtection;
+    }
+
+    public void setNoProtection(JRadioButton noProtection) {
+        this.noProtection = noProtection;
+    }
+    ArrayList<Object>e=new ArrayList<>();
+
+    public JPanel getExtrasPanel() {
+        return extrasPanel;
+    }
+
+    public void setExtrasPanel(JPanel extrasPanel) {
+        this.extrasPanel = extrasPanel;
     }
 }

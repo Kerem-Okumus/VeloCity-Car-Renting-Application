@@ -9,11 +9,13 @@ public class View extends JFrame {
     UserMainView uView = new UserMainView();
     PaymentInformationView pView = new PaymentInformationView();
     ArrayList<JButton> buttons=new ArrayList<JButton>();
+    ArrayList<JComboBox> cBoxes=new ArrayList<JComboBox>();
 
     public View() {
         this.setSize(400,400);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         addButtonsToArrayList();
+        addComboBoxesToArrayList();
     }
 
     public void addButtonsToArrayList(){
@@ -24,6 +26,22 @@ public class View extends JFrame {
         buttons.add(lView.getSignUpButton());
         buttons.add(uView.getSearchButton());
         buttons.add(uView.getConfirmButton());
+    }
+    public void addComboBoxesToArrayList(){
+        cBoxes.add(uView.getBrandComboBox());
+        cBoxes.add(uView.getColorComboBox());
+        cBoxes.add(uView.getFuelTypeComboBox());
+        cBoxes.add(uView.getCarTypeComboBox());
+        cBoxes.add(uView.getPickUpDateDay());
+        cBoxes.add(uView.getPickUpDateMonth());
+        cBoxes.add(uView.getPickUpDateYear());
+        cBoxes.add(uView.getDeliveryDateDay());
+        cBoxes.add(uView.getDeliveryDateMonth());
+        cBoxes.add(uView.getDeliveryDateYear());
+        cBoxes.add(uView.getPickUpPlace());
+        cBoxes.add(uView.getDeliveryPlace());
+        cBoxes.add(uView.getPassengerAmountComboBox());
+        cBoxes.add(uView. getGearTypeComboBox());
     }
     public LoginView getlView() {
         return lView;
@@ -45,4 +63,7 @@ public class View extends JFrame {
         return buttons;
     }
 
+    public ArrayList<JComboBox> getcBoxes() {
+        return cBoxes;
+    }
 }

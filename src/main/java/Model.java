@@ -324,10 +324,8 @@ public class Model {
             statement.executeUpdate("UPDATE Reservation SET driverId =" + driverId + " WHERE reservationId =" + reservationId);
             statement.executeUpdate("UPDATE Driver SET isAvailable = 0 WHERE driverId =" + driverId);
         } else {
-            // Handle the case where no available driver is found
             System.out.println("No available driver found.");
         }
-        // Close ResultSet and Statement
         rs1.close();
         statement.close();
     }
@@ -347,9 +345,7 @@ public class Model {
     }
 
 
-    public ResultSet filterCars(String brand, String category, String color, String gearType, int passenger, int pDay, int pMonth, int pYear, int dDay, int dMonth, int dYear) throws SQLException {
-        Date pickupDate = new Date(pYear - 1900, pMonth-1, pDay);
-        Date deliverDate = new Date(dYear - 1900, dMonth-1, dDay);
+    public ResultSet filterCars(String brand, String category, String color, String gearType, int passenger,Date pickupDate, Date deliverDate) throws SQLException {
         Statement statement = connection.createStatement();
         StringBuilder queryBuilder = new StringBuilder("SELECT V.vehicleId, V.gearType, V.color, V.carType, V.model, V.brand, V.isAvailable, V.fuelType, V.passengerAmount, V.dailyPrice FROM Vehicle V WHERE V.vehicleId NOT IN(SELECT R.vehicleId FROM Reservation R WHERE R.pickupDate <= '" + deliverDate + "' AND R.returnDate >= '" + pickupDate + "')" );
         if (!"ALL".equals(brand)) {
@@ -440,6 +436,22 @@ public class Model {
             }
         }
         return true;
+    }
+    public int validateDriver(Date pickupDate, Date deliverDate, boolean isExperienced) throws SQLException {
+        int i;
+        if(isExperienced)
+            i=1;
+        else{
+            i=0;
+        }
+        Statement statement = connection.createStatement();
+        ResultSet rs1 = statement.executeQuery("SELECT distinct D.driverId FROM Driver D, Reservation R WHERE D.driverId NOT IN(SELECT R.driverId FROM Reservation R WHERE R.pickupDate <= '" + deliverDate + "' AND R.returnDate >= '" + pickupDate + "') AND  D.isExperienced ='"+i+"' ORDER BY D.driverId ASC");
+        if(rs1.next()){
+            System.out.println(rs1.getInt("driverId"));
+            return rs1.getInt("driverId");
+        }
+        rs1.close();
+        return -1;
     }
 
     public ArrayList<User> getUserArrayList() {
