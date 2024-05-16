@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Controller implements ActionListener, MouseListener {
 
@@ -264,12 +265,65 @@ public class Controller implements ActionListener, MouseListener {
             String cardNumber = paymentView.getCardNumberTextField().getText();
             String cvv = paymentView.getCvvTextField().getText();
             String promotionCode = paymentView.getPromotionCodeTextField().getText();
+            String lastDateYear = Objects.requireNonNull(paymentView.getYearComboBox().getSelectedItem()).toString();
+            String lastDateMonth = Objects.requireNonNull(paymentView.getMonthComboBox().getSelectedItem()).toString();
 
-            if(model.paymentValidation(nameOnTheCard,cardNumber,cvv,promotionCode)==true){
+            if(model.paymentValidation(nameOnTheCard, cardNumber, cvv, promotionCode)){
                 System.out.println("successful rent");
-            }
-        }
+                paymentView.setVisible(false);
+                String username = "";
+                User user = null;
+                for(int i = 0; i< model.getUserArrayList().size();i++){
+                    if(model.getUserArrayList().get(i).getUserId() == (model.getLoggedUserId())){
+                        username = model.getUserArrayList().get(i).getUsername();
+                        user = model.getUserArrayList().get(i);
+                    }
+                }
+                int vehicleId = -1;
+                for(int j = 0; j<model.getVehicleArrayList().size();j++){
+                    if(model.getVehicleArrayList().get(j).getModel().equals(userMainView.getCarListTable().getValueAt(userMainView.getCarListTable().getSelectedRow(), 0))){
+                        vehicleId = model.getVehicleArrayList().get(j).getVehicleId();
+                    }
+                }
+                try {
+                    assert user != null;
+                    model.addPaymentInformation(cardNumber,cvv,lastDateYear,lastDateMonth,"2",user);
+                    model.addReservation(new Date(Integer.parseInt((Objects.requireNonNull(userMainView.getPickUpDateYear().getSelectedItem())).toString())-1900
+                                    ,Integer.parseInt(Objects.requireNonNull(userMainView.getPickUpDateMonth().getSelectedItem()).toString()) -1
+                                    ,Integer.parseInt(Objects.requireNonNull(userMainView.getPickUpDateDay().getSelectedItem()).toString()))
+                            , new Date(Integer.parseInt(Objects.requireNonNull(userMainView.getDeliveryDateYear().getSelectedItem()).toString())-1900
+                                    ,Integer.parseInt(Objects.requireNonNull(userMainView.getDeliveryDateMonth().getSelectedItem()).toString()) -1
+                                    ,Integer.parseInt(Objects.requireNonNull(userMainView.getDeliveryDateDay().getSelectedItem()).toString()))
+                            , Objects.requireNonNull(userMainView.getPickUpPlace().getSelectedItem()).toString()
+                            , Objects.requireNonNull(userMainView.getDeliveryPlace().getSelectedItem()).toString()
+                            , 1
+                            , Double.parseDouble(userMainView.getCarListTable().getValueAt(userMainView.getCarListTable().getSelectedRow(), 7).toString())
+                            , model.getLoggedUserId()
+                            , vehicleId);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+                userMainView.clearReservationTable();
+                ArrayList<String> tempList = getUsersReservations(username);
+                String[][] tempArray = getData(tempList);
+                userMainView.setData(tempArray);
+                userMainView.createTable();
 
+                ArrayList<Integer> chosenExtras = getChosenExtras(userMainView);
+                int resID = model.getReservationArrayList().getLast().getReservationId();
+                try {
+                    model.addExtrastoReservation(resID,chosenExtras);
+                    for(int l=0;l<chosenExtras.size();l++){
+                        model.getReservationExtrasArrayList().add(new ReservationExtras(resID,chosenExtras.get(l)));
+                    }
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+                userMainView.setVisible(true);
+            }
+
+        }
 
 
 
@@ -332,6 +386,32 @@ public class Controller implements ActionListener, MouseListener {
             carArray[i][7] = vehicles.get(i).getDailyPrice();
         }
         return carArray;
+    }
+
+    public ArrayList<Integer> getChosenExtras(UserMainView userMainView){
+        ArrayList<Integer> extraIds = new ArrayList<>();
+        if(userMainView.getBabySeat().isSelected()){
+            extraIds.add(5);
+        }
+        if(userMainView.getChildSeat().isSelected()){
+            extraIds.add(4);
+        }
+        if(userMainView.getRoofBoxYes().isSelected()){
+            extraIds.add(6);
+        }
+        if(userMainView.getTireChainYes().isSelected()){
+            extraIds.add(7);
+        }
+        if(userMainView.getBigProtection().isSelected()){
+            extraIds.add(1);
+        }
+        if(userMainView.getMediumProtection().isSelected()){
+            extraIds.add(2);
+        }
+        if(userMainView.getAdditionalProtection().isSelected()){
+            extraIds.add(3);
+        }
+        return extraIds;
     }
 
     @Override

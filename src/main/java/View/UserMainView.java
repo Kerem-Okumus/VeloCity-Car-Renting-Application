@@ -563,6 +563,11 @@ public class UserMainView extends JFrame{
             carSelectionPanel.remove(carSelectionPane);
         }
     }
+
+    public void clearReservationTable(){
+        currentRentPanel.remove(scrollPane);
+    }
+    
     public void setExtrasPanelVisibilityFalse(){
         extrasPanel.setVisible(false);
         confirmButton.setVisible(false);
