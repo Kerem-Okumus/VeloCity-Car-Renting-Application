@@ -20,6 +20,16 @@ public class PaymentInformationView extends JFrame{
     JLabel cvvLabel;
     JLabel cardNumberLabel;
     JLabel pageNameLabel;
+
+    //Calculation Part
+    JTextField rentFeeTextField;
+    JTextField extrasPriceTextField;
+    JTextField discountTextfield;
+    JTextField totalTextField;
+    JLabel rentFeeLabel;
+    JLabel extrasPriceLabel;
+    JLabel discountLabel;
+    JLabel totalLabel;
     ImageIcon logo;
 
     public PaymentInformationView() {
@@ -47,7 +57,6 @@ public class PaymentInformationView extends JFrame{
         cardNumberTextField = new JTextField();
         cardNumberTextField.setBounds(700,350,300,50);
         cardNumberTextField.setFont(new Font("Metropolis", Font.PLAIN, 20));
-
 
         cvvTextField = new JTextField();
         cvvTextField.setBounds(300,550,300,50);
@@ -107,6 +116,62 @@ public class PaymentInformationView extends JFrame{
         yearComboBox.setFont(new Font("Metropolis", Font.PLAIN,20));
         yearComboBox.setForeground(new Color(255,81,0));
 
+        rentFeeLabel = new JLabel("Rent Fee:");
+        rentFeeLabel.setBounds(1100,280, 300,50);
+        rentFeeLabel.setFont(new Font("Metropolis", Font.PLAIN,20));
+        rentFeeLabel.setForeground(new Color(255,81,0));
+
+        extrasPriceLabel = new JLabel("Extra Price:");
+        extrasPriceLabel.setBounds(1100,380, 300,50);
+        extrasPriceLabel.setFont(new Font("Metropolis", Font.PLAIN,20));
+        extrasPriceLabel.setForeground(new Color(255,81,0));
+
+        discountLabel = new JLabel("Discount:");
+        discountLabel.setBounds(1100,480, 300,50);
+        discountLabel.setFont(new Font("Metropolis", Font.PLAIN,20));
+        discountLabel.setForeground(new Color(255,81,0));
+
+        totalLabel = new JLabel("Total:");
+        totalLabel.setBounds(1100,560, 300,50);
+        totalLabel.setFont(new Font("Metropolis", Font.PLAIN,20));
+        totalLabel.setForeground(new Color(255,81,0));
+
+        rentFeeTextField = new JTextField();
+        rentFeeTextField.setBounds(1300,280,300,50);
+        rentFeeTextField.setBackground(new Color(248,239,217));
+        rentFeeTextField.setForeground(new Color(255,81,0));
+        rentFeeTextField.setBorder(BorderFactory.createLineBorder(new Color(248,239,217)));
+        rentFeeTextField.setText("5400");
+        rentFeeTextField.setEditable(false);
+        rentFeeTextField.setFont(new Font("Metropolis", Font.PLAIN, 20));
+
+        extrasPriceTextField = new JTextField();
+        extrasPriceTextField.setBounds(1300,380,300,50);
+        extrasPriceTextField.setBackground(new Color(248,239,217));
+        extrasPriceTextField.setForeground(new Color(255,81,0));
+        extrasPriceTextField.setBorder(BorderFactory.createLineBorder(new Color(248,239,217)));
+        extrasPriceTextField.setText("790");
+        extrasPriceTextField.setEditable(false);
+        extrasPriceTextField.setFont(new Font("Metropolis", Font.PLAIN, 20));
+
+        discountTextfield = new JTextField();
+        discountTextfield.setBounds(1300,480,300,50);
+        discountTextfield.setBackground(new Color(248,239,217));
+        discountTextfield.setForeground(new Color(255,81,0));
+        discountTextfield.setBorder(BorderFactory.createLineBorder(new Color(248,239,217)));
+        discountTextfield.setText("1000");
+        discountTextfield.setEditable(false);
+        discountTextfield.setFont(new Font("Metropolis", Font.PLAIN, 20));
+
+        totalTextField = new JTextField();
+        totalTextField.setBounds(1300,560,300,50);
+        totalTextField.setBackground(new Color(248,239,217));
+        totalTextField.setForeground(new Color(255,81,0));
+        totalTextField.setBorder(BorderFactory.createLineBorder(new Color(248,239,217)));
+        totalTextField.setEditable(false);
+        totalTextField.setText("5190");
+        totalTextField.setFont(new Font("Metropolis", Font.PLAIN, 20));
+
         this.add(pageNameLabel);
         this.add(nameOnCardTextField);
         this.add(cardNumberTextField);
@@ -121,7 +186,15 @@ public class PaymentInformationView extends JFrame{
         this.add(promotionCodeLabel);
         this.add(confirmButton);
         this.add(backButton);
-        this.setVisible(false);
+        this.add(rentFeeLabel);
+        this.add(extrasPriceLabel);
+        this.add(discountLabel);
+        this.add(totalLabel);
+        this.add(rentFeeTextField);
+        this.add(extrasPriceTextField);
+        this.add(discountTextfield);
+        this.add(totalTextField);
+        this.setVisible(true);
     }
 
     public JTextField getNameOnCardTextField() {

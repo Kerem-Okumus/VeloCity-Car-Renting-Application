@@ -10,6 +10,7 @@ public class UserMainView extends JFrame{
     JPanel newRentPanel;
     JPanel carSelectionPanel;
     JPanel extrasPanel;
+    JPanel extrasPricePanel;
     JTabbedPane optionBar;
     String[] columnNames = {"Vehicle Model", "Rental Place", "Delivery Place", "Rental Date", "Delivery Date"};
     String[] carColumnNames = {"Model", "Brand", "Color", "Gear Type", "Car Type", "Fuel Type", "Passenger Amount", "Daily Price"};
@@ -83,6 +84,20 @@ public class UserMainView extends JFrame{
     JLabel tireChainLabel;
     JLabel roofBoxLabel;
     JLabel protectionLabel;
+
+    //Labels for price of extras
+    JLabel driverPriceLabel;
+    JLabel driverLevelPriceLabel;
+    JLabel seatPriceLabel;
+    JLabel tireChainPriceLabel;
+    JLabel roofBoxPriceLabel;
+    JLabel protectionPriceLabel;
+    JLabel driverPriceLabel2;
+    JLabel driverLevelPriceLabel2;
+    JLabel seatPriceLabel2;
+    JLabel tireChainPriceLabel2;
+    JLabel roofBoxPriceLabel2;
+    JLabel protectionPriceLabel2;
     JScrollPane carSelectionPane;
     ImageIcon logo;
     ButtonGroup driverOption = new ButtonGroup();
@@ -95,7 +110,7 @@ public class UserMainView extends JFrame{
     public UserMainView(){
 
         this.setTitle("VeloCity");
-        this.setResizable(true);
+        this.setResizable(false);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setLayout(null);
         this.setSize(1920,1080);
@@ -180,12 +195,75 @@ public class UserMainView extends JFrame{
         carSelectionPanel.setBackground(new Color(225, 211, 189));
         carSelectionPanel.setBounds(300,550,900,400);
 
+        extrasPricePanel = new JPanel();
+        extrasPricePanel.setLayout(new FlowLayout(FlowLayout.LEFT,60,52));
+        extrasPricePanel.setBackground(new Color(225, 211, 189));
+        extrasPricePanel.setBounds(50,300,200,650);
+
+        driverPriceLabel = new JLabel("Driver Fee:");
+        driverPriceLabel.setBounds(70,320,200,30);
+        driverPriceLabel.setForeground(new Color(255,81,0));
+        driverPriceLabel.setFont(new Font("Metropolis",Font.PLAIN, 20));
+
+        driverLevelPriceLabel = new JLabel("Experienced Driver:");
+        driverLevelPriceLabel.setBounds(70,395,200,30);
+        driverLevelPriceLabel.setForeground(new Color(255,81,0));
+        driverLevelPriceLabel.setFont(new Font("Metropolis",Font.PLAIN, 20));
+
+        seatPriceLabel = new JLabel("Seat:");
+        seatPriceLabel.setBounds(70,470,200,30);
+        seatPriceLabel.setForeground(new Color(255,81,0));
+        seatPriceLabel.setFont(new Font("Metropolis",Font.PLAIN, 20));
+
+        tireChainPriceLabel = new JLabel("Tire Chain:");
+        tireChainPriceLabel.setBounds(70,545,200,30);
+        tireChainPriceLabel.setForeground(new Color(255,81,0));
+        tireChainPriceLabel.setFont(new Font("Metropolis",Font.PLAIN, 20));
+
+        roofBoxPriceLabel = new JLabel("Roof Box:");
+        roofBoxPriceLabel.setBounds(70,625,200,30);
+        roofBoxPriceLabel.setForeground(new Color(255,81,0));
+        roofBoxPriceLabel.setFont(new Font("Metropolis",Font.PLAIN, 20));
+
+        protectionPriceLabel = new JLabel("Protection:");
+        protectionPriceLabel.setBounds(70,700,200,30);
+        protectionPriceLabel.setForeground(new Color(255,81,0));
+        protectionPriceLabel.setFont(new Font("Metropolis",Font.PLAIN, 20));
+
+        driverPriceLabel2 = new JLabel("500");
+        driverPriceLabel2.setBounds(70,350,200,30);
+        driverPriceLabel2.setForeground(new Color(255,81,0));
+        driverPriceLabel2.setFont(new Font("Metropolis",Font.PLAIN, 20));
+
+        driverLevelPriceLabel2 = new JLabel("750:");
+        driverLevelPriceLabel2.setBounds(70,425,200,30);
+        driverLevelPriceLabel2.setForeground(new Color(255,81,0));
+        driverLevelPriceLabel2.setFont(new Font("Metropolis",Font.PLAIN, 20));
+
+        seatPriceLabel2 = new JLabel("50 / 30:");
+        seatPriceLabel2.setBounds(70,500,200,30);
+        seatPriceLabel2.setForeground(new Color(255,81,0));
+        seatPriceLabel2.setFont(new Font("Metropolis",Font.PLAIN, 20));
+
+        tireChainPriceLabel2 = new JLabel("10:");
+        tireChainPriceLabel2.setBounds(70,575,200,30);
+        tireChainPriceLabel2.setForeground(new Color(255,81,0));
+        tireChainPriceLabel2.setFont(new Font("Metropolis",Font.PLAIN, 20));
+
+        roofBoxPriceLabel2 = new JLabel("40:");
+        roofBoxPriceLabel2.setBounds(70,655,200,30);
+        roofBoxPriceLabel2.setForeground(new Color(255,81,0));
+        roofBoxPriceLabel2.setFont(new Font("Metropolis",Font.PLAIN, 20));
+
+        protectionPriceLabel2 = new JLabel("200 / 150 / 100:");
+        protectionPriceLabel2.setBounds(70,730,200,30);
+        protectionPriceLabel2.setForeground(new Color(255,81,0));
+        protectionPriceLabel2.setFont(new Font("Metropolis",Font.PLAIN, 20));
+
         extrasPanel = new JPanel();
         extrasPanel.setLayout(new FlowLayout(FlowLayout.LEFT,60,52));
         extrasPanel.setBackground(new Color(225, 211, 189));
         extrasPanel.setBounds(1300,300,300,650);
-
-
 
         driverOptionYes = new JRadioButton("Yes");
         driverOptionYes.setForeground(new Color(255,81,0));
@@ -196,7 +274,7 @@ public class UserMainView extends JFrame{
         driverOptionNo.setBackground(new Color(248,239,217));
 
         extrasLabel = new JLabel("Extras");
-        extrasLabel.setBounds(1350,245,200,50);
+        extrasLabel.setBounds(50,245,200,50);
         extrasLabel.setForeground(new Color(255,81,0));
         extrasLabel.setFont(new Font("Franklin Gothic Heavy",Font.BOLD, 50));
 
@@ -412,7 +490,20 @@ public class UserMainView extends JFrame{
         newRentPanel.add(seatOptionLabel);
         newRentPanel.add(roofBoxLabel);
         newRentPanel.add(tireChainLabel);
+        newRentPanel.add(driverPriceLabel);
+        newRentPanel.add(driverLevelPriceLabel);
+        newRentPanel.add(seatPriceLabel);
+        newRentPanel.add(tireChainPriceLabel);
+        newRentPanel.add(roofBoxPriceLabel);
+        newRentPanel.add(protectionPriceLabel);
+        newRentPanel.add(driverPriceLabel2);
+        newRentPanel.add(driverLevelPriceLabel2);
+        newRentPanel.add(seatPriceLabel2);
+        newRentPanel.add(tireChainPriceLabel2);
+        newRentPanel.add(roofBoxPriceLabel2);
+        newRentPanel.add(protectionPriceLabel2);
         newRentPanel.add(protectionLabel);
+        newRentPanel.add(extrasPricePanel);
         newRentPanel.add(extrasPanel);
 
 
@@ -442,9 +533,7 @@ public class UserMainView extends JFrame{
         this.add(optionBar);
         this.setVisible(false);
 
-
     }
-
 
     public void createTable(){
         rentListTable = new JTable(data,columnNames);
