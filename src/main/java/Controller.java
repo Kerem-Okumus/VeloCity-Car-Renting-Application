@@ -18,6 +18,8 @@ public class Controller implements ActionListener, MouseListener {
     private View view;
     int pDay,pMonth,pYear,dDay,dMonth,dYear;
     Date pickupDate,deliverDate;
+    int driverIdtobeAssigned=-1;
+
 
     public Controller(Model model, View view) throws SQLException {
         this.model = model;
@@ -135,11 +137,12 @@ public class Controller implements ActionListener, MouseListener {
             String color=userMainView.getColorComboBox().getSelectedItem().toString();
             String category=userMainView.getCarTypeComboBox().getSelectedItem().toString();
             String gearType=userMainView.getGearTypeComboBox().getSelectedItem().toString();
+            String fuelType=userMainView.getFuelTypeComboBox().getSelectedItem().toString();
             LocalDate startDate = LocalDate.of(pYear, pMonth, pDay); // Example start date
             LocalDate returnDate = LocalDate.of(dYear, dMonth, dDay); // Example return date
             if(startDate.isBefore(returnDate)){
                 try {
-                    ArrayList<Vehicle> tempCars = model.showFilteredCars(model.filterCars(brand,category,color,gearType,passenger,pickupDate,deliverDate));
+                    ArrayList<Vehicle> tempCars = model.showFilteredCars(model.filterCars(brand,category,color,gearType,fuelType,passenger,pickupDate,deliverDate));
                     String[][] tempCarsData = carsToTable(tempCars);
                     userMainView.setCarData(tempCarsData);
                     userMainView.clearCarTable();
@@ -159,6 +162,7 @@ public class Controller implements ActionListener, MouseListener {
 
 
         if(e.getSource() == userMainView.getConfirmButton()){
+            boolean validation=false;
             boolean isExperienced=false;
             boolean hasDriver=false;
             if(view.getuView().getDriverOptionYes().isSelected()){
@@ -170,28 +174,29 @@ public class Controller implements ActionListener, MouseListener {
                     isExperienced=true;
                 }
             }
-            if(hasDriver){
-                int i;
-                try {
-                    i= model.validateDriver(pickupDate,deliverDate,isExperienced);
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
-                if(i!=-1){
-                    JOptionPane.showMessageDialog(new JFrame(),i);
-                }
-                else{
-                    String s;
-                    if(isExperienced)
-                        s="EXPERIENCED";
-                    else{
-                        s="NORMAL";
+
+                if(hasDriver){
+                    try {
+                        driverIdtobeAssigned= model.validateDriver(pickupDate,deliverDate,isExperienced);
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
                     }
-                    JOptionPane.showMessageDialog(new JFrame(),"THERE IS NO " +s+ " DRIVER AVAILABLE BETWEEN THE DATES YOU'VE ENTERED!!");
+                    if(driverIdtobeAssigned!=-1){
+                        JOptionPane.showMessageDialog(new JFrame(),driverIdtobeAssigned);
+                    }
                 }
-            }
+
             if(userMainView.getCarListTable()==null){
                 JOptionPane.showMessageDialog(new JFrame(),"!! FIRST SEARCH A CAR AND THEN SELECT ONE !!");
+            }
+            else if(hasDriver&& driverIdtobeAssigned==-1){
+                String s;
+                if(isExperienced)
+                    s="EXPERIENCED";
+                else{
+                    s="NORMAL";
+                }
+                JOptionPane.showMessageDialog(new JFrame(),"THERE IS NO " +s+ " DRIVER AVAILABLE BETWEEN THE DATES YOU'VE ENTERED!!");
             }
             else if(userMainView.getCarListTable().getSelectedRowCount() < 1){
                 JOptionPane.showMessageDialog(new JFrame(),"!! PLEASE SELECT A CAR !!");
@@ -288,7 +293,7 @@ public class Controller implements ActionListener, MouseListener {
                 try {
                     assert user != null;
                     model.addPaymentInformation(cardNumber,cvv,lastDateYear,lastDateMonth,"2",user);
-                    model.addReservation(new Date(Integer.parseInt((Objects.requireNonNull(userMainView.getPickUpDateYear().getSelectedItem())).toString())-1900
+                   int reservationId= model.addReservation(new Date(Integer.parseInt((Objects.requireNonNull(userMainView.getPickUpDateYear().getSelectedItem())).toString())-1900
                                     ,Integer.parseInt(Objects.requireNonNull(userMainView.getPickUpDateMonth().getSelectedItem()).toString()) -1
                                     ,Integer.parseInt(Objects.requireNonNull(userMainView.getPickUpDateDay().getSelectedItem()).toString()))
                             , new Date(Integer.parseInt(Objects.requireNonNull(userMainView.getDeliveryDateYear().getSelectedItem()).toString())-1900
@@ -300,6 +305,11 @@ public class Controller implements ActionListener, MouseListener {
                             , Double.parseDouble(userMainView.getCarListTable().getValueAt(userMainView.getCarListTable().getSelectedRow(), 7).toString())
                             , model.getLoggedUserId()
                             , vehicleId);
+                    System.out.println(driverIdtobeAssigned);
+                    if(driverIdtobeAssigned!=-1){
+                        model.assignDriver(driverIdtobeAssigned,reservationId);
+                        System.out.println("olm niye olmuyor");
+                    }
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -309,8 +319,9 @@ public class Controller implements ActionListener, MouseListener {
                 userMainView.setData(tempArray);
                 userMainView.createTable();
 
+
                 ArrayList<Integer> chosenExtras = getChosenExtras(userMainView);
-                int resID = model.getReservationArrayList().getLast().getReservationId();
+                int resID = model.getReservationArrayList().get(model.getReservationArrayList().size()-1).getReservationId();
                 try {
                     model.addExtrastoReservation(resID,chosenExtras);
                     for(int l=0;l<chosenExtras.size();l++){

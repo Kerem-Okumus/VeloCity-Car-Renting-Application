@@ -312,23 +312,9 @@ public class Model {
             System.out.println("NOTIFICATION >>> ReservationExtra   with  reservationId " + reservationId + " and with extrasId "+extraId.get(i)+"has been added to DB <<<");
         }
     }
-    public void assignDriver(boolean isExperienced, int reservationId) throws SQLException {
+    public void assignDriver(int driverId, int reservationId) throws SQLException {
         Statement statement = connection.createStatement();
-        ResultSet rs1;
-        if(isExperienced){
-            rs1 = statement.executeQuery("SELECT driverId FROM Driver WHERE isExperienced=true and isAvailable=true");
-        }
-        else{
-            rs1 = statement.executeQuery("SELECT driverId FROM Driver WHERE isExperienced=false and isAvailable=true");
-        }
-        if (rs1.next()) {
-            int driverId = rs1.getInt("driverId");
-            statement.executeUpdate("UPDATE Reservation SET driverId =" + driverId + " WHERE reservationId =" + reservationId);
-            statement.executeUpdate("UPDATE Driver SET isAvailable = 0 WHERE driverId =" + driverId);
-        } else {
-            System.out.println("No available driver found.");
-        }
-        rs1.close();
+        statement.executeUpdate("UPDATE Reservation SET driverId =" + driverId + " WHERE reservationId =" + reservationId);
         statement.close();
     }
 
@@ -347,9 +333,9 @@ public class Model {
     }
 
 
-    public ResultSet filterCars(String brand, String category, String color, String gearType, int passenger,Date pickupDate, Date deliverDate) throws SQLException {
+    public ResultSet filterCars(String brand, String category, String color, String gearType, String fuelType, int passenger,Date pickupDate, Date deliverDate) throws SQLException {
         Statement statement = connection.createStatement();
-        StringBuilder queryBuilder = new StringBuilder("SELECT V.vehicleId, V.gearType, V.color, V.carType, V.model, V.brand, V.isAvailable, V.fuelType, V.passengerAmount, V.dailyPrice FROM Vehicle V WHERE V.vehicleId NOT IN(SELECT R.vehicleId FROM Reservation R WHERE R.pickupDate <= '" + deliverDate + "' AND R.returnDate >= '" + pickupDate + "')" );
+        StringBuilder queryBuilder = new StringBuilder("SELECT V.vehicleId, V.gearType, V.color, V.carType, V.model, V.brand, V.isAvailable, V.fuelType, V.passengerAmount, V.dailyPrice, V.fuelType FROM Vehicle V WHERE V.vehicleId NOT IN(SELECT R.vehicleId FROM Reservation R WHERE R.pickupDate <= '" + deliverDate + "' AND R.returnDate >= '" + pickupDate + "')" );
         if (!"ALL".equals(brand)) {
             queryBuilder.append(" AND V.brand = '").append(brand).append("'");
         }
@@ -361,6 +347,9 @@ public class Model {
         }
         if (!"ALL".equals(color)) {
             queryBuilder.append(" AND V.color = '").append(color).append("'");
+        }
+        if (!"ALL".equals(fuelType)) {
+            queryBuilder.append(" AND V.fuelType = '").append(fuelType).append("'");
         }
         if (passenger != -1) { // assuming -1 represents "ALL" for passenger count
             queryBuilder.append(" AND V.passengerAmount = ").append(passenger);
@@ -446,13 +435,12 @@ public class Model {
         else{
             i=0;
         }
+        ResultSet rs1;
         Statement statement = connection.createStatement();
-        ResultSet rs1 = statement.executeQuery("SELECT distinct D.driverId FROM Driver D, Reservation R WHERE D.driverId NOT IN(SELECT R.driverId FROM Reservation R WHERE R.pickupDate <= '" + deliverDate + "' AND R.returnDate >= '" + pickupDate + "') AND  D.isExperienced ='"+i+"' ORDER BY D.driverId ASC");
+        rs1=statement.executeQuery( "SELECT DISTINCT D.driverId " + "FROM Driver D " + "LEFT JOIN Reservation R ON D.driverId = R.driverId " + "AND R.pickupDate <= '" + deliverDate + "' " + "AND R.returnDate >= '" + pickupDate + "' " +  "WHERE R.driverId IS NULL " +   "AND D.isExperienced = '" + i + "' " + "ORDER BY D.driverId ASC");
         if(rs1.next()){
-            System.out.println(rs1.getInt("driverId"));
             return rs1.getInt("driverId");
         }
-        rs1.close();
         return -1;
     }
 
