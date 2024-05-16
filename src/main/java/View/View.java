@@ -26,6 +26,7 @@ public class View extends JFrame {
         buttons.add(lView.getSignUpButton());
         buttons.add(uView.getSearchButton());
         buttons.add(uView.getConfirmButton());
+        buttons.add(uView.getClearButton());
     }
     public void addComboBoxesToArrayList(){
         cBoxes.add(uView.getBrandComboBox());

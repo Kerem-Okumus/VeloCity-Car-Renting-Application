@@ -74,9 +74,8 @@ public class Controller implements ActionListener, MouseListener {
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
-
-
         }
+
 
         if(e.getSource()==lv.getLogInButton()){
             String username=lv.getUserNameTextField().getText();
@@ -98,6 +97,9 @@ public class Controller implements ActionListener, MouseListener {
             lv.getPasswordTextField().setText("");
             lv.getUserNameTextField().setText("");
         }
+
+
+
         if(e.getSource()==lv.getSignUpButton()){
             lv.setVisible(false);
             signUpView.getUserNameTextField().setText("");
@@ -128,9 +130,7 @@ public class Controller implements ActionListener, MouseListener {
                  passenger= Integer.parseInt(userMainView.getPassengerAmountComboBox().getSelectedItem().toString());
             }
 
-
             String brand=userMainView.getBrandComboBox().getSelectedItem().toString();
-
             String color=userMainView.getColorComboBox().getSelectedItem().toString();
             String category=userMainView.getCarTypeComboBox().getSelectedItem().toString();
             String gearType=userMainView.getGearTypeComboBox().getSelectedItem().toString();
@@ -152,11 +152,11 @@ public class Controller implements ActionListener, MouseListener {
                 System.out.println("Dates are not valid.");
                 JOptionPane.showMessageDialog(new JFrame(),"!! PLEASE ENTER A VALID DATE !!");
             }
-
-
-
-
         }
+
+
+
+
         if(e.getSource() == userMainView.getConfirmButton()){
             boolean isExperienced=false;
             boolean hasDriver=false;
@@ -189,16 +189,76 @@ public class Controller implements ActionListener, MouseListener {
                     JOptionPane.showMessageDialog(new JFrame(),"THERE IS NO " +s+ " DRIVER AVAILABLE BETWEEN THE DATES YOU'VE ENTERED!!");
                 }
             }
-            if(userMainView.getCarListTable().getSelectedRowCount() < 1){
-                JOptionPane.showMessageDialog(new JFrame(),"!! PLEASE SELECT A CAR !!");
+            if(userMainView.getCarListTable()==null){
+                JOptionPane.showMessageDialog(new JFrame(),"!! FIRST SEARCH A CAR AND THEN SELECT ONE !!");
             }
-            else{
+            else if(userMainView.getCarListTable().getSelectedRowCount() < 1){
+                JOptionPane.showMessageDialog(new JFrame(),"!! PLEASE SELECT A CAR !!");
+            }else {
+                String selectedDriver = null;
+                String selectedDriverPreference = null;
+                String selectedSeat = null;
+                String selectedTireChain = null;
+                String selectedRoofBox = null;
+                String selectedProtection = null;
+                if (1 == 1 /* get selected radio buttons function here */) {
+                    ////////////////////////////////////////////////////////////
+                    if (userMainView.getDriverOptionNo().isSelected()) {
+                        selectedDriver = "No";
+                    } else if (userMainView.getDriverOptionYes().isSelected()) {
+                        selectedDriver = "Yes";
+                    }
+                    ////////////////////////////////////////////////////////////
+                    if (userMainView.getNormalDriver().isSelected()) {
+                        selectedDriverPreference = "Normal";
+                    } else if (userMainView.getProfessionalDriver().isSelected()) {
+                        selectedDriverPreference = "Experienced";
+                    }
+                    ////////////////////////////////////////////////////////////
+                    if (userMainView.getBabySeat().isSelected()) {
+                        selectedSeat = "Baby";
+                    } else if (userMainView.getChildSeat().isSelected()) {
+                        selectedSeat = "Child";
+                    }
+                    ////////////////////////////////////////////////////////////
+                    if (userMainView.getTireChainYes().isSelected()) {
+                        selectedTireChain = new String("sa");
+                    } else if (userMainView.getTireChainNo().isSelected()) {
+                        selectedTireChain = "No";
+                    }
+                    ////////////////////////////////////////////////////////////
+                    if (userMainView.getRoofBoxYes().isSelected()) {
+                        selectedRoofBox = "Yes";
+                    } else if (userMainView.getRoofBoxNo().isSelected()) {
+                        selectedRoofBox = "No";
+                    }
+                    ////////////////////////////////////////////////////////////
+                    if (userMainView.getBigProtection().isSelected()) {
+                        selectedProtection = "High";
+                    } else if (userMainView.getMediumProtection().isSelected()) {
+                        selectedProtection = "Medium";
+                    } else if (userMainView.getAdditionalProtection().isSelected()) {
+                        selectedProtection = "Additional";
+                    } else if (userMainView.getNoProtection().isSelected()) {
+                        selectedProtection = "No";
+                    }
+                }
 
-                System.out.println(userMainView.getCarListTable().getValueAt(userMainView.getCarListTable().getSelectedRow(), 0));
-                userMainView.setVisible(false);
-                paymentView.setVisible(true);
+                if (model.extrasValidation(selectedDriver, selectedDriverPreference, selectedSeat, selectedTireChain, selectedRoofBox, selectedProtection)) {
+                    System.out.println("TEST " + userMainView.getCarListTable().getValueAt(userMainView.getCarListTable().getSelectedRow(), 0));
+                    userMainView.setVisible(false);
+                    paymentView.setVisible(true);
+                }
             }
         }
+
+        if(e.getSource()==userMainView.getClearButton()){
+            clearExtrasSelections(userMainView);
+        }
+
+
+
+
         if(e.getSource()==paymentView.getConfirmButton()){
             String nameOnTheCard = paymentView.getNameOnCardTextField().getText();
             String cardNumber = paymentView.getCardNumberTextField().getText();
@@ -208,8 +268,11 @@ public class Controller implements ActionListener, MouseListener {
             if(model.paymentValidation(nameOnTheCard,cardNumber,cvv,promotionCode)==true){
                 System.out.println("successful rent");
             }
-
         }
+
+
+
+
         if(e.getSource()==paymentView.getBackButton()){
             userMainView.clearCarTable();
             view.getuView().setExtrasPanelVisibilityFalse();
@@ -299,4 +362,14 @@ public class Controller implements ActionListener, MouseListener {
     public void mouseExited(MouseEvent e) {
 
     }
+
+    public void clearExtrasSelections(UserMainView userMainView){
+        userMainView.getDriverOption().clearSelection();
+        userMainView.getRoofBox().clearSelection();
+        userMainView.getTireChain().clearSelection();
+        userMainView.getDriverQuality().clearSelection();
+        userMainView.getProtectionPackages().clearSelection();
+        userMainView.getSeatOption().clearSelection();
+    }
+
 }

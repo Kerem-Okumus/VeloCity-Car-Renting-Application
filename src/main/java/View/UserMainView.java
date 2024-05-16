@@ -45,6 +45,7 @@ public class UserMainView extends JFrame{
     String fuelType[] = {"ALL","Gasoline","Diesel","Electric","Hybrid"};
     JButton searchButton;
     JButton confirmButton;
+    JButton clearButton;
     JRadioButton driverOptionYes;
     JRadioButton driverOptionNo;
     JRadioButton normalDriver;
@@ -75,6 +76,7 @@ public class UserMainView extends JFrame{
     JScrollPane scrollPane;
 
     //Labels for extras panel
+    JLabel extrasLabel;
     JLabel driverOptionLabel;
     JLabel driverLevelLabel;
     JLabel seatOptionLabel;
@@ -192,6 +194,11 @@ public class UserMainView extends JFrame{
         driverOptionNo = new JRadioButton("No");
         driverOptionNo.setForeground(new Color(255,81,0));
         driverOptionNo.setBackground(new Color(248,239,217));
+
+        extrasLabel = new JLabel("Extras");
+        extrasLabel.setBounds(1350,245,200,50);
+        extrasLabel.setForeground(new Color(255,81,0));
+        extrasLabel.setFont(new Font("Franklin Gothic Heavy",Font.BOLD, 50));
 
         driverOptionLabel = new JLabel("Driver:");
         driverOptionLabel.setBounds(1360,320,200,30);
@@ -352,6 +359,13 @@ public class UserMainView extends JFrame{
         confirmButton.setBackground(new Color(255,81,0));
         confirmButton.setForeground(new Color(248,239,217));
 
+        clearButton = new JButton("Clear");
+        clearButton.setBounds(1380,910,140,30);
+        clearButton.setBorderPainted(false);
+        clearButton.setFocusPainted(false);
+        clearButton.setBackground(new Color(102, 102, 102, 255));
+        clearButton.setForeground(new Color(248,239,217));
+
         searchButton = new JButton("Search");
         searchButton.setBounds(675,950,200,50);
         searchButton.setBorderPainted(false);
@@ -391,6 +405,8 @@ public class UserMainView extends JFrame{
         newRentPanel.add(searchButton);
         newRentPanel.add(carSelectionPanel);
         newRentPanel.add(confirmButton);
+        newRentPanel.add(clearButton);
+        newRentPanel.add(extrasLabel);
         newRentPanel.add(driverOptionLabel);
         newRentPanel.add(driverLevelLabel);
         newRentPanel.add(seatOptionLabel);
@@ -883,5 +899,37 @@ public class UserMainView extends JFrame{
 
     public void setExtrasPanel(JPanel extrasPanel) {
         this.extrasPanel = extrasPanel;
+    }
+
+    public JButton getClearButton() {
+        return clearButton;
+    }
+
+    public String[] getCarColumnNames() {
+        return carColumnNames;
+    }
+
+    public ButtonGroup getDriverOption() {
+        return driverOption;
+    }
+
+    public ButtonGroup getDriverQuality() {
+        return driverQuality;
+    }
+
+    public ButtonGroup getSeatOption() {
+        return seatOption;
+    }
+
+    public ButtonGroup getTireChain() {
+        return tireChain;
+    }
+
+    public ButtonGroup getRoofBox() {
+        return roofBox;
+    }
+
+    public ButtonGroup getProtectionPackages() {
+        return protectionPackages;
     }
 }

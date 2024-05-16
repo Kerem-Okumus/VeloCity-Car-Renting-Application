@@ -454,6 +454,23 @@ public class Model {
         return -1;
     }
 
+    public boolean extrasValidation(String selectedDriver, String selectedDriverPreference, String selectedSeat, String selectedTireChain, String selectedRoofBox, String selectedProtection){
+
+        if(selectedDriver==null || selectedTireChain==null || selectedRoofBox==null || selectedProtection==null){
+            JOptionPane.showMessageDialog(new JFrame(),"!! PLEASE FILL EXTRAS PART !!");
+            return false;
+        }
+        if(selectedDriver.equals("Yes") && selectedDriverPreference==null){
+            JOptionPane.showMessageDialog(new JFrame(),"!! PLEASE SELECT DRIVER TYPE !!");
+            return false;
+        }
+        if(selectedDriver.equals("No") && selectedDriverPreference!=null){
+            JOptionPane.showMessageDialog(new JFrame(),"!! DON'T SELECT PREFERENCE IF NO NEED DRIVER !!");
+            return false;
+        }
+        return true;
+    }
+
     public ArrayList<User> getUserArrayList() {
         return userArrayList;
     }
