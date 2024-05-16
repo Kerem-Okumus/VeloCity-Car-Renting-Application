@@ -298,17 +298,19 @@ public class Model {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        Reservation reservation = new Reservation(reservationId,pickupDate,returnDate,pickupLocation,returnLocation,resStatus,(int) price,userId,vehicleId);
+        reservationArrayList.add(reservation);
         return reservationId;
 
     }
-    public void addExtrastoReservation(int reservationId,ArrayList extraId) throws SQLException {
+
+    public void addExtrastoReservation(int reservationId,ArrayList<Integer> extraId) throws SQLException {
         Statement statement = connection.createStatement();
         for(int i=0;i<extraId.size();i++){
-            statement.executeUpdate("INSERT INTO reservationExtras (reservationId, extraId,) VALUES ( '" + reservationId
-                    + "' , '"  +extraId + "')");
+            statement.executeUpdate("INSERT INTO reservationExtras (reservationId, extraId) VALUES ( '" + reservationId
+                    + "' , '"  +extraId.get(i) + "')");
             System.out.println("NOTIFICATION >>> ReservationExtra   with  reservationId " + reservationId + " and with extrasId "+extraId.get(i)+"has been added to DB <<<");
         }
-
     }
     public void assignDriver(boolean isExperienced, int reservationId) throws SQLException {
         Statement statement = connection.createStatement();
