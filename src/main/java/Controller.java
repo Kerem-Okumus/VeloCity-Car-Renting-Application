@@ -2,24 +2,21 @@ import Objects.*;
 import View.*;
 
 import javax.swing.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Controller implements ActionListener, MouseListener {
+public class Controller implements ActionListener, MouseListener, ItemListener {
 
     private Model model;
     private View view;
     int pDay,pMonth,pYear,dDay,dMonth,dYear;
     Date pickupDate,deliverDate;
     int driverIdtobeAssigned=-1;
-    boolean isPromotionCodeApplied=false;
+    boolean isPromotionCodeApplied=false,updating=false;
 
 
     public Controller(Model model, View view) throws SQLException {
@@ -27,6 +24,7 @@ public class Controller implements ActionListener, MouseListener {
         this.view = view;
         addActionListenerToButtons();
         addMouseListener();
+        addItemListenertoComboBoxes();
         model.addPaymentInformation("1234","123","1928","06","2",model.getUserArrayList().get(0));
     }
 
@@ -37,8 +35,12 @@ public class Controller implements ActionListener, MouseListener {
         }
     }
     public void addMouseListener(){
+        view.getuView().getDriverOptionYes().addMouseListener(this);
+        view.getuView().getDriverOptionNo().addMouseListener((this));
+    }
+    public void addItemListenertoComboBoxes(){
         for(int i = 0; i<view.getcBoxes().size(); i++){
-            view.getcBoxes().get(i).addMouseListener(this);
+            view.getcBoxes().get(i).addItemListener(this);
         }
     }
 
@@ -80,7 +82,6 @@ public class Controller implements ActionListener, MouseListener {
             }
         }
 
-
         if(e.getSource()==lv.getLogInButton()){
             String username=lv.getUserNameTextField().getText();
             String password=lv.getPasswordTextField().getText();
@@ -115,8 +116,7 @@ public class Controller implements ActionListener, MouseListener {
             signUpView.getGenderButton().clearSelection();
             signUpView.setVisible(true);
         }
-        if(e.getSource()instanceof JComboBox)
-            view.getuView().clearCarTable();
+
         if(e.getSource()==userMainView.getSearchButton()){
              pDay = Integer.parseInt(userMainView.getPickUpDateDay().getSelectedItem().toString());
              pMonth = Integer.parseInt(userMainView.getPickUpDateMonth().getSelectedItem().toString());
@@ -467,11 +467,18 @@ public class Controller implements ActionListener, MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        view.getuView().clearCarTable();
-        view.getuView().getCarSelectionPanel().setVisible(false);
-        view.getuView().getCarSelectionPanel().setVisible(true);
-        view.getuView().setExtrasPanelVisibilityFalse();
 
+        if(e.getSource() instanceof JRadioButton){
+            if( view.getuView().getDriverOptionYes().isSelected()){
+                view.getuView().getNormalDriver().setEnabled(true);
+                view.getuView().getProfessionalDriver().setEnabled(true);
+            }
+            else if(view.getuView().getDriverOptionNo().isSelected()){
+                view.getuView().getNormalDriver().setEnabled(false);
+                view.getuView().getProfessionalDriver().setEnabled(false);
+                view.getuView().getDriverQuality().clearSelection();
+            }
+        }
     }
 
     @Override
@@ -522,4 +529,143 @@ public class Controller implements ActionListener, MouseListener {
         return dayCount;
     }
 
+    @Override
+
+    public void itemStateChanged(ItemEvent e) {
+        if (updating) {
+            return;
+        }
+
+        updating = true; // Set guard
+
+        try {
+            if (e.getSource() instanceof JComboBox) {
+                view.getuView().clearCarTable();
+                view.getuView().getCarSelectionPanel().setVisible(false);
+                view.getuView().getCarSelectionPanel().setVisible(true);
+                view.getuView().setExtrasPanelVisibilityFalse();
+            }
+
+            JComboBox<String> pickUpDateMonth = view.getuView().getPickUpDateMonth();
+            JComboBox<String> pickUpDateYear = view.getuView().getPickUpDateYear();
+            JComboBox<String> pickUpDateDay = view.getuView().getPickUpDateDay();
+            JComboBox<String> deliveryDateMonth = view.getuView().getDeliveryDateMonth();
+            JComboBox<String> deliveryDateYear = view.getuView().getDeliveryDateYear();
+            JComboBox<String> deliveryDateDay = view.getuView().getDeliveryDateDay();
+
+            //---------------PICK UP-----------
+            if (e.getSource() == pickUpDateMonth || e.getSource() == pickUpDateYear || e.getSource() == pickUpDateDay) {
+                int selectedMonth = pickUpDateMonth.getSelectedIndex();
+                int selectedYear = pickUpDateYear.getSelectedIndex();
+
+                if (selectedMonth == 1) {
+                    validateFebruaryPickUp(selectedYear);
+                } else {
+                    addNeededDaysPickUp(selectedMonth);
+                }
+
+                adjustDaysComboBox(pickUpDateDay, selectedMonth);
+            }
+
+            //----------------------DELIVERY-----------------------
+            if (e.getSource() == deliveryDateMonth || e.getSource() == deliveryDateYear || e.getSource() == deliveryDateDay) {
+                int selectedMonth = deliveryDateMonth.getSelectedIndex();
+                int selectedYear = deliveryDateYear.getSelectedIndex();
+
+                if (selectedMonth == 1) {
+                    validateFebruaryDelivery(selectedYear);
+                } else {
+                    addNeededDaysDelivery(selectedMonth);
+                }
+
+                adjustDaysComboBox(deliveryDateDay, selectedMonth);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            updating = false; // Release guard
+        }
+    }
+
+    private void adjustDaysComboBox(JComboBox<String> dateDay, int selectedMonth) {
+        if ((selectedMonth % 2 == 1 && selectedMonth != 1)) {
+            if (dateDay.getItemCount() > 30 && selectedMonth < 7) {
+                dateDay.removeItemAt(30);
+            } else if (dateDay.getItemCount() == 30 && selectedMonth > 7) {
+                dateDay.addItem("31");
+            }
+        } else if (selectedMonth % 2 == 0 && selectedMonth != 1) {
+            if (dateDay.getItemCount() == 30 && selectedMonth < 7) {
+                dateDay.addItem("31");
+            } else if (dateDay.getItemCount() > 30 && selectedMonth > 7) {
+                dateDay.removeItemAt(30);
+            }
+        }
+    }
+
+    public void validateFebruaryPickUp(int selectedYear) {
+        JComboBox<String> pickUpDateDay = view.getuView().getPickUpDateDay();
+        adjustFebruaryDays(pickUpDateDay, selectedYear);
+    }
+
+    public void validateFebruaryDelivery(int selectedYear) {
+        JComboBox<String> deliveryDateDay = view.getuView().getDeliveryDateDay();
+        adjustFebruaryDays(deliveryDateDay, selectedYear);
+    }
+
+    private void adjustFebruaryDays(JComboBox<String> dateDay, int selectedYear) {
+        try {
+            if (selectedYear == 0) {
+                if(dateDay.getItemCount()==28){
+                    dateDay.addItem("29");
+                }
+                if (dateDay.getItemCount() > 30) {
+                    dateDay.removeItemAt(30);
+                }
+                if (dateDay.getItemCount() > 29) {
+                    dateDay.removeItemAt(29);
+                }
+
+            }
+            else {
+                if (dateDay.getItemCount() > 30) {
+                    dateDay.removeItemAt(30);
+                }
+                if (dateDay.getItemCount() > 29) {
+                    dateDay.removeItemAt(29);
+                }
+                if (dateDay.getItemCount() > 28) {
+                    dateDay.removeItemAt(28);
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void addNeededDaysPickUp(int selectedMonth) {
+        JComboBox<String> pickUpDateDay = view.getuView().getPickUpDateDay();
+        addNeededDays(pickUpDateDay, selectedMonth);
+    }
+
+    public void addNeededDaysDelivery(int selectedMonth) {
+        JComboBox<String> deliveryDateDay = view.getuView().getDeliveryDateDay();
+        addNeededDays(deliveryDateDay, selectedMonth);
+    }
+
+    private void addNeededDays(JComboBox<String> dateDay, int selectedMonth) {
+        try {
+            if (dateDay.getItemCount() == 28) {
+                dateDay.addItem("29");
+            }
+            if (dateDay.getItemCount() == 29) {
+                dateDay.addItem("30");
+            }
+            if (dateDay.getItemCount() == 30 && selectedMonth != 1) {
+                dateDay.addItem("31");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 }

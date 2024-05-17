@@ -5,8 +5,8 @@ public class DBConnection {
 
     //pulladığınızda sadece nameofthedatabase ve password kısmını kendinizinki yapın.pushlarken de eski halinde bırakın
     final static String url="jdbc:mysql://localhost:3306/velocity";
-    final static String user = "localhost";
-    final static String password= "Jd5.rS<7,hZ!2";
+    final static String user = "root";
+    final static String password= "111111";
 
 
     public static Connection getConnection(){
