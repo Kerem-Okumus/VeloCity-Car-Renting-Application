@@ -1,5 +1,7 @@
 import Objects.*;
 import Objects.Driver;
+import View.PaymentInformationView;
+import View.UserMainView;
 
 import javax.swing.*;
 import java.sql.*;
@@ -406,10 +408,7 @@ public class Model {
                 errorMessage += "!! INVALID CCV (NEED 3 DIGITS) !!\n";
                 flag = 1;
             }
-            if (!promotionCodes.contains(promotionCode) && !promotionCode.equals("")) {
-                errorMessage += "!! INVALID PROMOTION CODE !!\n";
-                flag = 1;
-            }
+
         }
 
         if(flag==1){
@@ -418,6 +417,47 @@ public class Model {
         }
 
         return true;
+    }
+
+    public boolean promotionValidation(String promotionCode){
+        if (!promotionCodes.contains(promotionCode) && !promotionCode.equals("")) {
+            JOptionPane.showMessageDialog(new JFrame(),"!! Invalid Promotion Code !!");
+            return false;
+        }
+        return true;
+    }
+
+    public int applyPromotion(PaymentInformationView paymentInformationView){
+
+        String enteredCode = paymentInformationView.getPromotionCodeTextField().getText().toLowerCase();
+        int discountpPercentage = 0;
+
+        if(enteredCode.equals(promotionCodes.get(0))){
+            paymentInformationView.getDiscountTextfield().setText("10%");
+            discountpPercentage = 10;
+        }else if(enteredCode.equals(promotionCodes.get(1))) {
+            paymentInformationView.getDiscountTextfield().setText("15%");
+            discountpPercentage = 15;
+        }else if(enteredCode.equals(promotionCodes.get(2))) {
+            paymentInformationView.getDiscountTextfield().setText("20%");
+            discountpPercentage = 20;
+        }
+        if(discountpPercentage==0){
+            JOptionPane.showMessageDialog(new JFrame(),"!! Please enter a promotion code if you have one !!");
+        }else {
+            JOptionPane.showMessageDialog(new JFrame(), "** " + discountpPercentage + "% discount has been applied **");
+        }
+        return discountpPercentage;
+    }
+
+    public void updateTotalCharge(PaymentInformationView paymentInformationView){
+
+        int discountPercentage = applyPromotion(paymentInformationView);
+        double totalAmount = Double.parseDouble(paymentInformationView.getTotalTextField().getText());
+
+        totalAmount = totalAmount - totalAmount*discountPercentage/100;
+
+        paymentInformationView.getTotalTextField().setText(Double.toString(totalAmount));
     }
 
     public boolean checkStringIfItIsFullOfLetters(String string){
@@ -460,6 +500,45 @@ public class Model {
         }
         return true;
     }
+
+    public int calculateExtraPayment(String selectedDriver, String selectedDriverPreference, String selectedSeat, String selectedTireChain, String selectedRoofBox, String selectedProtection){
+        int extraAmount=0;
+
+        if(selectedDriver.equals("Yes")){
+            if(selectedDriverPreference.equals("Normal")){
+                 extraAmount += 500;
+            }else if(selectedDriverPreference.equals("Experienced")){
+                extraAmount += 750;
+            }
+        }
+
+        if(selectedSeat != null) {
+            if (selectedSeat.equals("Child")) {
+                extraAmount += 50;
+            } else if (selectedSeat.equals("Baby")) {
+                extraAmount += 30;
+            }
+        }
+
+        if(selectedTireChain.equals("Yes")){
+            extraAmount += 10;
+        }
+
+        if(selectedRoofBox.equals("Yes")){
+            extraAmount += 40;
+        }
+
+        if(selectedProtection.equals("High")){
+            extraAmount += 200;
+        }else if(selectedProtection.equals("Medium")){
+            extraAmount += 150;
+        }else if(selectedProtection.equals("Additional")){
+            extraAmount += 100;
+        }
+
+    return extraAmount;
+    }
+
 
     public ArrayList<User> getUserArrayList() {
         return userArrayList;

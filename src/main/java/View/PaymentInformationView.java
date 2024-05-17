@@ -12,6 +12,7 @@ public class PaymentInformationView extends JFrame{
     String month[] = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
     JComboBox yearComboBox;
     String year[] = {"2025","2026","2027","2028","2029","2030"};
+    JButton applyDiscountButton;
     JButton confirmButton;
     JButton backButton;
     JLabel expirationDateLabel;
@@ -92,6 +93,13 @@ public class PaymentInformationView extends JFrame{
         expirationDateLabel.setFont(new Font("Metropolis", Font.PLAIN,20));
         expirationDateLabel.setForeground(new Color(255,81,0));
 
+        applyDiscountButton = new JButton("Apply");
+        applyDiscountButton.setBounds(900,600,99,20);
+        applyDiscountButton.setBorderPainted(false);
+        applyDiscountButton.setFocusPainted(false);
+        applyDiscountButton.setBackground(new Color(255, 81, 0));
+        applyDiscountButton.setForeground(new Color(248,239,217));
+
         confirmButton = new JButton("Confirm");
         confirmButton.setBounds(700,750,300,50);
         confirmButton.setBorderPainted(false);
@@ -103,7 +111,7 @@ public class PaymentInformationView extends JFrame{
         backButton.setBounds(1100,750,200,50);
         backButton.setBorderPainted(false);
         backButton.setFocusPainted(false);
-        backButton.setBackground(new Color(255,81,0));
+        backButton.setBackground(new Color(102, 102, 102));
         backButton.setForeground(new Color(248,239,217));
 
         monthComboBox = new JComboBox(month);
@@ -126,7 +134,7 @@ public class PaymentInformationView extends JFrame{
         extrasPriceLabel.setFont(new Font("Metropolis", Font.PLAIN,20));
         extrasPriceLabel.setForeground(new Color(255,81,0));
 
-        discountLabel = new JLabel("Discount:");
+        discountLabel = new JLabel("Discount (%) :");
         discountLabel.setBounds(1100,480, 300,50);
         discountLabel.setFont(new Font("Metropolis", Font.PLAIN,20));
         discountLabel.setForeground(new Color(255,81,0));
@@ -159,17 +167,17 @@ public class PaymentInformationView extends JFrame{
         discountTextfield.setBackground(new Color(248,239,217));
         discountTextfield.setForeground(new Color(255,81,0));
         discountTextfield.setBorder(BorderFactory.createLineBorder(new Color(248,239,217)));
-        discountTextfield.setText("1000");
+        discountTextfield.setText("0");
         discountTextfield.setEditable(false);
         discountTextfield.setFont(new Font("Metropolis", Font.PLAIN, 20));
 
         totalTextField = new JTextField();
         totalTextField.setBounds(1300,560,300,50);
         totalTextField.setBackground(new Color(248,239,217));
-        totalTextField.setForeground(new Color(255,81,0));
+        totalTextField.setForeground(new Color(255, 81, 0));
         totalTextField.setBorder(BorderFactory.createLineBorder(new Color(248,239,217)));
         totalTextField.setEditable(false);
-        totalTextField.setText("5190");
+        totalTextField.setText("");
         totalTextField.setFont(new Font("Metropolis", Font.PLAIN, 20));
 
         this.add(pageNameLabel);
@@ -184,6 +192,7 @@ public class PaymentInformationView extends JFrame{
         this.add(cvvLabel);
         this.add(expirationDateLabel);
         this.add(promotionCodeLabel);
+        this.add(applyDiscountButton);
         this.add(confirmButton);
         this.add(backButton);
         this.add(rentFeeLabel);
@@ -255,6 +264,50 @@ public class PaymentInformationView extends JFrame{
 
     public JButton getBackButton() {
         return backButton;
+    }
+
+    public JButton getApplyDiscountButton() {
+        return applyDiscountButton;
+    }
+
+    public String[] getMonth() {
+        return month;
+    }
+
+    public void setMonth(String[] month) {
+        this.month = month;
+    }
+
+    public JTextField getRentFeeTextField() {
+        return rentFeeTextField;
+    }
+
+    public void setRentFeeTextField(JTextField rentFeeTextField) {
+        this.rentFeeTextField = rentFeeTextField;
+    }
+
+    public JTextField getExtrasPriceTextField() {
+        return extrasPriceTextField;
+    }
+
+    public void setExtrasPriceTextField(JTextField extrasPriceTextField) {
+        this.extrasPriceTextField = extrasPriceTextField;
+    }
+
+    public JTextField getDiscountTextfield() {
+        return discountTextfield;
+    }
+
+    public void setDiscountTextfield(JTextField discountTextfield) {
+        this.discountTextfield = discountTextfield;
+    }
+
+    public JTextField getTotalTextField() {
+        return totalTextField;
+    }
+
+    public void setTotalTextField(JTextField totalTextField) {
+        this.totalTextField = totalTextField;
     }
 }
 

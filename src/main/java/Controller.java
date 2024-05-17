@@ -19,6 +19,7 @@ public class Controller implements ActionListener, MouseListener {
     int pDay,pMonth,pYear,dDay,dMonth,dYear;
     Date pickupDate,deliverDate;
     int driverIdtobeAssigned=-1;
+    boolean isPromotionCodeApplied=false;
 
 
     public Controller(Model model, View view) throws SQLException {
@@ -228,7 +229,7 @@ public class Controller implements ActionListener, MouseListener {
                     }
                     ////////////////////////////////////////////////////////////
                     if (userMainView.getTireChainYes().isSelected()) {
-                        selectedTireChain = new String("sa");
+                        selectedTireChain = "Yes";
                     } else if (userMainView.getTireChainNo().isSelected()) {
                         selectedTireChain = "No";
                     }
@@ -251,9 +252,21 @@ public class Controller implements ActionListener, MouseListener {
                 }
 
                 if (model.extrasValidation(selectedDriver, selectedDriverPreference, selectedSeat, selectedTireChain, selectedRoofBox, selectedProtection)) {
-                    System.out.println("TEST " + userMainView.getCarListTable().getValueAt(userMainView.getCarListTable().getSelectedRow(), 0));
+
+                    Double rentFee = Double.parseDouble(userMainView.getCarListTable().getValueAt
+                            (userMainView.getCarListTable().getSelectedRow(), 7).toString()) * getHowManyDaysToBeRented(userMainView);
+                    int extrasPrice = model.calculateExtraPayment(selectedDriver, selectedDriverPreference,
+                            selectedSeat, selectedTireChain, selectedRoofBox, selectedProtection);
+
+                    Double totalAmount = rentFee + extrasPrice;
+
+                    paymentView.getRentFeeTextField().setText((rentFee)+" ("+getHowManyDaysToBeRented(userMainView)+" days)");
+                    paymentView.getExtrasPriceTextField().setText(Integer.toString(extrasPrice));
+                    paymentView.getTotalTextField().setText(rentFee + extrasPrice+"");
+
                     userMainView.setVisible(false);
                     paymentView.setVisible(true);
+
                 }
             }
         }
@@ -264,6 +277,24 @@ public class Controller implements ActionListener, MouseListener {
 
 
 
+
+        if(e.getSource()==paymentView.getApplyDiscountButton()){
+            String promotionCode = paymentView.getPromotionCodeTextField().getText().toLowerCase();
+
+                if (model.promotionValidation(promotionCode)) {
+
+                    if(isPromotionCodeApplied){
+                        JOptionPane.showMessageDialog(new JFrame(),"You can use promotion codes for a rent just once");
+                    }else {
+                        model.updateTotalCharge(paymentView);
+                    }
+
+                    if(!promotionCode.equals("")){
+                        isPromotionCodeApplied = true;
+                        paymentView.getPromotionCodeTextField().setEditable(false);
+                    }
+                }
+        }
 
         if(e.getSource()==paymentView.getConfirmButton()){
             String nameOnTheCard = paymentView.getNameOnCardTextField().getText();
@@ -339,6 +370,8 @@ public class Controller implements ActionListener, MouseListener {
                 view.getuView().setExtrasPanelVisibilityFalse();
             }
 
+            isPromotionCodeApplied=false;
+            paymentView.getPromotionCodeTextField().setEditable(true);
         }
 
 
@@ -352,6 +385,8 @@ public class Controller implements ActionListener, MouseListener {
             paymentView.getPromotionCodeTextField().setText("");
             paymentView.setVisible(false);
             userMainView.setVisible(true);
+            isPromotionCodeApplied=false;
+            paymentView.getPromotionCodeTextField().setEditable(true);
         }
     }
 
@@ -466,6 +501,25 @@ public class Controller implements ActionListener, MouseListener {
         userMainView.getDriverQuality().clearSelection();
         userMainView.getProtectionPackages().clearSelection();
         userMainView.getSeatOption().clearSelection();
+    }
+
+    public int getHowManyDaysToBeRented(UserMainView userMainView){
+
+        int dayCount=0;
+
+        pDay = Integer.parseInt(userMainView.getPickUpDateDay().getSelectedItem().toString());
+        pMonth = Integer.parseInt(userMainView.getPickUpDateMonth().getSelectedItem().toString());
+        pYear = Integer.parseInt(userMainView.getPickUpDateYear().getSelectedItem().toString());
+        dDay= Integer.parseInt(userMainView.getDeliveryDateDay().getSelectedItem().toString());
+        dMonth= Integer.parseInt(userMainView.getDeliveryDateMonth().getSelectedItem().toString());
+        dYear= Integer.parseInt(userMainView.getDeliveryDateYear().getSelectedItem().toString());
+
+        LocalDate startDate = LocalDate.of(pYear, pMonth, pDay);
+        LocalDate returnDate = LocalDate.of(dYear, dMonth, dDay);
+
+        dayCount = Integer.parseInt(Long.toString(startDate.datesUntil(returnDate).count()));
+
+        return dayCount;
     }
 
 }
