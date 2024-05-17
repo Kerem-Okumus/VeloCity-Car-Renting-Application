@@ -194,7 +194,7 @@ public class PaymentInformationView extends JFrame{
         this.add(extrasPriceTextField);
         this.add(discountTextfield);
         this.add(totalTextField);
-        this.setVisible(true);
+        this.setVisible(false);
     }
 
     public JTextField getNameOnCardTextField() {

@@ -577,6 +577,8 @@ public class UserMainView extends JFrame{
         tireChainLabel.setVisible(false);
         roofBoxLabel.setVisible(false);
         protectionLabel.setVisible(false);
+        extrasLabel.setVisible(false);
+        clearButton.setVisible(false);
     }
     public void setExtrasPanelVisibilityTrue(){
         extrasPanel.setVisible(true);
@@ -587,6 +589,8 @@ public class UserMainView extends JFrame{
         tireChainLabel.setVisible(true);
         roofBoxLabel.setVisible(true);
         protectionLabel.setVisible(true);
+        extrasLabel.setVisible(true);
+        clearButton.setVisible(true);
 
     }
 
@@ -1026,4 +1030,5 @@ public class UserMainView extends JFrame{
     public ButtonGroup getProtectionPackages() {
         return protectionPackages;
     }
+
 }

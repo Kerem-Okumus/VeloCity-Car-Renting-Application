@@ -330,8 +330,13 @@ public class Controller implements ActionListener, MouseListener {
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
-
+                userMainView.getOptionBar().setSelectedComponent(userMainView.getCurrentRentPanel());
                 userMainView.setVisible(true);
+                view.getuView().clearCarTable();
+                view.getuView().getCarSelectionPanel().setVisible(false);
+                clearExtrasSelections(view.getuView());
+                view.getuView().getCarSelectionPanel().setVisible(true);
+                view.getuView().setExtrasPanelVisibilityFalse();
             }
 
         }
