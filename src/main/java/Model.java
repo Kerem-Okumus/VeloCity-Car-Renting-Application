@@ -81,7 +81,7 @@ public class Model {
         while (rs1.next()) {
             String activeUserName = rs1.getString("userName");
             if(userName.equals(activeUserName)){
-                JOptionPane.showMessageDialog(new JFrame(),"--- This username has taken ---");
+                JOptionPane.showMessageDialog(new JFrame(),"--- This username has taken ---","",JOptionPane.ERROR_MESSAGE);
                 return false;
             }
         }
@@ -135,7 +135,7 @@ public class Model {
             flag=1;
         }
         if(flag==1) {
-            JOptionPane.showMessageDialog(new JFrame(), errorMessage);
+            JOptionPane.showMessageDialog(new JFrame(), errorMessage,"SignUp Error",JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;
@@ -254,7 +254,7 @@ public class Model {
     public boolean logIn(String username, String password) throws SQLException {
         Statement statement = connection.createStatement();
         if(username.equals("") || password.equals("")){
-            JOptionPane.showMessageDialog(new JFrame(),"PLEASE FILL BOTH FIELDS !!!");
+            JOptionPane.showMessageDialog(new JFrame(),"PLEASE FILL BOTH FIELDS !!!","Login Error",JOptionPane.ERROR_MESSAGE);
             return false;
         }
         ResultSet rs1 = statement.executeQuery("SELECT username, userId " +
@@ -267,7 +267,7 @@ public class Model {
             return true;
         } else {
             System.out.println("NOTIFICATION >>> Wrong username or password");
-            JOptionPane.showMessageDialog(new JFrame(),"WRONG USERNAME OR PASSWORD !!!");
+            JOptionPane.showMessageDialog(new JFrame(),"WRONG USERNAME OR PASSWORD !!!","Login Error",JOptionPane.ERROR_MESSAGE);
         }
         return false;
     }
@@ -404,7 +404,7 @@ public class Model {
             if (!isNumeric(cvv)) {
                 errorMessage += "!! PLEASE ENTER ONLY INTEGERS IN CCV !!\n";
                 flag = 1;
-            } else if (cardNumber.length() != 16) {
+            } else if (cvv.length() != 3) {
                 errorMessage += "!! INVALID CCV (NEED 3 DIGITS) !!\n";
                 flag = 1;
             }
@@ -412,7 +412,7 @@ public class Model {
         }
 
         if(flag==1){
-            JOptionPane.showMessageDialog(new JFrame(), errorMessage);
+            JOptionPane.showMessageDialog(new JFrame(), errorMessage,"VALIDATION ERROR",JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
@@ -421,7 +421,7 @@ public class Model {
 
     public boolean promotionValidation(String promotionCode){
         if (!promotionCodes.contains(promotionCode) && !promotionCode.equals("")) {
-            JOptionPane.showMessageDialog(new JFrame(),"!! Invalid Promotion Code !!");
+            JOptionPane.showMessageDialog(new JFrame(),"!! Invalid Promotion Code !!","",JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;
@@ -486,16 +486,19 @@ public class Model {
 
     public boolean extrasValidation(String selectedDriver, String selectedDriverPreference, String selectedSeat, String selectedTireChain, String selectedRoofBox, String selectedProtection){
 
+        String errorMessage =null;
+
         if(selectedDriver==null || selectedTireChain==null || selectedRoofBox==null || selectedProtection==null){
-            JOptionPane.showMessageDialog(new JFrame(),"!! PLEASE FILL EXTRAS PART !!");
-            return false;
+            errorMessage += "!! PLEASE FILL EXTRAS PART !!\n";
         }
         if(selectedDriver.equals("Yes") && selectedDriverPreference==null){
-            JOptionPane.showMessageDialog(new JFrame(),"!! PLEASE SELECT DRIVER TYPE !!");
-            return false;
+            errorMessage += "!! PLEASE SELECT DRIVER TYPE !!\n";
         }
         if(selectedDriver.equals("No") && selectedDriverPreference!=null){
-            JOptionPane.showMessageDialog(new JFrame(),"!! DON'T SELECT PREFERENCE IF NO NEED DRIVER !!");
+            errorMessage += "DON'T SELECT PREFERENCE IF NO NEED DRIVER\n";
+        }
+        if(errorMessage != null){
+            JOptionPane.showMessageDialog(new JFrame(),errorMessage,"",JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;

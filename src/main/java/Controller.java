@@ -155,7 +155,7 @@ public class Controller implements ActionListener, MouseListener, ItemListener {
             }
             else{
                 System.out.println("Dates are not valid.");
-                JOptionPane.showMessageDialog(new JFrame(),"!! PLEASE ENTER A VALID DATE !!");
+                JOptionPane.showMessageDialog(new JFrame(),"!! PLEASE ENTER A VALID DATE !!","Validation Error",JOptionPane.ERROR_MESSAGE);
             }
         }
 
@@ -188,7 +188,7 @@ public class Controller implements ActionListener, MouseListener, ItemListener {
                 }
 
             if(userMainView.getCarListTable()==null){
-                JOptionPane.showMessageDialog(new JFrame(),"!! FIRST SEARCH A CAR AND THEN SELECT ONE !!");
+                JOptionPane.showMessageDialog(new JFrame(),"!! FIRST SEARCH A CAR AND THEN SELECT ONE !!","",JOptionPane.ERROR_MESSAGE);
             }
             else if(hasDriver&& driverIdtobeAssigned==-1){
                 String s;
@@ -197,10 +197,10 @@ public class Controller implements ActionListener, MouseListener, ItemListener {
                 else{
                     s="NORMAL";
                 }
-                JOptionPane.showMessageDialog(new JFrame(),"THERE IS NO " +s+ " DRIVER AVAILABLE BETWEEN THE DATES YOU'VE ENTERED!!");
+                JOptionPane.showMessageDialog(new JFrame(),"THERE IS NO " +s+ " DRIVER AVAILABLE BETWEEN THE DATES YOU'VE ENTERED!!","",JOptionPane.ERROR_MESSAGE);
             }
             else if(userMainView.getCarListTable().getSelectedRowCount() < 1){
-                JOptionPane.showMessageDialog(new JFrame(),"!! PLEASE SELECT A CAR !!");
+                JOptionPane.showMessageDialog(new JFrame(),"!! PLEASE SELECT A CAR !!","",JOptionPane.ERROR_MESSAGE);
             }else {
                 String selectedDriver = null;
                 String selectedDriverPreference = null;
@@ -284,7 +284,7 @@ public class Controller implements ActionListener, MouseListener, ItemListener {
                 if (model.promotionValidation(promotionCode)) {
 
                     if(isPromotionCodeApplied){
-                        JOptionPane.showMessageDialog(new JFrame(),"You can use promotion codes for a rent just once");
+                        JOptionPane.showMessageDialog(new JFrame(),"You can use promotion codes for a rent just once","",JOptionPane.ERROR_MESSAGE);
                     }else {
                         model.updateTotalCharge(paymentView);
                     }
