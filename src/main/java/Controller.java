@@ -182,9 +182,6 @@ public class Controller implements ActionListener, MouseListener, ItemListener {
                     } catch (SQLException ex) {
                         throw new RuntimeException(ex);
                     }
-                    if(driverIdtobeAssigned!=-1){
-                        JOptionPane.showMessageDialog(new JFrame(),driverIdtobeAssigned);
-                    }
                 }
 
             if(userMainView.getCarListTable()==null){
@@ -253,8 +250,7 @@ public class Controller implements ActionListener, MouseListener, ItemListener {
 
                 if (model.extrasValidation(selectedDriver, selectedDriverPreference, selectedSeat, selectedTireChain, selectedRoofBox, selectedProtection)) {
 
-                    Double rentFee = Double.parseDouble(userMainView.getCarListTable().getValueAt
-                            (userMainView.getCarListTable().getSelectedRow(), 7).toString()) * getHowManyDaysToBeRented(userMainView);
+                    Double rentFee = totalAmountCalculator();
                     int extrasPrice = model.calculateExtraPayment(selectedDriver, selectedDriverPreference,
                             selectedSeat, selectedTireChain, selectedRoofBox, selectedProtection);
 
@@ -264,6 +260,7 @@ public class Controller implements ActionListener, MouseListener, ItemListener {
                     paymentView.getExtrasPriceTextField().setText(Integer.toString(extrasPrice));
                     paymentView.getTotalTextField().setText(rentFee + extrasPrice+"");
 
+                    JOptionPane.showMessageDialog(new JFrame(),"You can pickup and must deliver the car between 8 am-7pm.","Warning Message",JOptionPane.WARNING_MESSAGE);
                     userMainView.setVisible(false);
                     paymentView.setVisible(true);
 
@@ -667,5 +664,31 @@ public class Controller implements ActionListener, MouseListener, ItemListener {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public double totalAmountCalculator(){
+        UserMainView userMainView = view.getuView();
+        double rentFee = Double.parseDouble(userMainView.getCarListTable().getValueAt
+                (userMainView.getCarListTable().getSelectedRow(), 7).toString()) * getHowManyDaysToBeRented(userMainView);
+        if(!(userMainView.getPickUpPlace().toString().equals(userMainView.getDeliveryPlace().toString()))){
+             rentFee+=1000;
+        }
+        return rentFee;
+    }
+
+    public double sameCarPriceCalculator(){
+        UserMainView userMainView = view.getuView();
+        double rentFee = 100;
+        if(!(Objects.requireNonNull(userMainView.getPickUpPlace().getSelectedItem()).toString()
+                .equals(Objects.requireNonNull(userMainView.getDeliveryPlace().getSelectedItem()).toString()))){
+            rentFee+=1000;
+        }
+        return rentFee;
+    }
+
+    public void clearPaymentPage(){
+        view.getpView().getNameOnCardTextField().setText("");
+        view.getpView().getCardNumberTextField().setText("");
+        view.getpView().getCvvTextField().setText("");
     }
 }

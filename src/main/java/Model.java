@@ -486,18 +486,23 @@ public class Model {
 
     public boolean extrasValidation(String selectedDriver, String selectedDriverPreference, String selectedSeat, String selectedTireChain, String selectedRoofBox, String selectedProtection){
 
-        String errorMessage =null;
+        String errorMessage ="";
 
-        if(selectedDriver==null || selectedTireChain==null || selectedRoofBox==null || selectedProtection==null){
+        if(selectedTireChain==null || selectedRoofBox==null || selectedProtection==null){
             errorMessage += "!! PLEASE FILL EXTRAS PART !!\n";
         }
-        if(selectedDriver.equals("Yes") && selectedDriverPreference==null){
-            errorMessage += "!! PLEASE SELECT DRIVER TYPE !!\n";
+        if(selectedDriver!=null){
+            if(selectedDriver.equals("Yes") && selectedDriverPreference==null){
+                errorMessage += "!! PLEASE SELECT DRIVER TYPE !!\n";
+            }
+            if(selectedDriver.equals("No") && selectedDriverPreference!=null){
+                errorMessage += "DON'T SELECT PREFERENCE IF NO NEED DRIVER\n";
+            }
+        }else{
+            errorMessage += "!! PLEASE FILL DRIVER PART !!\n";
         }
-        if(selectedDriver.equals("No") && selectedDriverPreference!=null){
-            errorMessage += "DON'T SELECT PREFERENCE IF NO NEED DRIVER\n";
-        }
-        if(errorMessage != null){
+
+        if(!(errorMessage.isEmpty())){
             JOptionPane.showMessageDialog(new JFrame(),errorMessage,"",JOptionPane.ERROR_MESSAGE);
             return false;
         }
