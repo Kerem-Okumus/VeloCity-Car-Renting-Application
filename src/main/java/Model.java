@@ -41,7 +41,6 @@ public class Model {
     }
 
     public int addUser(User user)  {
-        userArrayList.add(user);
         int lastId = 0;
         int userId = 0;
 
@@ -68,6 +67,8 @@ public class Model {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        userArrayList.add(user);
+        user.setUserId(userId);
         return userId;
     }
 

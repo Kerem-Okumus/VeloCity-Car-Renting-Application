@@ -28,7 +28,6 @@ public class Controller implements ActionListener, MouseListener, ItemListener {
         addActionListenerToButtons();
         addMouseListener();
         addItemListenertoComboBoxes();
-        model.addPaymentInformation("1234","123","1928","06","2",model.getUserArrayList().get(0));
     }
 
     public void addActionListenerToButtons(){
