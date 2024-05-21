@@ -1,7 +1,6 @@
 import Objects.*;
 import Objects.Driver;
 import View.PaymentInformationView;
-import View.UserMainView;
 
 import javax.swing.*;
 import java.sql.*;
@@ -21,6 +20,9 @@ public class Model {
     private ArrayList<ReservationExtras> reservationExtrasArrayList =new ArrayList<>();
     private int loggedUserId;
     private ArrayList<String> promotionCodes = new ArrayList<>();
+    private int promotionError=0;
+
+    private int selectedExtrasError =0;
 
     public Model() throws SQLException {
         getUsersInDB();
@@ -421,6 +423,7 @@ public class Model {
 
     public boolean promotionValidation(String promotionCode){
         if (!promotionCodes.contains(promotionCode) && !promotionCode.equals("")) {
+            promotionError=1;
             JOptionPane.showMessageDialog(new JFrame(),"!! Invalid Promotion Code !!","",JOptionPane.ERROR_MESSAGE);
             return false;
         }
@@ -489,11 +492,13 @@ public class Model {
         String errorMessage ="";
 
         if(selectedTireChain==null || selectedRoofBox==null || selectedProtection==null){
+            selectedExtrasError =1;
             errorMessage += "!! PLEASE FILL EXTRAS PART !!\n";
         }
         if(selectedDriver!=null){
             if(selectedDriver.equals("Yes") && selectedDriverPreference==null){
                 errorMessage += "!! PLEASE SELECT DRIVER TYPE !!\n";
+                selectedExtrasError=1;
             }
             if(selectedDriver.equals("No") && selectedDriverPreference!=null){
                 errorMessage += "DON'T SELECT PREFERENCE IF NO NEED DRIVER\n";
@@ -504,6 +509,7 @@ public class Model {
 
         if(!(errorMessage.isEmpty())){
             JOptionPane.showMessageDialog(new JFrame(),errorMessage,"",JOptionPane.ERROR_MESSAGE);
+            selectedExtrasError=1;
             return false;
         }
         return true;
@@ -575,4 +581,13 @@ public class Model {
     public int getLoggedUserId() {
         return loggedUserId;
     }
+
+    public int getPromotionError() {
+        return promotionError;
+    }
+
+    public int getSelectedExtrasError() {
+        return selectedExtrasError;
+    }
+
 }

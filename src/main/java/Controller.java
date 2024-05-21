@@ -17,6 +17,9 @@ public class Controller implements ActionListener, MouseListener, ItemListener {
     Date pickupDate,deliverDate;
     int driverIdtobeAssigned=-1;
     boolean isPromotionCodeApplied=false,updating=false;
+    private JFrame promotionError=null;
+    private int timeErrorOccured=0;
+    private int selectionErrorOccured=0;
 
 
     public Controller(Model model, View view) throws SQLException {
@@ -186,6 +189,7 @@ public class Controller implements ActionListener, MouseListener, ItemListener {
 
             if(userMainView.getCarListTable()==null){
                 JOptionPane.showMessageDialog(new JFrame(),"!! FIRST SEARCH A CAR AND THEN SELECT ONE !!","",JOptionPane.ERROR_MESSAGE);
+                selectionErrorOccured=1;
             }
             else if(hasDriver&& driverIdtobeAssigned==-1){
                 String s;
@@ -197,6 +201,7 @@ public class Controller implements ActionListener, MouseListener, ItemListener {
                 JOptionPane.showMessageDialog(new JFrame(),"THERE IS NO " +s+ " DRIVER AVAILABLE BETWEEN THE DATES YOU'VE ENTERED!!","",JOptionPane.ERROR_MESSAGE);
             }
             else if(userMainView.getCarListTable().getSelectedRowCount() < 1){
+                selectionErrorOccured=1;
                 JOptionPane.showMessageDialog(new JFrame(),"!! PLEASE SELECT A CAR !!","",JOptionPane.ERROR_MESSAGE);
             }else {
                 String selectedDriver = null;
@@ -261,6 +266,7 @@ public class Controller implements ActionListener, MouseListener, ItemListener {
                     paymentView.getTotalTextField().setText(rentFee + extrasPrice+"");
 
                     JOptionPane.showMessageDialog(new JFrame(),"You can pickup and must deliver the car between 8 am-7pm.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                    timeErrorOccured=1;
                     userMainView.setVisible(false);
                     paymentView.setVisible(true);
 
@@ -281,7 +287,8 @@ public class Controller implements ActionListener, MouseListener, ItemListener {
                 if (model.promotionValidation(promotionCode)) {
 
                     if(isPromotionCodeApplied){
-                        JOptionPane.showMessageDialog(new JFrame(),"You can use promotion codes for a rent just once","",JOptionPane.ERROR_MESSAGE);
+                        promotionError=new JFrame();
+                        JOptionPane.showMessageDialog(promotionError,"You can use promotion codes for a rent just once","",JOptionPane.ERROR_MESSAGE);
                     }else {
                         model.updateTotalCharge(paymentView);
                     }
@@ -533,6 +540,10 @@ public class Controller implements ActionListener, MouseListener, ItemListener {
             return;
         }
 
+        if(e.getSource()==view.getuView().getOptionBar().getComponentAt(1)){
+
+        }
+
         updating = true; // Set guard
 
         try {
@@ -690,5 +701,13 @@ public class Controller implements ActionListener, MouseListener, ItemListener {
         view.getpView().getNameOnCardTextField().setText("");
         view.getpView().getCardNumberTextField().setText("");
         view.getpView().getCvvTextField().setText("");
+    }
+
+    public int getTimeErrorOccured() {
+        return timeErrorOccured;
+    }
+
+    public int getSelectionErrorOccured() {
+        return selectionErrorOccured;
     }
 }
