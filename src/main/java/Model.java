@@ -63,7 +63,7 @@ public class Model {
             statement.executeUpdate("INSERT INTO User (userId, age, userName, password, name_surname,cardNumber, gender,phoneNumber) VALUES ( '" + userId
                     + "' , '" + user.getAge() + "', '" + user.getUsername() + "' , '" + user.getPassword() + "' , '" + user.getName_surname() + "' , '" + user.getCardNumber()
                     + "' , '" + user.getGender() + "' , '" + user.getPhoneNumber() + "')");
-            System.out.println("NOTIFICATION >>> Customer " + user.getName_surname() + " with id " + userId + " added to Users <<<");
+
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -75,7 +75,7 @@ public class Model {
         Statement statement = connection.createStatement();
         ResultSet rs1 = statement.executeQuery("SELECT userName FROM User");
 
-        //checkValidInfoForSignUp(userName, password, passwordCheck, eMail, birthday, phone, gender);
+
         if(checkValidInfoForSignUp(userName, password, passwordCheck, eMail, birthday, phone, gender)==false){
             return false;
         }
@@ -264,11 +264,9 @@ public class Model {
                         "WHERE username='" + username + "' and password= '" + password +"';");
 
         if (rs1.next()) {
-            System.out.println("NOTIFICATION >>> Welcome " + rs1.getString("username"));
             loggedUserId = rs1.getInt("userId");
             return true;
         } else {
-            System.out.println("NOTIFICATION >>> Wrong username or password");
             JOptionPane.showMessageDialog(new JFrame(),"WRONG USERNAME OR PASSWORD !!!","Login Error",JOptionPane.ERROR_MESSAGE);
         }
         return false;
@@ -297,7 +295,6 @@ public class Model {
             statement.executeUpdate("INSERT INTO Reservation (reservationId, pickupDate, returnDate, pickupLocation, returnLocation ,resStatus , price , userId , vehicleId , driverId) VALUES ( '" + reservationId
                     + "' , '" + pickupDate + "', '" + returnDate + "' , '" + pickupLocation+ "' , '" + returnLocation + "' , '" + resStatus
                     + "' , '" + price + "' , '" + userId + "','" +vehicleId + "',null)");
-            System.out.println("NOTIFICATION >>> Reservation   with id " + reservationId + " added to Reservations! <<<");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -313,7 +310,6 @@ public class Model {
         for(int i=0;i<extraId.size();i++){
             statement.executeUpdate("INSERT INTO reservationExtras (reservationId, extraId) VALUES ( '" + reservationId
                     + "' , '"  +extraId.get(i) + "')");
-            System.out.println("NOTIFICATION >>> ReservationExtra   with  reservationId " + reservationId + " and with extrasId "+extraId.get(i)+"has been added to DB <<<");
         }
     }
     public void assignDriver(int driverId, int reservationId) throws SQLException {
@@ -355,7 +351,7 @@ public class Model {
         if (!"ALL".equals(fuelType)) {
             queryBuilder.append(" AND V.fuelType = '").append(fuelType).append("'");
         }
-        if (passenger != -1) { // assuming -1 represents "ALL" for passenger count
+        if (passenger != -1) {
             queryBuilder.append(" AND V.passengerAmount = ").append(passenger);
         }
         ResultSet rs1 = statement.executeQuery(queryBuilder.toString());
@@ -560,14 +556,6 @@ public class Model {
 
     public ArrayList<Vehicle> getVehicleArrayList() {
         return vehicleArrayList;
-    }
-
-    public ArrayList<Driver> getDriverArrayList() {
-        return driverArrayList;
-    }
-
-    public ArrayList<Extras> getExtrasArrayList() {
-        return extrasArrayList;
     }
 
     public ArrayList<Reservation> getReservationArrayList() {

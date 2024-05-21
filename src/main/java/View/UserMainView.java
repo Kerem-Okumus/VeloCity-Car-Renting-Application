@@ -67,7 +67,7 @@ public class UserMainView extends JFrame{
     JLabel pickUpDateLabel;
     JLabel deliveryDateLabel;
 
-    //Labels for car selection panel
+
     JLabel brandLabel;
     JLabel colorLabel;
     JLabel categoryLabel;
@@ -76,7 +76,7 @@ public class UserMainView extends JFrame{
     JLabel fuelTypeLabel;
     JScrollPane scrollPane;
 
-    //Labels for extras panel
+
     JLabel extrasLabel;
     JLabel driverOptionLabel;
     JLabel driverLevelLabel;
@@ -85,7 +85,7 @@ public class UserMainView extends JFrame{
     JLabel roofBoxLabel;
     JLabel protectionLabel;
 
-    //Labels for price of extras
+
     JLabel driverPriceLabel;
     JLabel driverLevelPriceLabel;
     JLabel seatPriceLabel;
@@ -230,32 +230,32 @@ public class UserMainView extends JFrame{
         protectionPriceLabel.setForeground(new Color(255,81,0));
         protectionPriceLabel.setFont(new Font("Metropolis",Font.PLAIN, 20));
 
-        driverPriceLabel2 = new JLabel("500");
+        driverPriceLabel2 = new JLabel("500 ₺");
         driverPriceLabel2.setBounds(70,350,200,30);
         driverPriceLabel2.setForeground(new Color(255,81,0));
         driverPriceLabel2.setFont(new Font("Metropolis",Font.PLAIN, 20));
 
-        driverLevelPriceLabel2 = new JLabel("750:");
+        driverLevelPriceLabel2 = new JLabel("750 ₺");
         driverLevelPriceLabel2.setBounds(70,425,200,30);
         driverLevelPriceLabel2.setForeground(new Color(255,81,0));
         driverLevelPriceLabel2.setFont(new Font("Metropolis",Font.PLAIN, 20));
 
-        seatPriceLabel2 = new JLabel("50 / 30:");
+        seatPriceLabel2 = new JLabel("50 / 30 ₺");
         seatPriceLabel2.setBounds(70,500,200,30);
         seatPriceLabel2.setForeground(new Color(255,81,0));
         seatPriceLabel2.setFont(new Font("Metropolis",Font.PLAIN, 20));
 
-        tireChainPriceLabel2 = new JLabel("10:");
+        tireChainPriceLabel2 = new JLabel("10 ₺");
         tireChainPriceLabel2.setBounds(70,575,200,30);
         tireChainPriceLabel2.setForeground(new Color(255,81,0));
         tireChainPriceLabel2.setFont(new Font("Metropolis",Font.PLAIN, 20));
 
-        roofBoxPriceLabel2 = new JLabel("40:");
+        roofBoxPriceLabel2 = new JLabel("40 ₺");
         roofBoxPriceLabel2.setBounds(70,655,200,30);
         roofBoxPriceLabel2.setForeground(new Color(255,81,0));
         roofBoxPriceLabel2.setFont(new Font("Metropolis",Font.PLAIN, 20));
 
-        protectionPriceLabel2 = new JLabel("200 / 150 / 100:");
+        protectionPriceLabel2 = new JLabel("200 / 150 / 100 ₺");
         protectionPriceLabel2.setBounds(70,730,200,30);
         protectionPriceLabel2.setForeground(new Color(255,81,0));
         protectionPriceLabel2.setFont(new Font("Metropolis",Font.PLAIN, 20));
@@ -598,276 +598,84 @@ public class UserMainView extends JFrame{
         return currentRentPanel;
     }
 
-    public void setCurrentRentPanel(JPanel currentRentPanel) {
-        this.currentRentPanel = currentRentPanel;
-    }
-
-    public JPanel getNewRentPanel() {
-        return newRentPanel;
-    }
-
-    public void setNewRentPanel(JPanel newRentPanel) {
-        this.newRentPanel = newRentPanel;
-    }
-
     public JPanel getCarSelectionPanel() {
         return carSelectionPanel;
-    }
-
-    public void setCarSelectionPanel(JPanel carSelectionPanel) {
-        this.carSelectionPanel = carSelectionPanel;
-    }
-
-    public JPanel getDriverPanel() {
-        return extrasPanel;
-    }
-
-    public void setDriverPanel(JPanel extrasPanel) {
-        this.extrasPanel = extrasPanel;
     }
 
     public JTabbedPane getOptionBar() {
         return optionBar;
     }
 
-    public void setOptionBar(JTabbedPane optionBar) {
-        this.optionBar = optionBar;
-    }
-
-    public String[] getColumnNames() {
-        return columnNames;
-    }
-
-    public void setColumnNames(String[] columnNames) {
-        this.columnNames = columnNames;
-    }
-
-    public String[][] getData() {
-        return data;
-    }
-
     public void setData(String[][] data) {
         this.data = data;
-    }
-
-    public JTable getRentListTable() {
-        return rentListTable;
-    }
-
-    public void setRentListTable(JTable rentListTable) {
-        this.rentListTable = rentListTable;
-    }
-
-    public String[] getPlace() {
-        return place;
-    }
-
-    public void setPlace(String[] place) {
-        this.place = place;
-    }
-
-    public String[] getDay() {
-        return day;
-    }
-
-    public void setDay(String[] day) {
-        this.day = day;
-    }
-
-    public String[] getMonth() {
-        return month;
-    }
-
-    public void setMonth(String[] month) {
-        this.month = month;
-    }
-
-    public String[] getYear() {
-        return year;
-    }
-
-    public void setYear(String[] year) {
-        this.year = year;
     }
 
     public JComboBox getPickUpPlace() {
         return pickUpPlace;
     }
 
-    public void setPickUpPlace(JComboBox pickUpPlace) {
-        this.pickUpPlace = pickUpPlace;
-    }
-
     public JComboBox getDeliveryPlace() {
         return deliveryPlace;
-    }
-
-    public void setDeliveryPlace(JComboBox deliveryPlace) {
-        this.deliveryPlace = deliveryPlace;
     }
 
     public JComboBox getPickUpDateDay() {
         return pickUpDateDay;
     }
 
-    public void setPickUpDateDay(JComboBox pickUpDateDay) {
-        this.pickUpDateDay = pickUpDateDay;
-    }
-
     public JComboBox getPickUpDateMonth() {
         return pickUpDateMonth;
-    }
-
-    public void setPickUpDateMonth(JComboBox pickUpDateMonth) {
-        this.pickUpDateMonth = pickUpDateMonth;
     }
 
     public JComboBox getPickUpDateYear() {
         return pickUpDateYear;
     }
 
-    public void setPickUpDateYear(JComboBox pickUpDateYear) {
-        this.pickUpDateYear = pickUpDateYear;
-    }
-
     public JComboBox getDeliveryDateDay() {
         return deliveryDateDay;
-    }
-
-    public void setDeliveryDateDay(JComboBox deliveryDateDay) {
-        this.deliveryDateDay = deliveryDateDay;
     }
 
     public JComboBox getDeliveryDateMonth() {
         return deliveryDateMonth;
     }
 
-    public void setDeliveryDateMonth(JComboBox deliveryDateMonth) {
-        this.deliveryDateMonth = deliveryDateMonth;
-    }
-
     public JComboBox getDeliveryDateYear() {
         return deliveryDateYear;
-    }
-
-    public void setDeliveryDateYear(JComboBox deliveryDateYear) {
-        this.deliveryDateYear = deliveryDateYear;
     }
 
     public JComboBox getGearTypeComboBox() {
         return gearTypeComboBox;
     }
 
-    public void setGearTypeComboBox(JComboBox gearTypeComboBox) {
-        this.gearTypeComboBox = gearTypeComboBox;
-    }
-
-    public String[] getGear() {
-        return gear;
-    }
-
-    public void setGear(String[] gear) {
-        this.gear = gear;
-    }
-
     public JComboBox getColorComboBox() {
         return colorComboBox;
-    }
-
-    public void setColorComboBox(JComboBox colorComboBox) {
-        this.colorComboBox = colorComboBox;
-    }
-
-    public String[] getColor() {
-        return color;
-    }
-
-    public void setColor(String[] color) {
-        this.color = color;
     }
 
     public JComboBox getBrandComboBox() {
         return brandComboBox;
     }
 
-    public void setBrandComboBox(JComboBox brandComboBox) {
-        this.brandComboBox = brandComboBox;
-    }
-
-    public String[] getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String[] brand) {
-        this.brand = brand;
-    }
-
     public JComboBox getCarTypeComboBox() {
         return carTypeComboBox;
-    }
-
-    public void setCarTypeComboBox(JComboBox carTypeComboBox) {
-        this.carTypeComboBox = carTypeComboBox;
-    }
-
-    public String[] getCarType() {
-        return carType;
-    }
-
-    public void setCarType(String[] carType) {
-        this.carType = carType;
     }
 
     public JComboBox getPassengerAmountComboBox() {
         return passengerAmountComboBox;
     }
 
-    public void setPassengerAmountComboBox(JComboBox passengerAmountComboBox) {
-        this.passengerAmountComboBox = passengerAmountComboBox;
-    }
-
-    public String[] getPassengerAmount() {
-        return passengerAmount;
-    }
-
-    public void setPassengerAmount(String[] passengerAmount) {
-        this.passengerAmount = passengerAmount;
-    }
-
     public JButton getSearchButton() {
         return searchButton;
-    }
-
-    public void setSearchButton(JButton searchButton) {
-        this.searchButton = searchButton;
     }
 
     public JButton getConfirmButton() {
         return confirmButton;
     }
 
-    public void setConfirmButton(JButton confirmButton) {
-        this.confirmButton = confirmButton;
-    }
-
     public JRadioButton getDriverOptionYes() {
         return driverOptionYes;
     }
 
-    public void setDriverOptionYes(JRadioButton driverOptionYes) {
-        this.driverOptionYes = driverOptionYes;
-    }
-
     public JRadioButton getDriverOptionNo() {
         return driverOptionNo;
-    }
-
-    public void setDriverOptionNo(JRadioButton driverOptionNo) {
-        this.driverOptionNo = driverOptionNo;
-    }
-
-    public String[][] getCarData() {
-        return carData;
     }
 
     public void setCarData(String[][] carData) {
@@ -882,129 +690,56 @@ public class UserMainView extends JFrame{
         return fuelTypeComboBox;
     }
 
-    public void setFuelTypeComboBox(JComboBox fuelTypeComboBox) {
-        this.fuelTypeComboBox = fuelTypeComboBox;
-    }
-
-    public String[] getFuelType() {
-        return fuelType;
-    }
-
-    public void setFuelType(String[] fuelType) {
-        this.fuelType = fuelType;
-    }
-
     public JRadioButton getNormalDriver() {
         return normalDriver;
-    }
-
-    public void setNormalDriver(JRadioButton normalDriver) {
-        this.normalDriver = normalDriver;
     }
 
     public JRadioButton getProfessionalDriver() {
         return professionalDriver;
     }
 
-    public void setProfessionalDriver(JRadioButton professionalDriver) {
-        this.professionalDriver = professionalDriver;
-    }
-
     public JRadioButton getTireChainYes() {
         return tireChainYes;
-    }
-
-    public void setTireChainYes(JRadioButton tireChainYes) {
-        this.tireChainYes = tireChainYes;
     }
 
     public JRadioButton getTireChainNo() {
         return tireChainNo;
     }
 
-    public void setTireChainNo(JRadioButton tireChainNo) {
-        this.tireChainNo = tireChainNo;
-    }
-
     public JRadioButton getChildSeat() {
         return childSeat;
-    }
-
-    public void setChildSeat(JRadioButton childSeat) {
-        this.childSeat = childSeat;
     }
 
     public JRadioButton getBabySeat() {
         return babySeat;
     }
 
-    public void setBabySeat(JRadioButton babySeat) {
-        this.babySeat = babySeat;
-    }
-
     public JRadioButton getRoofBoxYes() {
         return roofBoxYes;
-    }
-
-    public void setRoofBoxYes(JRadioButton roofBoxYes) {
-        this.roofBoxYes = roofBoxYes;
     }
 
     public JRadioButton getRoofBoxNo() {
         return roofBoxNo;
     }
 
-    public void setRoofBoxNo(JRadioButton roofBoxNo) {
-        this.roofBoxNo = roofBoxNo;
-    }
-
     public JRadioButton getBigProtection() {
         return bigProtection;
-    }
-
-    public void setBigProtection(JRadioButton bigProtection) {
-        this.bigProtection = bigProtection;
     }
 
     public JRadioButton getMediumProtection() {
         return mediumProtection;
     }
 
-    public void setMediumProtection(JRadioButton mediumProtection) {
-        this.mediumProtection = mediumProtection;
-    }
-
     public JRadioButton getAdditionalProtection() {
         return additionalProtection;
-    }
-
-    public void setAdditionalProtection(JRadioButton additionalProtection) {
-        this.additionalProtection = additionalProtection;
     }
 
     public JRadioButton getNoProtection() {
         return noProtection;
     }
 
-    public void setNoProtection(JRadioButton noProtection) {
-        this.noProtection = noProtection;
-    }
-    ArrayList<Object>e=new ArrayList<>();
-
-    public JPanel getExtrasPanel() {
-        return extrasPanel;
-    }
-
-    public void setExtrasPanel(JPanel extrasPanel) {
-        this.extrasPanel = extrasPanel;
-    }
-
     public JButton getClearButton() {
         return clearButton;
-    }
-
-    public String[] getCarColumnNames() {
-        return carColumnNames;
     }
 
     public ButtonGroup getDriverOption() {

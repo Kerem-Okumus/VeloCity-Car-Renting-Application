@@ -9,11 +9,4 @@ public class ReservationExtras {
         this.extraId = extraId;
     }
 
-    public int getReseravationId() {
-        return reseravationId;
-    }
-
-    public int getExtraId() {
-        return extraId;
-    }
 }

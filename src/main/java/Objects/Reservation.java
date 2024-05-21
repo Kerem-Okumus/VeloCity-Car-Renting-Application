@@ -46,60 +46,12 @@ public class Reservation {
         return returnLocation;
     }
 
-    public int getResStatus() {
-        return resStatus;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
     public int getUserId() {
         return userId;
     }
 
     public int getVehicleId() {
         return vehicleId;
-    }
-
-    public int getDriverId() {
-        return driverId;
-    }
-
-    public void setReservationId(int reservationId) {
-        this.reservationId = reservationId;
-    }
-
-    public void setPickupDate(Date pickupDate) {
-        this.pickupDate = pickupDate;
-    }
-
-    public void setReturnDate(Date returnDate) {
-        this.returnDate = returnDate;
-    }
-
-    public void setPickupLocation(String pickupLocation) {
-        this.pickupLocation = pickupLocation;
-    }
-
-    public void setReturnLocation(String returnLocation) {
-        this.returnLocation = returnLocation;
-    }
-
-    public void setResStatus(int resStatus) {
-        this.resStatus = resStatus;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public void setVehicleId(int vehicleId) {
-        this.vehicleId = vehicleId;
     }
 
     public void setDriverId(int driverId) {

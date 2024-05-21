@@ -50,20 +50,12 @@ public class Vehicle {
         return brand;
     }
 
-    public boolean isAvailable() {
-        return isAvailable;
-    }
-
     public String getFuelType() {
         return fuelType;
     }
 
     public String getPassengerAmount() {
         return passengerAmount;
-    }
-
-    public void setAvailable(boolean available) {
-        isAvailable = available;
     }
 
     public String getDailyPrice() {

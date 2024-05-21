@@ -15,23 +15,4 @@ public class Driver {
         this.isExperienced = isExperienced;
     }
 
-    public int getDriverId() {
-        return driverId;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public int getExperienceYear() {
-        return experienceYear;
-    }
-
-    public int getMaxSpeed() {
-        return maxSpeed;
-    }
-
-    public boolean isExperienced() {
-        return isExperienced;
-    }
 }

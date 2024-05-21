@@ -33,7 +33,7 @@ public class Controller implements ActionListener, MouseListener, ItemListener {
 
     public void addActionListenerToButtons(){
         for(int i = 0; i<view.getButtons().size(); i++){
-           // System.out.println("aağğ");
+
             view.getButtons().get(i).addActionListener(this);
         }
     }
@@ -47,10 +47,7 @@ public class Controller implements ActionListener, MouseListener, ItemListener {
         }
     }
 
-    /**
-     * burda kullanıcı ne yapmış nelere basmış kontrol edip ona göre modelin fonksiyonlarını kullanıcaz
-     * @param e the event to be processed
-     */
+
     public void actionPerformed(ActionEvent e) {
         SignUpView signUpView = view.getsView();
         LoginView lv = view.getlView();
@@ -91,7 +88,7 @@ public class Controller implements ActionListener, MouseListener, ItemListener {
             try {
                 if(model.logIn(username,password)==true){
                     lv.setVisible(false);
-                    //Reservation list
+
                     ArrayList<String> tempList = getUsersReservations(username);
                     String[][] tempArray = getData(tempList);
                     userMainView.setData(tempArray);
@@ -142,8 +139,8 @@ public class Controller implements ActionListener, MouseListener, ItemListener {
             String category=userMainView.getCarTypeComboBox().getSelectedItem().toString();
             String gearType=userMainView.getGearTypeComboBox().getSelectedItem().toString();
             String fuelType=userMainView.getFuelTypeComboBox().getSelectedItem().toString();
-            LocalDate startDate = LocalDate.of(pYear, pMonth, pDay); // Example start date
-            LocalDate returnDate = LocalDate.of(dYear, dMonth, dDay); // Example return date
+            LocalDate startDate = LocalDate.of(pYear, pMonth, pDay);
+            LocalDate returnDate = LocalDate.of(dYear, dMonth, dDay);
             if(startDate.isBefore(returnDate)){
                 try {
                     ArrayList<Vehicle> tempCars = model.showFilteredCars(model.filterCars(brand,category,color,gearType,fuelType,passenger,pickupDate,deliverDate));
@@ -157,7 +154,6 @@ public class Controller implements ActionListener, MouseListener, ItemListener {
                 }
             }
             else{
-                System.out.println("Dates are not valid.");
                 JOptionPane.showMessageDialog(new JFrame(),"!! PLEASE ENTER A VALID DATE !!","Validation Error",JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -210,38 +206,38 @@ public class Controller implements ActionListener, MouseListener, ItemListener {
                 String selectedTireChain = null;
                 String selectedRoofBox = null;
                 String selectedProtection = null;
-                if (1 == 1 /* get selected radio buttons function here */) {
-                    ////////////////////////////////////////////////////////////
+                if (1 == 1) {
+
                     if (userMainView.getDriverOptionNo().isSelected()) {
                         selectedDriver = "No";
                     } else if (userMainView.getDriverOptionYes().isSelected()) {
                         selectedDriver = "Yes";
                     }
-                    ////////////////////////////////////////////////////////////
+
                     if (userMainView.getNormalDriver().isSelected()) {
                         selectedDriverPreference = "Normal";
                     } else if (userMainView.getProfessionalDriver().isSelected()) {
                         selectedDriverPreference = "Experienced";
                     }
-                    ////////////////////////////////////////////////////////////
+
                     if (userMainView.getBabySeat().isSelected()) {
                         selectedSeat = "Baby";
                     } else if (userMainView.getChildSeat().isSelected()) {
                         selectedSeat = "Child";
                     }
-                    ////////////////////////////////////////////////////////////
+
                     if (userMainView.getTireChainYes().isSelected()) {
                         selectedTireChain = "Yes";
                     } else if (userMainView.getTireChainNo().isSelected()) {
                         selectedTireChain = "No";
                     }
-                    ////////////////////////////////////////////////////////////
+
                     if (userMainView.getRoofBoxYes().isSelected()) {
                         selectedRoofBox = "Yes";
                     } else if (userMainView.getRoofBoxNo().isSelected()) {
                         selectedRoofBox = "No";
                     }
-                    ////////////////////////////////////////////////////////////
+
                     if (userMainView.getBigProtection().isSelected()) {
                         selectedProtection = "High";
                     } else if (userMainView.getMediumProtection().isSelected()) {
@@ -309,7 +305,6 @@ public class Controller implements ActionListener, MouseListener, ItemListener {
             String lastDateMonth = Objects.requireNonNull(paymentView.getMonthComboBox().getSelectedItem()).toString();
 
             if(model.paymentValidation(nameOnTheCard, cardNumber, cvv, promotionCode)){
-                System.out.println("successful rent");
                 paymentView.setVisible(false);
                 String username = "";
                 User user = null;
@@ -340,10 +335,8 @@ public class Controller implements ActionListener, MouseListener, ItemListener {
                             , Double.parseDouble(userMainView.getCarListTable().getValueAt(userMainView.getCarListTable().getSelectedRow(), 7).toString())
                             , model.getLoggedUserId()
                             , vehicleId);
-                    System.out.println(driverIdtobeAssigned);
                     if(driverIdtobeAssigned!=-1){
                         model.assignDriver(driverIdtobeAssigned,reservationId);
-                        System.out.println("olm niye olmuyor");
                     }
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
@@ -544,8 +537,7 @@ public class Controller implements ActionListener, MouseListener, ItemListener {
 
         }
 
-        updating = true; // Set guard
-
+        updating = true;
         try {
             if (e.getSource() instanceof JComboBox) {
                 view.getuView().clearCarTable();
@@ -561,7 +553,6 @@ public class Controller implements ActionListener, MouseListener, ItemListener {
             JComboBox<String> deliveryDateYear = view.getuView().getDeliveryDateYear();
             JComboBox<String> deliveryDateDay = view.getuView().getDeliveryDateDay();
 
-            //---------------PICK UP-----------
             if (e.getSource() == pickUpDateMonth || e.getSource() == pickUpDateYear || e.getSource() == pickUpDateDay) {
                 int selectedMonth = pickUpDateMonth.getSelectedIndex();
                 int selectedYear = pickUpDateYear.getSelectedIndex();
@@ -575,7 +566,6 @@ public class Controller implements ActionListener, MouseListener, ItemListener {
                 adjustDaysComboBox(pickUpDateDay, selectedMonth);
             }
 
-            //----------------------DELIVERY-----------------------
             if (e.getSource() == deliveryDateMonth || e.getSource() == deliveryDateYear || e.getSource() == deliveryDateDay) {
                 int selectedMonth = deliveryDateMonth.getSelectedIndex();
                 int selectedYear = deliveryDateYear.getSelectedIndex();
@@ -591,7 +581,7 @@ public class Controller implements ActionListener, MouseListener, ItemListener {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            updating = false; // Release guard
+            updating = false;
         }
     }
 

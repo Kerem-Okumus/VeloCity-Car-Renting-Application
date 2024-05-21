@@ -21,8 +21,6 @@ public class PaymentInformationView extends JFrame{
     JLabel cvvLabel;
     JLabel cardNumberLabel;
     JLabel pageNameLabel;
-
-    //Calculation Part
     JTextField rentFeeTextField;
     JTextField extrasPriceTextField;
     JTextField discountTextfield;
@@ -31,6 +29,10 @@ public class PaymentInformationView extends JFrame{
     JLabel extrasPriceLabel;
     JLabel discountLabel;
     JLabel totalLabel;
+    JLabel rentFeeSymbolLabel;
+    JLabel extrasPriceSymbolLabel;
+    JLabel discountSymbolLabel;
+    JLabel totalSymbolLabel;
     ImageIcon logo;
 
     public PaymentInformationView() {
@@ -149,7 +151,7 @@ public class PaymentInformationView extends JFrame{
         rentFeeTextField.setBackground(new Color(248,239,217));
         rentFeeTextField.setForeground(new Color(255,81,0));
         rentFeeTextField.setBorder(BorderFactory.createLineBorder(new Color(248,239,217)));
-        rentFeeTextField.setText("5400");
+        rentFeeTextField.setText("0");
         rentFeeTextField.setEditable(false);
         rentFeeTextField.setFont(new Font("Metropolis", Font.PLAIN, 20));
 
@@ -158,7 +160,7 @@ public class PaymentInformationView extends JFrame{
         extrasPriceTextField.setBackground(new Color(248,239,217));
         extrasPriceTextField.setForeground(new Color(255,81,0));
         extrasPriceTextField.setBorder(BorderFactory.createLineBorder(new Color(248,239,217)));
-        extrasPriceTextField.setText("790");
+        extrasPriceTextField.setText("0");
         extrasPriceTextField.setEditable(false);
         extrasPriceTextField.setFont(new Font("Metropolis", Font.PLAIN, 20));
 
@@ -180,6 +182,21 @@ public class PaymentInformationView extends JFrame{
         totalTextField.setText("");
         totalTextField.setFont(new Font("Metropolis", Font.PLAIN, 20));
 
+        rentFeeSymbolLabel = new JLabel("₺");
+        rentFeeSymbolLabel.setBounds(1600,280, 300,50);
+        rentFeeSymbolLabel.setFont(new Font("Metropolis", Font.PLAIN,20));
+        rentFeeSymbolLabel.setForeground(new Color(255,81,0));
+
+        extrasPriceSymbolLabel = new JLabel("₺");
+        extrasPriceSymbolLabel.setBounds(1600,380, 300,50);
+        extrasPriceSymbolLabel.setFont(new Font("Metropolis", Font.PLAIN,20));
+        extrasPriceSymbolLabel.setForeground(new Color(255,81,0));
+
+        totalSymbolLabel = new JLabel("₺");
+        totalSymbolLabel.setBounds(1600,560, 300,50);
+        totalSymbolLabel.setFont(new Font("Metropolis", Font.PLAIN,20));
+        totalSymbolLabel.setForeground(new Color(255,81,0));
+
         this.add(pageNameLabel);
         this.add(nameOnCardTextField);
         this.add(cardNumberTextField);
@@ -199,6 +216,9 @@ public class PaymentInformationView extends JFrame{
         this.add(extrasPriceLabel);
         this.add(discountLabel);
         this.add(totalLabel);
+        this.add(rentFeeSymbolLabel);
+        this.add(extrasPriceSymbolLabel);
+        this.add(totalSymbolLabel);
         this.add(rentFeeTextField);
         this.add(extrasPriceTextField);
         this.add(discountTextfield);
@@ -210,56 +230,28 @@ public class PaymentInformationView extends JFrame{
         return nameOnCardTextField;
     }
 
-    public void setNameOnCardTextField(JTextField nameOnCardTextField) {
-        this.nameOnCardTextField = nameOnCardTextField;
-    }
-
     public JTextField getPromotionCodeTextField() {
         return promotionCodeTextField;
-    }
-
-    public void setPromotionCodeTextField(JTextField promotionCodeTextField) {
-        this.promotionCodeTextField = promotionCodeTextField;
     }
 
     public JTextField getCvvTextField() {
         return cvvTextField;
     }
 
-    public void setCvvTextField(JTextField cvvTextField) {
-        this.cvvTextField = cvvTextField;
-    }
-
     public JTextField getCardNumberTextField() {
         return cardNumberTextField;
-    }
-
-    public void setCardNumberTextField(JTextField cardNumberTextField) {
-        this.cardNumberTextField = cardNumberTextField;
     }
 
     public JComboBox getMonthComboBox() {
         return monthComboBox;
     }
 
-    public void setMonthComboBox(JComboBox monthComboBox) {
-        this.monthComboBox = monthComboBox;
-    }
-
     public JComboBox getYearComboBox() {
         return yearComboBox;
     }
 
-    public void setYearComboBox(JComboBox yearComboBox) {
-        this.yearComboBox = yearComboBox;
-    }
-
     public JButton getConfirmButton() {
         return confirmButton;
-    }
-
-    public void setConfirmButton(JButton confirmButton) {
-        this.confirmButton = confirmButton;
     }
 
     public JButton getBackButton() {
@@ -270,44 +262,21 @@ public class PaymentInformationView extends JFrame{
         return applyDiscountButton;
     }
 
-    public String[] getMonth() {
-        return month;
-    }
-
-    public void setMonth(String[] month) {
-        this.month = month;
-    }
-
     public JTextField getRentFeeTextField() {
         return rentFeeTextField;
-    }
-
-    public void setRentFeeTextField(JTextField rentFeeTextField) {
-        this.rentFeeTextField = rentFeeTextField;
     }
 
     public JTextField getExtrasPriceTextField() {
         return extrasPriceTextField;
     }
 
-    public void setExtrasPriceTextField(JTextField extrasPriceTextField) {
-        this.extrasPriceTextField = extrasPriceTextField;
-    }
-
     public JTextField getDiscountTextfield() {
         return discountTextfield;
-    }
-
-    public void setDiscountTextfield(JTextField discountTextfield) {
-        this.discountTextfield = discountTextfield;
     }
 
     public JTextField getTotalTextField() {
         return totalTextField;
     }
 
-    public void setTotalTextField(JTextField totalTextField) {
-        this.totalTextField = totalTextField;
-    }
 }
 

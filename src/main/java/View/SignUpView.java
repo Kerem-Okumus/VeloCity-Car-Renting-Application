@@ -151,56 +151,28 @@ public class SignUpView extends JFrame{
         return userNameTextField;
     }
 
-    public void setUserNameTextField(JTextField userNameTextField) {
-        this.userNameTextField = userNameTextField;
-    }
-
     public JTextField getBirthdayTextField() {
         return birthdayTextField;
-    }
-
-    public void setBirthdayTextField(JTextField birthdayTextField) {
-        this.birthdayTextField = birthdayTextField;
     }
 
     public JTextField getPhoneNumberTextField() {
         return phoneNumberTextField;
     }
 
-    public void setPhoneNumberTextField(JTextField phoneNumberTextField) {
-        this.phoneNumberTextField = phoneNumberTextField;
-    }
-
     public JTextField getMailTextField() {
         return mailTextField;
-    }
-
-    public void setMailTextField(JTextField mailTextField) {
-        this.mailTextField = mailTextField;
     }
 
     public JPasswordField getPasswordTextField() {
         return passwordTextField;
     }
 
-    public void setPasswordTextField(JPasswordField passwordTextField) {
-        this.passwordTextField = passwordTextField;
-    }
-
     public JPasswordField getPasswordCheckTextField() {
         return passwordCheckTextField;
     }
 
-    public void setPasswordCheckTextField(JPasswordField passwordCheckTextField) {
-        this.passwordCheckTextField = passwordCheckTextField;
-    }
-
     public JButton getSignUpButton() {
         return signUpButton;
-    }
-
-    public void setSignUpButton(JButton signUpButton) {
-        this.signUpButton = signUpButton;
     }
     public ButtonGroup getGenderButton(){
         return genderButton;
