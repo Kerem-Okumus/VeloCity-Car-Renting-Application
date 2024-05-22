@@ -364,6 +364,8 @@ public class Controller implements ActionListener, MouseListener, ItemListener {
                 clearExtrasSelections(view.getuView());
                 view.getuView().getCarSelectionPanel().setVisible(true);
                 view.getuView().setExtrasPanelVisibilityFalse();
+                paymentView.getDiscountTextfield().setText("");
+                paymentView.getPromotionCodeTextField().setText("");
             }
 
             isPromotionCodeApplied=false;
