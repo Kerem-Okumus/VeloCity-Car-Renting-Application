@@ -105,7 +105,7 @@ public class Model {
             ageFlag=1;
         }
 
-        if(userName.equals("") || password.equals("") || passwordCheck.equals("") || eMail.equals("") || age.equals("") || phone.equals("") || gender.equals("")){
+        if(userName.equals("") || password.equals("") || passwordCheck.equals("") || eMail.equals("") || age.equals("") || phone.equals("") || gender==null){
             errorMessage+="!! PLEASE FILL ALL THE FIELDS !!\n";
             flag=1;
         }
